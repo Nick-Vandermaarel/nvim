@@ -1,0 +1,2 @@
+require("nvdm")
+print("hello")
