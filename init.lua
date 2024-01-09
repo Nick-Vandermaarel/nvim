@@ -1,2 +1,1 @@
 require("nvdm")
-print("hello")
