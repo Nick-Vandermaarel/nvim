@@ -64,9 +64,22 @@ return require('packer').startup(function(use)
     end
   }
 
-  use {
-    "nvim-telescope/telescope-file-browser.nvim",
-    requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
-  }
+    use("nvim-tree/nvim-tree.lua")
+    use("nvim-tree/nvim-web-devicons")
+
+    use {
+	    "windwp/nvim-autopairs",
+        config = function() require("nvim-autopairs").setup {} end
+    }
+
+    use {
+        "lukas-reineke/indent-blankline.nvim",
+        config = function() require("ibl").setup {} end
+    }
+
+    use {
+      'nvim-lualine/lualine.nvim',
+      requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+    }
 
 end )
