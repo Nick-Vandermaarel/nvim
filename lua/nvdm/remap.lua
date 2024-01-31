@@ -23,3 +23,6 @@ vim.keymap.set("n", "<leader>Y", "\"+Y")
 
 -- Replace line i'm currently on
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+
+vim.keymap.set("n", "<leader><leader>", ":split<CR> :resize -10<CR> :terminal<CR>")
+
