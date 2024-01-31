@@ -82,4 +82,13 @@ return require('packer').startup(function(use)
       requires = { 'nvim-tree/nvim-web-devicons', opt = true }
     }
 
+    use {
+        'nvimdev/dashboard-nvim',
+        event = 'VimEnter',
+        config = function()
+            require('dashboard').setup()
+        end,
+        requires = {'nvim-tree/nvim-web-devicons'}
+    }
+
 end )
