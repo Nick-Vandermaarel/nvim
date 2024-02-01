@@ -1,7 +1,4 @@
 
-vim.g.mapleader=" "
---vim.keymap.set("n","<leader>pv",vim.cmd.Ex)
-
 function Map(mode, lhs, rhs, opts)
     local options = { noremap = true, silent = true }
     if opts then

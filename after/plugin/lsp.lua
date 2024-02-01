@@ -1,18 +1,25 @@
 local lsp_zero = require('lsp-zero')
 
-lsp_zero.on_attach(function(client, bufnr)
-  local opts = {buffer = bufnr, remap = false}
+lsp_zero.on_attach(function(_, bufnr)
+    local nmap = function(keys, func, desc)
+            if desc then
+                desc = "LSP: " .. desc
+        end
 
-  vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
-  vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-  vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
-  vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
-  vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
-  vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
-  vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
-  vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
-  vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
-  vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+        vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc, remap = false })
+    end
+
+  local builtin = require("telescope.builtin")
+  nmap("gd", builtin.lsp_definitions, "[G]oto [D]efinitions")
+  nmap("gr", builtin.lsp_references, "[G]oto [R]eferences")
+  nmap("gI", builtin.lsp_implementations, "[G]oto [I]mplementation")
+  nmap("K", vim.lsp.buf.hover, "Hover Documentation")
+  nmap("<leader>ws", builtin.lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
+  nmap("[d", function() vim.diagnostic.goto_next() end)
+  nmap("]d", function() vim.diagnostic.goto_prev() end)
+  nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
+  nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
+  vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end)
 end)
 
 require('mason').setup({})
