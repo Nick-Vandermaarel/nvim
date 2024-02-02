@@ -19,14 +19,8 @@ return {
 	  branch = "harpoon2",
 	  dependencies = { {"nvim-lua/plenary.nvim"} }
   },
-  {
     "mbbill/undotree",
-    lazy = true,
-  },
-  {
     "tpope/vim-fugitive",
-    lazy = true,
-  },
 
     -- LSP
     {'VonHeikemen/lsp-zero.nvim', branch = 'v3.x'},
