@@ -1,6 +1,5 @@
 -- PLUGINS FOR LAZY
 
-
 return {
   {
 	  'nvim-telescope/telescope.nvim', tag = '0.1.5',
@@ -13,7 +12,9 @@ return {
   'numToStr/Comment.nvim',
 
   'nvim-treesitter/nvim-treesitter', build = ':TSUpdate',
-  'nvim-treesitter/playground',
+  {
+    'nvim-treesitter/playground',
+  },
 
   "nvim-lua/plenary.nvim", -- don't forget to add this one if you don't have it yet!
   {
@@ -21,8 +22,14 @@ return {
 	  branch = "harpoon2",
 	  dependencies = { {"nvim-lua/plenary.nvim"} }
   },
-  "mbbill/undotree",
-  "tpope/vim-fugitive",
+  {
+    "mbbill/undotree",
+    lazy = true,
+  },
+  {
+    "tpope/vim-fugitive",
+    lazy = true,
+  },
 
   {
 	  'VonHeikemen/lsp-zero.nvim',
@@ -50,7 +57,6 @@ return {
 
   {
     "folke/which-key.nvim",
-    event = "VeryLazy",
     init = function()
       vim.o.timeout = true
       vim.o.timeoutlen = 300

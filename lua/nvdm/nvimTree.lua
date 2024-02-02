@@ -8,4 +8,11 @@ vim.opt.termguicolors = true
 vim.keymap.set("n", "<C-e>", ":NvimTreeToggle<CR>")
 vim.keymap.set("n", "<leader>e", ":NvimTreeFocus<CR>")
 
-require("nvim-tree").setup()
+require("nvim-tree").setup({
+    sort = {
+        sorter = "case_sensitive",
+    },
+    filters = {
+        dotfiles = true
+    }
+})
