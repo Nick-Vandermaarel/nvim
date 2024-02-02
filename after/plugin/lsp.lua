@@ -1,7 +1,7 @@
 local lsp_zero = require('lsp-zero')
 
 lsp_zero.on_attach(function(_, bufnr)
-    local ap = function(keys, func, desc)
+    local nmap = function(keys, func, desc)
             if desc then
                 desc = "LSP: " .. desc
         end

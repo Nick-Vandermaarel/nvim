@@ -27,5 +27,5 @@ vim.o.shell = "pwsh"
 vim.opt.title = true
 vim.opt.titlestring = [[%t - %{fnamemodify(getcwd(), ':t')}]]
 
-vim.g.mapleader = " "
-
+-- Sync clipboard between OS and Neovim
+vim.o.clipboard = "unnamedplus"

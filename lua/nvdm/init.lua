@@ -11,6 +11,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- Leader must be setup first so lazy can bind correctly.
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 

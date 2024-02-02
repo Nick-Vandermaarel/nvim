@@ -8,14 +8,11 @@ return {
   },
 
   'navarasu/onedark.nvim', -- Theme
-
   'numToStr/Comment.nvim',
-
   'nvim-treesitter/nvim-treesitter', build = ':TSUpdate',
   {
     'nvim-treesitter/playground',
   },
-
   "nvim-lua/plenary.nvim", -- don't forget to add this one if you don't have it yet!
   {
 	  "ThePrimeagen/harpoon",
@@ -31,22 +28,14 @@ return {
     lazy = true,
   },
 
-  {
-	  'VonHeikemen/lsp-zero.nvim',
-	  branch = 'v3.x',
-	  dependencies = {
-		  --- Uncomment these if you want to manage LSP servers from neovim
-		  {'williamboman/mason.nvim'},
-		  {'williamboman/mason-lspconfig.nvim'},
-
-		  -- LSP Support
-		  {'neovim/nvim-lspconfig'},
-		  -- Autocompletion
-		  {'hrsh7th/nvim-cmp'},
-		  {'hrsh7th/cmp-nvim-lsp'},
-		  {'L3MON4D3/LuaSnip'},
-	  }
-  },
+    -- LSP
+    {'VonHeikemen/lsp-zero.nvim', branch = 'v3.x'},
+    {'neovim/nvim-lspconfig'},
+    {'hrsh7th/cmp-nvim-lsp'},
+    {'hrsh7th/nvim-cmp'},
+    {'L3MON4D3/LuaSnip'},
+    {'williamboman/mason.nvim'},
+    {'williamboman/mason-lspconfig.nvim'},
 
   {
       "lewis6991/gitsigns.nvim",
@@ -57,6 +46,7 @@ return {
 
   {
     "folke/which-key.nvim",
+    event ="VeryLazy",
     init = function()
       vim.o.timeout = true
       vim.o.timeoutlen = 300
@@ -70,22 +60,19 @@ return {
 
     "nvim-tree/nvim-tree.lua",
     "nvim-tree/nvim-web-devicons",
-
     {
 	    "windwp/nvim-autopairs",
         config = function() require("nvim-autopairs").setup {} end
     },
-
+    "windwp/nvim-ts-autotag",
     {
         "lukas-reineke/indent-blankline.nvim",
         config = function() require("ibl").setup {} end
     },
-
     {
       'nvim-lualine/lualine.nvim',
       dependencies = { 'nvim-tree/nvim-web-devicons', opt = true }
     },
-
     {
         'nvimdev/dashboard-nvim',
         event = 'VimEnter',
@@ -94,4 +81,5 @@ return {
         end,
         dependencies = {{'nvim-tree/nvim-web-devicons'}}
     },
+    {'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons'}
 }

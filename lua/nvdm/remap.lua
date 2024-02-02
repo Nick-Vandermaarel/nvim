@@ -29,7 +29,7 @@ Map("n", "<leader>Y", "\"+Y")
 -- Replace line i'm currently on
 Map("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
-Map("n", "<leader><leader>", ":split<CR> :resize -12<CR> :terminal<CR>")
+Map("n", "<leader>x", ":split<CR> :resize -12<CR> :terminal<CR>")
 Map("t", "<esc>", "<C-\\><C-n>")
 
 -- Movement
