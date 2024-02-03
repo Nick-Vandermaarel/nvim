@@ -6,8 +6,8 @@ return {
 	  -- or                            , branch = '0.1.x',
 	  dependencies = { {'nvim-lua/plenary.nvim'} }
   },
-
-  'navarasu/onedark.nvim', -- Theme
+    "nvim-telescope/telescope-project.nvim",
+    "rebelot/kanagawa.nvim",
   'numToStr/Comment.nvim',
   'nvim-treesitter/nvim-treesitter', build = ':TSUpdate',
   {
@@ -67,6 +67,7 @@ return {
       'nvim-lualine/lualine.nvim',
       dependencies = { 'nvim-tree/nvim-web-devicons', opt = true }
     },
+    "f-person/git-blame.nvim",
     {
         'nvimdev/dashboard-nvim',
         event = 'VimEnter',
@@ -75,5 +76,6 @@ return {
         end,
         dependencies = {{'nvim-tree/nvim-web-devicons'}}
     },
-    {'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons'}
+    {'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons'},
+    "github/copilot.vim",
 }
