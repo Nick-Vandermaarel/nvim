@@ -8,7 +8,10 @@ return {
   },
     "nvim-telescope/telescope-project.nvim",
     "rebelot/kanagawa.nvim",
-  'numToStr/Comment.nvim',
+    {
+        'numToStr/Comment.nvim',
+        lazy = false,
+    },
   'nvim-treesitter/nvim-treesitter', build = ':TSUpdate',
   {
     'nvim-treesitter/playground',
