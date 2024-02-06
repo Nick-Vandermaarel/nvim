@@ -62,10 +62,7 @@ return {
         config = function() require("nvim-autopairs").setup {} end
     },
     "windwp/nvim-ts-autotag",
-    {
-        "lukas-reineke/indent-blankline.nvim",
-        config = function() require("ibl").setup {} end
-    },
+    { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
     {
       'nvim-lualine/lualine.nvim',
       dependencies = { 'nvim-tree/nvim-web-devicons', opt = true }
