@@ -23,7 +23,7 @@ vim.opt.termguicolors = true
 vim.opt.scrolloff = 8
 vim.opt.updatetime = 50
 
-vim.o.shell = "pwsh"
+--vim.o.shell = "pwsh"
 vim.opt.title = true
 vim.opt.titlestring = [[%t - %{fnamemodify(getcwd(), ':t')}]]
 
