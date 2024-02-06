@@ -22,6 +22,7 @@ lsp_zero.on_attach(function(_, bufnr)
   vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end)
 end)
 
+require("neoconf").setup()
 require('mason').setup({})
 require('mason-lspconfig').setup({
   ensure_installed = {'tsserver', 'eslint', 'html', 'rust_analyzer'},
@@ -33,6 +34,10 @@ require('mason-lspconfig').setup({
     end,
   }
 })
+
+require("lspconfig").volar.setup {
+    filetypes = { "typescript", "javascript", "vue", "json" }
+}
 
 local cmp = require('cmp')
 local cmp_select = {behavior = cmp.SelectBehavior.Select}

@@ -24,6 +24,7 @@ return {
   },
     "mbbill/undotree",
     "tpope/vim-fugitive",
+    "folke/neoconf.nvim",
 
     -- LSP
     {'VonHeikemen/lsp-zero.nvim', branch = 'v3.x'},
