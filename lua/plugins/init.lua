@@ -57,6 +57,10 @@ return {
             -- refer to the configuration section below
         }
     },
+    {
+        "folke/trouble.nvim",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+    },
 
     "nvim-tree/nvim-tree.lua",
     "nvim-tree/nvim-web-devicons",
