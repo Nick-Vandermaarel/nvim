@@ -13,8 +13,10 @@ return {
         'numToStr/Comment.nvim',
         lazy = false,
     },
-    'nvim-treesitter/nvim-treesitter',
-    build = ':TSUpdate',
+    {
+        'nvim-treesitter/nvim-treesitter',
+        build = ':TSUpdate',
+    },
     {
         'nvim-treesitter/playground',
     },
