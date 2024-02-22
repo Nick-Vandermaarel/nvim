@@ -8,13 +8,7 @@ return {
         dependencies = { { 'nvim-lua/plenary.nvim' } }
     },
     "nvim-telescope/telescope-project.nvim",
-    -- "rebelot/kanagawa.nvim",
-    -- Theme
-    {
-        "catppuccin/nvim",
-        name = "catppuccin",
-        priority = 1000
-    },
+    "rebelot/kanagawa.nvim", -- Theme
     {
         'numToStr/Comment.nvim',
         lazy = false,
