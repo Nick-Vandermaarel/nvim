@@ -36,20 +36,20 @@ return {
     { 'L3MON4D3/LuaSnip' },
     { 'williamboman/mason.nvim' },
     { 'williamboman/mason-lspconfig.nvim' },
-    {
-        "nvimdev/lspsaga.nvim",
-        config = function()
-            require('lspsaga').setup({
-                lightbulb = {
-                    virtual_text = false,
-                },
-            })
-        end,
-        dependencies = {
-            "nvim-treesitter/nvim-treesitter",
-            "nvim-tree/nvim-web-devicons"
-        }
-    },
+    -- {
+    --     "nvimdev/lspsaga.nvim",
+    --     config = function()
+    --         require('lspsaga').setup({
+    --             lightbulb = {
+    --                 virtual_text = false,
+    --             },
+    --         })
+    --     end,
+    --     dependencies = {
+    --         "nvim-treesitter/nvim-treesitter",
+    --         "nvim-tree/nvim-web-devicons"
+    --     }
+    -- },
     {
         "lewis6991/gitsigns.nvim",
         dependencies = {
