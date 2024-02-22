@@ -36,7 +36,20 @@ return {
     { 'L3MON4D3/LuaSnip' },
     { 'williamboman/mason.nvim' },
     { 'williamboman/mason-lspconfig.nvim' },
-
+    {
+        "nvimdev/lspsaga.nvim",
+        config = function()
+            require('lspsaga').setup({
+                code_action_prompt = {
+                    enable = false,
+                },
+            })
+        end,
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+            "nvim-tree/nvim-web-devicons"
+        }
+    },
     {
         "lewis6991/gitsigns.nvim",
         dependencies = {
@@ -93,5 +106,5 @@ return {
         dependencies = "nvim-treesitter/nvim-treesitter",
         config = true,
     },
-    "norcalli/nvim-colorizer.lua"
+    "norcalli/nvim-colorizer.lua",
 }
