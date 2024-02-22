@@ -40,8 +40,8 @@ return {
         "nvimdev/lspsaga.nvim",
         config = function()
             require('lspsaga').setup({
-                code_action_prompt = {
-                    enable = false,
+                lightbulb = {
+                    virtual_text = false,
                 },
             })
         end,
