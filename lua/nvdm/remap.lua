@@ -1,4 +1,3 @@
-
 function Map(mode, lhs, rhs, opts)
     local options = { noremap = true, silent = true }
     if opts then
@@ -55,3 +54,6 @@ Map("t", "<C-Up>", "<cmd>resize -2<CR>")
 Map("t", "<C-Down>", "<cmd>resize +2<CR>")
 Map("t", "<C-Left>", "<cmd>vertical resize -2<CR>")
 Map("t", "<C-Right>", "<cmd>vertical resize +2<CR>")
+
+-- Neogen Documentation
+Map("n", "<leader>gd", "<cmd>lua require('neogen').generate()<CR>")

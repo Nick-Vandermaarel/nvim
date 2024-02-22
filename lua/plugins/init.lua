@@ -86,4 +86,11 @@ return {
     { 'akinsho/bufferline.nvim',             version = "*", dependencies = 'nvim-tree/nvim-web-devicons' },
     "github/copilot.vim",
     'stevearc/conform.nvim',
+
+    -- Documentation Generation
+    {
+        "danymat/neogen",
+        dependencies = "nvim-treesitter/nvim-treesitter",
+        config = true,
+    }
 }
