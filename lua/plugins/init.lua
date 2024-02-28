@@ -84,7 +84,7 @@ return {
         config = function() require("nvim-autopairs").setup {} end
     },
     "windwp/nvim-ts-autotag",
-    { "lukas-reineke/indent-blankline.nvim", main = "ibl",  opts = {} },
+    { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
     {
         'nvim-lualine/lualine.nvim',
         dependencies = { 'nvim-tree/nvim-web-devicons', opt = true }
@@ -98,7 +98,6 @@ return {
         end,
         dependencies = { { 'nvim-tree/nvim-web-devicons' } }
     },
-    { 'akinsho/bufferline.nvim',             version = "*", dependencies = 'nvim-tree/nvim-web-devicons' },
     "github/copilot.vim",
     'stevearc/conform.nvim',
 
