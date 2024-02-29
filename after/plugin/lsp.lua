@@ -46,7 +46,11 @@ cmp.setup({
     sources = {
         { name = 'path' },
         { name = 'nvim_lsp' },
+        { name = 'buffer' },
         { name = 'nvim_lua' },
+    },
+    window = {
+        documentation = cmp.config.window.bordered()
     },
     formatting = lsp_zero.cmp_format(),
     mapping = cmp.mapping.preset.insert({
