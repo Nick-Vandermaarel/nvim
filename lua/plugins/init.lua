@@ -38,20 +38,6 @@ return {
     { 'L3MON4D3/LuaSnip' },
     { 'williamboman/mason.nvim' },
     { 'williamboman/mason-lspconfig.nvim' },
-    -- {
-    --     "nvimdev/lspsaga.nvim",
-    --     config = function()
-    --         require('lspsaga').setup({
-    --             lightbulb = {
-    --                 virtual_text = false,
-    --             },
-    --         })
-    --     end,
-    --     dependencies = {
-    --         "nvim-treesitter/nvim-treesitter",
-    --         "nvim-tree/nvim-web-devicons"
-    --     }
-    -- },
     {
         "lewis6991/gitsigns.nvim",
         dependencies = {
@@ -66,11 +52,6 @@ return {
             vim.o.timeout = true
             vim.o.timeoutlen = 300
         end,
-        opts = {
-            -- your configuration comes here
-            -- or leave it empty to use the default settings
-            -- refer to the configuration section below
-        }
     },
     {
         "folke/trouble.nvim",
@@ -108,4 +89,8 @@ return {
         config = true,
     },
     "norcalli/nvim-colorizer.lua",
+    {
+        "folke/todo-comments.nvim",
+        dependencies = "nvim-lua/plenary.nvim",
+    }
 }
