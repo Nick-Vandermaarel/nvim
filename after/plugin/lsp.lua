@@ -26,7 +26,7 @@ end)
 require("neoconf").setup()
 require('mason').setup({})
 require('mason-lspconfig').setup({
-    ensure_installed = { 'tsserver', 'eslint', 'html', 'rust_analyzer' },
+    ensure_installed = { 'tsserver', 'volar', 'eslint', 'html', 'rust_analyzer' },
     handlers = {
         lsp_zero.default_setup,
         lua_ls = function()
@@ -36,9 +36,22 @@ require('mason-lspconfig').setup({
     }
 })
 
-require("lspconfig").volar.setup {
-    filetypes = { "typescript", "javascript", "vue", "json" }
+require("lspconfig").tsserver.setup {
+    init_options = {
+        plugins = {
+            {
+                name = "@vue/typescript-plugin",
+                location = "/usr/local/lib/node_modules/@vue/typescript-plugin",
+                languages = { "typescript", "javascript", "vue" },
+            }
+        }
+    },
+    filetypes = { "typescript", "javascript", "vue" }
 }
+
+-- require("lspconfig").volar.setup {
+--     filetypes = { "typescript", "javascript", "vue", "json" }
+-- }
 
 local cmp = require('cmp')
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
