@@ -36,6 +36,15 @@ require('mason-lspconfig').setup({
     }
 })
 
+local function organizeImports()
+    local params = {
+        command = "_typescript.organizeImports",
+        arguments = { vim.api.nvim_buf_get_name(0) },
+        title = ""
+    }
+    vim.lsp.buf.execute_command(params)
+end
+
 require("lspconfig").tsserver.setup {
     init_options = {
         plugins = {
@@ -46,31 +55,39 @@ require("lspconfig").tsserver.setup {
             }
         }
     },
-    filetypes = { "typescript", "javascript", "vue" }
+    filetypes = { "typescript", "javascript", "vue" },
+    commands = {
+        OrganizeImports = {
+            organizeImports,
+            description = "Organize Imports"
+        }
+    }
 }
-
--- require("lspconfig").volar.setup {
---     filetypes = { "typescript", "javascript", "vue", "json" }
--- }
 
 local cmp = require('cmp')
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
 cmp.setup({
     sources = {
-        { name = 'path' },
         { name = 'nvim_lsp' },
+        { name = 'luasnip' },
         { name = 'buffer' },
-        { name = 'nvim_lua' },
+        { name = 'path' },
     },
     window = {
         documentation = cmp.config.window.bordered()
     },
     formatting = lsp_zero.cmp_format(),
     mapping = cmp.mapping.preset.insert({
+        -- Select the next item
         ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
+        -- select the previous item
         ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+
+        -- Accept the completion. Default is <c-y>
         ['<enter>'] = cmp.mapping.confirm({ select = true }),
+
+        -- Manually trigger a completion from nvim-cmp
         ['<C-Space>'] = cmp.mapping.complete(),
     }),
 })
