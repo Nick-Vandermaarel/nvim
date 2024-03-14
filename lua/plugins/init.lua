@@ -27,7 +27,10 @@ return {
         dependencies = { { "nvim-lua/plenary.nvim" } }
     },
     "mbbill/undotree",
-    "tpope/vim-fugitive",
+    {
+        "tpope/vim-fugitive",
+        event = "VeryLazy",
+    },
     "folke/neoconf.nvim",
 
     -- LSP
@@ -43,6 +46,7 @@ return {
     { "rafamadriz/friendly-snippets" },
     {
         'L3MON4D3/LuaSnip',
+        version = "v2.*",
         depenedencies = {
             { 'rafamadriz/friendly-snippets' }
         }
@@ -66,6 +70,7 @@ return {
     },
     {
         "folke/trouble.nvim",
+        event = "VeryLazy",
         dependencies = { "nvim-tree/nvim-web-devicons" },
     },
 
