@@ -40,6 +40,7 @@ return {
             { 'hrsh7th/cmp-nvim-lsp' },
         }
     },
+    { "rafamadriz/friendly-snippets" },
     {
         'L3MON4D3/LuaSnip',
         depenedencies = {
