@@ -11,7 +11,7 @@ return {
     "rebelot/kanagawa.nvim", -- Theme
     {
         'numToStr/Comment.nvim',
-        lazy = false,
+        lazy = true,
     },
     {
         'nvim-treesitter/nvim-treesitter',
@@ -31,11 +31,21 @@ return {
     "folke/neoconf.nvim",
 
     -- LSP
-    { 'VonHeikemen/lsp-zero.nvim',        branch = 'v3.x' },
+    { 'VonHeikemen/lsp-zero.nvim', branch = 'v3.x' },
     { 'neovim/nvim-lspconfig' },
-    { 'hrsh7th/cmp-nvim-lsp' },
-    { 'hrsh7th/nvim-cmp' },
-    { 'L3MON4D3/LuaSnip' },
+    {
+        'hrsh7th/nvim-cmp',
+        event = "InsertEnter",
+        dependencies = {
+            { 'hrsh7th/cmp-nvim-lsp' },
+        }
+    },
+    {
+        'L3MON4D3/LuaSnip',
+        depenedencies = {
+            { 'rafamadriz/friendly-snippets' }
+        }
+    },
     { 'williamboman/mason.nvim' },
     { 'williamboman/mason-lspconfig.nvim' },
     {
@@ -58,8 +68,14 @@ return {
         dependencies = { "nvim-tree/nvim-web-devicons" },
     },
 
-    "nvim-tree/nvim-tree.lua",
-    "nvim-tree/nvim-web-devicons",
+    {
+        "nvim-tree/nvim-tree.lua",
+        lazy = true,
+    },
+    {
+        "nvim-tree/nvim-web-devicons",
+        lazy = true
+    },
     {
         "windwp/nvim-autopairs",
         config = function() require("nvim-autopairs").setup {} end
@@ -80,13 +96,19 @@ return {
         dependencies = { { 'nvim-tree/nvim-web-devicons' } }
     },
     "github/copilot.vim",
-    'stevearc/conform.nvim',
+
+    -- formatter
+    {
+        'stevearc/conform.nvim',
+        lazy = true,
+    },
 
     -- Documentation Generation
     {
         "danymat/neogen",
         dependencies = "nvim-treesitter/nvim-treesitter",
         config = true,
+        event = "VeryLazy",
     },
     "norcalli/nvim-colorizer.lua",
     {

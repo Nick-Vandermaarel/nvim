@@ -1,13 +1,13 @@
 require("conform").setup({
     formatters_by_ft = {
-        javascript = { { "prettierd", "prettier" } },
-        typescript = { { "prettierd", "prettier" } },
-        vue = { { "prettierd", "prettier" } },
-        scss = { { "prettierd", "prettier" } },
-        json = { { "prettierd", "prettier" } },
-        html = { { "prettierd", "prettier" } },
-        css = { { "prettierd", "prettier" } },
-        markdown = { { "prettierd", "prettier" } },
+        javascript = { { "prettierd" } },
+        typescript = { { "prettierd" } },
+        vue = { { "prettierd" } },
+        scss = { { "prettierd" } },
+        json = { { "prettierd" } },
+        html = { { "prettierd" } },
+        css = { { "prettierd" } },
+        markdown = { { "prettierd" } },
     },
     format_on_save = {
         timeout_ms = 1000,
