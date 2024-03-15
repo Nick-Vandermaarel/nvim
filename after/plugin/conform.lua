@@ -11,7 +11,7 @@ require("conform").setup({
     },
     format_on_save = {
         timeout_ms = 1000,
-        async = false,
+        async = true,
         lsp_fallback = true,
     }
 })
@@ -21,8 +21,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     callback = function(args)
         require("conform").format({
             bufnr = args.buf,
-            async = true,
-            lsp_fallback = true
         })
     end,
 })

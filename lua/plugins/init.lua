@@ -3,24 +3,20 @@
 return {
     {
         'nvim-telescope/telescope.nvim',
-        tag = '0.1.5',
-        -- or                            , branch = '0.1.x',
+        tag = '0.1.6',
         dependencies = { { 'nvim-lua/plenary.nvim' } }
     },
     "nvim-telescope/telescope-project.nvim",
     "rebelot/kanagawa.nvim", -- Theme
-    {
-        'numToStr/Comment.nvim',
-        lazy = true,
-    },
+    'numToStr/Comment.nvim',
     {
         'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate',
     },
     {
-        'nvim-treesitter/playground',
+        "nvim-lua/plenary.nvim",
+        name = "plenary",
     },
-    "nvim-lua/plenary.nvim", -- don't forget to add this one if you don't have it yet!
     {
         "ThePrimeagen/harpoon",
         branch = "harpoon2",
@@ -31,35 +27,37 @@ return {
         "tpope/vim-fugitive",
         event = "VeryLazy",
     },
+
+    "folke/neodev.nvim",
     "folke/neoconf.nvim",
 
     -- LSP
-    { 'VonHeikemen/lsp-zero.nvim', branch = 'v3.x' },
     { 'neovim/nvim-lspconfig' },
     {
         'hrsh7th/nvim-cmp',
-        event = "InsertEnter",
         dependencies = {
-            { 'hrsh7th/cmp-nvim-lsp' },
-        }
+            "hrsh7th/cmp-nvim-lsp",
+            "hrsh7th/cmp-buffer",           -- source for text in buffer
+            "hrsh7th/cmp-path",             -- source for file system paths
+            "L3MON4D3/LuaSnip",             -- snippet engine
+            "saadparwaiz1/cmp_luasnip",     -- for autocompletion
+            "rafamadriz/friendly-snippets", -- useful snippets
+            "onsails/lspkind.nvim",         -- vs-code like pictograms
+        },
     },
-    { "rafamadriz/friendly-snippets" },
     {
-        'L3MON4D3/LuaSnip',
-        version = "v2.*",
-        depenedencies = {
-            { 'rafamadriz/friendly-snippets' }
+        'williamboman/mason-lspconfig.nvim',
+        dependencies = {
+            'neovim/nvim-lspconfig',
+            'williamboman/mason.nvim'
         }
     },
-    { 'williamboman/mason.nvim' },
-    { 'williamboman/mason-lspconfig.nvim' },
     {
         "lewis6991/gitsigns.nvim",
         dependencies = {
             "nvim-lua/plenary.nvim"
         }
     },
-
     {
         "folke/which-key.nvim",
         event = "VeryLazy",
@@ -73,17 +71,14 @@ return {
         event = "VeryLazy",
         dependencies = { "nvim-tree/nvim-web-devicons" },
     },
-
     {
         "nvim-tree/nvim-tree.lua",
         lazy = true,
-    },
-    {
-        "nvim-tree/nvim-web-devicons",
-        lazy = true
+        dependencies = { 'nvim-tree/nvim-web-devicons', opt = true }
     },
     {
         "windwp/nvim-autopairs",
+        event = "InsertEnter",
         config = function() require("nvim-autopairs").setup {} end
     },
     "windwp/nvim-ts-autotag",
@@ -101,7 +96,23 @@ return {
         end,
         dependencies = { { 'nvim-tree/nvim-web-devicons' } }
     },
-    "github/copilot.vim",
+    {
+        "zbirenbaum/copilot-cmp",
+        config = function()
+            require("copilot_cmp").setup()
+        end
+    },
+    {
+        "zbirenbaum/copilot.lua",
+        cnd = "Copilot",
+        event = "InsertEnter",
+        config = function()
+            require("copilot").setup({
+                suggestion = { enabled = false },
+                panel = { enabled = false }
+            })
+        end
+    },
 
     -- formatter
     {
