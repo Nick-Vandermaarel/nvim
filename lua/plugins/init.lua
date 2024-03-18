@@ -20,6 +20,7 @@ return {
     {
         "ThePrimeagen/harpoon",
         branch = "harpoon2",
+        event = "VeryLazy",
         dependencies = { { "nvim-lua/plenary.nvim" } }
     },
     "mbbill/undotree",
@@ -30,7 +31,6 @@ return {
 
     "folke/neodev.nvim",
     "folke/neoconf.nvim",
-
     -- LSP
     { 'neovim/nvim-lspconfig' },
     {
@@ -47,6 +47,7 @@ return {
     },
     {
         'williamboman/mason-lspconfig.nvim',
+        event = "InsertEnter",
         dependencies = {
             'neovim/nvim-lspconfig',
             'williamboman/mason.nvim'
@@ -81,7 +82,10 @@ return {
         event = "InsertEnter",
         config = function() require("nvim-autopairs").setup {} end
     },
-    "windwp/nvim-ts-autotag",
+    {
+        "windwp/nvim-ts-autotag",
+        event = "InsertEnter",
+    },
     { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
     {
         'nvim-lualine/lualine.nvim',
@@ -131,5 +135,6 @@ return {
     {
         "folke/todo-comments.nvim",
         dependencies = "nvim-lua/plenary.nvim",
+        event = "VeryLazy",
     }
 }
