@@ -58,3 +58,6 @@ Map("t", "<C-Right>", "<cmd>vertical resize +2<CR>")
 -- Neogen Documentation
 Map("n", "<leader>d", "<cmd>lua require('neogen').generate()<CR>")
 Map("n", "<leader>dc", "<cmd>lua require('neogen').generate({ type = 'class'})<CR>")
+
+-- Create a new Tab.
+Map("n", "<C-t>", "<cmd>:tabnew<CR>", { desc = 'New Tab' });
