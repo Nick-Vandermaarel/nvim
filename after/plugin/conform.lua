@@ -10,7 +10,6 @@ require("conform").setup({
         markdown = { { "prettierd" } },
     },
     format_on_save = {
-        timeout_ms = 1000,
         async = true,
         lsp_fallback = true,
     }
