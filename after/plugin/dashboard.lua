@@ -1,23 +1,35 @@
 local db = require("dashboard")
 
 db.setup {
-    theme = "hyper",
+    theme = "doom",
     config = {
         header = {
-[[  _   _   ___    ____   _  __   __     __  ____    __  __  ]],
-[[ | \ | | |_ _|  / ___| | |/ /   \ \   / / |  _ \  |  \/  | ]],
-[[ |  \| |  | |  | |     | ' /     \ \ / /  | | | | | |\/| | ]],
-[[ | |\  |  | |  | |___  | . \      \ V /   | |_| | | |  | | ]],
-[[ |_| \_| |___|  \____| |_|\_\      \_/    |____/  |_|  |_| ]],
-[[                                                           ]],
-[[      _   _   _____    ___   __     __  ___   __  __       ]],
-[[     | \ | | | ____|  / _ \  \ \   / / |_ _| |  \/  |      ]],
-[[     |  \| | |  _|   | | | |  \ \ / /   | |  | |\/| |      ]],
-[[     | |\  | | |___  | |_| |   \ V /    | |  | |  | |      ]],
-[[     |_| \_| |_____|  \___/     \_/    |___| |_|  |_|      ]],
-[[                                                           ]]
+            [[]],
+            [[]],
+            [[]],
+            [[]],
+            [[]],
+            [[          ▀████▀▄▄              ▄█ ]],
+            [[            █▀    ▀▀▄▄▄▄▄    ▄▄▀▀█ ]],
+            [[    ▄        █          ▀▀▀▀▄  ▄▀  ]],
+            [[   ▄▀ ▀▄      ▀▄              ▀▄▀  ]],
+            [[  ▄▀    █     █▀   ▄█▀▄      ▄█    ]],
+            [[  ▀▄     ▀▄  █     ▀██▀     ██▄█   ]],
+            [[   ▀▄    ▄▀ █   ▄██▄   ▄  ▄  ▀▀ █  ]],
+            [[    █  ▄▀  █    ▀██▀    ▀▀ ▀▀  ▄▀  ]],
+            [[   █   █  █      ▄▄           ▄▀   ]],
+            [[]],
+            [[]],
+            [[]],
+            [[]],
+            [[]],
         },
-        project = { enable = true, limit = 8, action = "Telescope find_files cwd=" },
+        center = {
+            { action = "Telescope fd", desc = " Browse files", icon = "󰈔 ", key = "f" },
+            { action = "Telescope oldfiles", desc = " Recent files", icon = " ", key = "r" },
+            { action = 'lua require("telescope").extensions.project.project{}', desc = " Open Project", icon = "󱉥 ", key = "p" },
+            { action = 'lua require("persistence").load()', desc = " Restore Session", icon = " ", key = "s" },
+        },
         footer = {}
     }
 }

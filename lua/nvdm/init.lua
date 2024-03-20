@@ -17,9 +17,9 @@ vim.g.maplocalleader = " "
 
 require("lazy").setup("plugins")
 
-require("nvdm.nvimTree")
 require("nvdm.remap")
 require("nvdm.set")
+
 require("gitsigns").setup()
 require("Comment").setup()
 require("colorizer").setup()

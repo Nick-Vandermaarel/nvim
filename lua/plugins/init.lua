@@ -8,7 +8,10 @@ return {
     },
     "nvim-telescope/telescope-project.nvim",
     "rebelot/kanagawa.nvim", -- Theme
-    'numToStr/Comment.nvim',
+    {
+        'numToStr/Comment.nvim',
+        event = "BufReadPre"
+    },
     {
         'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate',
@@ -23,7 +26,10 @@ return {
         event = "VeryLazy",
         dependencies = { { "nvim-lua/plenary.nvim" } }
     },
-    "mbbill/undotree",
+    {
+        "mbbill/undotree",
+        event = "BufReadPre"
+    },
     {
         "tpope/vim-fugitive",
         event = "VeryLazy",
@@ -31,6 +37,16 @@ return {
 
     "folke/neodev.nvim",
     "folke/neoconf.nvim",
+    {
+        "folke/persistence.nvim",
+        event = "BufReadPre",
+        config = function()
+            require("persistence").setup {
+                dir = vim.fn.expand(vim.fn.stdpath "config" .. "/session/"),
+                options = { "buffers", "curdir", "tabpages", "winsize" },
+            }
+        end
+    },
     -- LSP
     { 'neovim/nvim-lspconfig' },
     {
@@ -46,8 +62,24 @@ return {
         },
     },
     {
-        'williamboman/mason-lspconfig.nvim',
+        "zbirenbaum/copilot-cmp",
+        config = function()
+            require("copilot_cmp").setup()
+        end
+    },
+    {
+        "zbirenbaum/copilot.lua",
+        cnd = "Copilot",
         event = "InsertEnter",
+        config = function()
+            require("copilot").setup({
+                suggestion = { enabled = false },
+                panel = { enabled = false }
+            })
+        end
+    },
+    {
+        'williamboman/mason-lspconfig.nvim',
         dependencies = {
             'neovim/nvim-lspconfig',
             'williamboman/mason.nvim'
@@ -86,7 +118,12 @@ return {
         "windwp/nvim-ts-autotag",
         event = "InsertEnter",
     },
-    { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
+    {
+        "lukas-reineke/indent-blankline.nvim",
+        event = "BufReadPre",
+        main = "ibl",
+        opts = {}
+    },
     {
         'nvim-lualine/lualine.nvim',
         dependencies = { 'nvim-tree/nvim-web-devicons', opt = true }
@@ -95,27 +132,7 @@ return {
     {
         'nvimdev/dashboard-nvim',
         event = 'VimEnter',
-        config = function()
-            require('dashboard').setup()
-        end,
         dependencies = { { 'nvim-tree/nvim-web-devicons' } }
-    },
-    {
-        "zbirenbaum/copilot-cmp",
-        config = function()
-            require("copilot_cmp").setup()
-        end
-    },
-    {
-        "zbirenbaum/copilot.lua",
-        cnd = "Copilot",
-        event = "InsertEnter",
-        config = function()
-            require("copilot").setup({
-                suggestion = { enabled = false },
-                panel = { enabled = false }
-            })
-        end
     },
 
     -- formatter
