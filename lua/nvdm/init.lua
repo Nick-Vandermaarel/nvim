@@ -22,4 +22,3 @@ require("nvdm.set")
 
 require("gitsigns").setup()
 require("Comment").setup()
-require("colorizer").setup()

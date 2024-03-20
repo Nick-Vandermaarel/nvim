@@ -5,3 +5,7 @@ require("kanagawa").setup({
 })
 
 vim.cmd("colorscheme kanagawa")
+
+require("colorizer").setup {
+    html = { names = false } -- Disabled name parsing
+}

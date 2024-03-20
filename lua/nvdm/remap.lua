@@ -28,7 +28,7 @@ Map("n", "<leader>Y", "\"+Y")
 -- Replace line i'm currently on
 Map("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
-Map("n", "<leader>x", ":split<CR> :resize -12<CR> :terminal<CR>")
+--Map("n", "<leader>x", ":split<CR> :resize -12<CR> :terminal<CR>")
 Map("t", "<esc>", "<C-\\><C-n>")
 
 -- Movement
@@ -61,3 +61,7 @@ Map("n", "<leader>dc", "<cmd>lua require('neogen').generate({ type = 'class'})<C
 
 -- Create a new Tab.
 Map("n", "<C-t>", "<cmd>:tabnew<CR>", { desc = 'New Tab' });
+
+-- Splits
+Map("n", "<C-x>", "<cmd>split<CR>", { desc = "Horizontal Split" });
+Map("n", "<C-v>", "<cmd>vsplit<CR>", { desc = "Vertical Split" });
