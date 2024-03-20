@@ -50,7 +50,6 @@ require('mason-lspconfig').setup({
         "lua_ls",
         'tsserver',
         'volar',
-        'eslint',
         'html',
         'rust_analyzer'
     },
