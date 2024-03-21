@@ -29,6 +29,10 @@ vim.g.gitblame_date_format = "%Y-%m-%d %H:%M"
 -- Enable 24 bit color.
 vim.opt.termguicolors = true
 
+-- Disable netrw
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 vim.keymap.set("n", "<leader>gs", vim.cmd.Git);
 
