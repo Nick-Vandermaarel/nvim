@@ -5,6 +5,7 @@ return {
         dependencies = { 'nvim-lua/plenary.nvim',
             "nvim-telescope/telescope-project.nvim",
         },
+        event = "VeryLazy",
         config = function()
             require("telescope").load_extension("project")
 

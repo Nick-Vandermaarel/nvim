@@ -8,7 +8,7 @@ return {
     },
     {
         "mbbill/undotree",
-        event = "BufReadPre"
+        event = "VeryLazy",
     },
     {
         "tpope/vim-fugitive",
@@ -50,7 +50,11 @@ return {
         "windwp/nvim-ts-autotag",
         event = "InsertEnter",
     },
-    "norcalli/nvim-colorizer.lua",
+    {
+        "norcalli/nvim-colorizer.lua",
+        event = "BufReadPre",
+        opts = {}
+    },
     {
         "folke/todo-comments.nvim",
         dependencies = "nvim-lua/plenary.nvim",

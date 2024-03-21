@@ -3,7 +3,7 @@ return {
     {
         "danymat/neogen",
         dependencies = "nvim-treesitter/nvim-treesitter",
-        event = "VeryLazy",
+        event = "BufReadPre",
         config = function()
             require("neogen").setup {
                 enabled = true,
