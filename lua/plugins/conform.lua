@@ -14,7 +14,7 @@ return {
                     html = { { "prettierd" } },
                     css = { { "prettierd" } },
                     markdown = { { "prettierd" } },
-                    csharp = { { "csharpier" }},
+                    csharp = { { "csharpier" } },
                 },
                 format_on_save = {
                     async = true,

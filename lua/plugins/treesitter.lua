@@ -7,6 +7,7 @@ return {
             require 'nvim-treesitter.configs'.setup {
                 -- A list of parser names, or "all" (the five listed parsers should always be installed)
                 ensure_installed = { "javascript", "typescript", "c_sharp", "vue", "python", "c", "lua", "vim", "vimdoc", "html", "http", "scss", "markdown", "markdown_inline", "comment" },
+                ignore_install = {}, -- List of parsers to ignore installing
 
                 -- Install parsers synchronously (only applied to `ensure_installed`)
                 sync_install = false,
@@ -52,10 +53,10 @@ return {
                 swap = {
                     enable = true,
                     swap_next = {
-                        ["<leader>a"] = "@parameter.inner",
+                        ["<leader>t"] = "@parameter.inner",
                     },
                     swap_previous = {
-                        ["<leader>A"] = "@parameter.outer",
+                        ["<leader>T"] = "@parameter.outer",
                     }
                 }
             }
