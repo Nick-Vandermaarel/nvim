@@ -35,6 +35,10 @@ vim.g.loaded_netrwPlugin = 1
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 vim.keymap.set("n", "<leader>gs", vim.cmd.Git);
 
+
+local harpoon = require("harpoon")
+harpoon:setup();
+
 -- LSP Attach AutoCMD
 vim.api.nvim_create_autocmd('LspAttach', {
     desc = "LSP actions",
@@ -68,7 +72,8 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     callback = function(args)
         require("conform").format({
             bufnr = args.buf,
-            async = true,
+            async = false,
+            timeout_ms = 5000,
             lsp_fallback = true,
         })
     end,

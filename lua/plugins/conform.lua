@@ -17,7 +17,8 @@ return {
                     csharp = { { "csharpier" } },
                 },
                 format_on_save = {
-                    async = true,
+                    async = false,
+                    timeout_ms = 5000,
                     lsp_fallback = true,
                 }
             })
