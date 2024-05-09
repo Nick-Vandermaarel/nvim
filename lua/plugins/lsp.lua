@@ -27,6 +27,15 @@ return {
                 vim.lsp.buf.execute_command(params)
             end
 
+            vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+                vim.lsp.handlers.hover,
+                { border = "rounded" }
+            )
+            vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+                vim.lsp.handlers.signature_help,
+                { border = "rounded" }
+            )
+
             require('mason').setup({})
             require('mason-lspconfig').setup({
                 ensure_installed = {
@@ -106,7 +115,8 @@ return {
                         }),
                     },
                     window = {
-                        documentation = cmp.config.window.bordered()
+                        documentation = cmp.config.window.bordered(),
+                        completion = cmp.config.window.bordered(),
                     },
                     snippet = {
                         expand = function(args)
@@ -126,6 +136,13 @@ return {
                         ['<C-Space>'] = cmp.mapping.complete(),
                     }),
                 })
+
+                -- Add parentheses after selecting function or method item.
+                local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+                cmp.event:on(
+                    "confirm_done",
+                    cmp_autopairs.on_confirm_done()
+                )
             end
         },
         {

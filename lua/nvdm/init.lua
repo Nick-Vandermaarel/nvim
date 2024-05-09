@@ -17,9 +17,6 @@ vim.g.maplocalleader = " "
 
 require("lazy").setup("plugins")
 
-vim.cmd("colorscheme kanagawa")
-vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = '#ffe5b4', bold = true })
-
 -- Gitblame config
 vim.g.gitblame_display_virtual_text = 0 -- Remove virtual text from the buffer.
 vim.g.gitblame_message_when_not_committed = "Not commited"
