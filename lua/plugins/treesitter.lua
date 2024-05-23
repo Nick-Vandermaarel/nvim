@@ -2,7 +2,7 @@ return {
     {
         'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate',
-        event = "BufRead",
+        event = { "BufReadPre", "BufNewFile" },
         config = function()
             require 'nvim-treesitter.configs'.setup {
                 -- A list of parser names, or "all" (the five listed parsers should always be installed)
@@ -24,41 +24,12 @@ return {
                 incremental_selection = {
                     enable = true,
                     keymaps = {
-                        init_selection = "<leader><tab>",
-                        node_incremental = "<leader><tab>",
-                        scope_incremental = "<leader>.",
-                        node_decremental = "<S-tab>",
+                        --init_selection = "v",
+                        node_incremental = "v",
+                        scope_incremental = false,
+                        node_decremental = "V",
                     },
                 },
-                move = {
-                    enable = true,
-                    set_jumps = true,
-                    goto_next_start = {
-                        ["]m"] = "@function.outer",
-                        ["]]"] = "@class.outer",
-                    },
-                    goto_next_end = {
-                        ["]M"] = "@function.outer",
-                        ["]["] = "@class.outer",
-                    },
-                    goto_previous_start = {
-                        ["[m"] = "@function.outer",
-                        ["]["] = "@class.outer",
-                    },
-                    goto_previous_end = {
-                        ["[M"] = "@function.outer",
-                        ["[]"] = "@class.outer",
-                    },
-                },
-                swap = {
-                    enable = true,
-                    swap_next = {
-                        ["<leader>t"] = "@parameter.inner",
-                    },
-                    swap_previous = {
-                        ["<leader>T"] = "@parameter.outer",
-                    }
-                }
             }
         end,
     },

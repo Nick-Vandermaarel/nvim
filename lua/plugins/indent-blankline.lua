@@ -8,7 +8,7 @@ return {
                 indent = { char = "▏" },
                 scope = {
                     enabled = true,
-                    char = "▎",
+                    char = "▏",
                 },
                 exclude = {
                     filetypes = {
