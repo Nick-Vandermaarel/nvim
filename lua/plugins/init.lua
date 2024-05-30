@@ -11,10 +11,6 @@ return {
         event = "VeryLazy",
     },
     {
-        "tpope/vim-fugitive",
-        event = "VeryLazy",
-    },
-    {
         "folke/persistence.nvim",
         event = "BufReadPre",
         config = function()
