@@ -48,5 +48,19 @@ return {
             end,
             desc = "Harpoon 4"
         },
+        {
+            "<leader>5",
+            function()
+                require("harpoon"):list():select(5)
+            end,
+            desc = "Harpoon 5"
+        },
+        {
+            "<leader>6",
+            function()
+                require("harpoon"):list():select(6)
+            end,
+            desc = "Harpoon 6"
+        },
     }
 };
