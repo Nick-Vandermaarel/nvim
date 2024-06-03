@@ -2,6 +2,7 @@ return {
     {
         "folke/trouble.nvim",
         event = "VeryLazy",
+        cmd = "Trouble",
         dependencies = { "nvim-tree/nvim-web-devicons" },
         config = function()
             local trouble = require("trouble")
