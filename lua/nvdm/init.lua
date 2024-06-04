@@ -17,11 +17,6 @@ vim.g.maplocalleader = " "
 
 require("lazy").setup("plugins")
 
--- Gitblame config
-vim.g.gitblame_display_virtual_text = 0 -- Remove virtual text from the buffer.
-vim.g.gitblame_message_when_not_committed = "Not commited"
-vim.g.gitblame_date_format = "%Y-%m-%d %H:%M"
-
 -- Enable 24 bit color.
 vim.opt.termguicolors = true
 
@@ -38,3 +33,4 @@ harpoon:setup();
 require("nvdm.autocmd")
 require("nvdm.remap")
 require("nvdm.set")
+require("colorizer").setup();

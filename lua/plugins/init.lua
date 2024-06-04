@@ -47,7 +47,7 @@ return {
         event = "InsertEnter",
     },
     {
-        "norcalli/nvim-colorizer.lua",
+        "NvChad/nvim-colorizer.lua",
         event = "BufReadPre",
         opts = {}
     },
@@ -56,5 +56,5 @@ return {
         dependencies = "nvim-lua/plenary.nvim",
         event = "VeryLazy",
         opts = {}
-    }
+    },
 }
