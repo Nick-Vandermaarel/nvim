@@ -57,4 +57,7 @@ return {
         event = "VeryLazy",
         opts = {}
     },
+    {
+        'akinsho/toggleterm.nvim', version = "*", config = true
+    }
 }
