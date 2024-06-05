@@ -8,7 +8,8 @@ return {
                     sorter = "case_sensitive",
                 },
                 view = {
-                    adaptive_size = true
+                    adaptive_size = true,
+                    relativenumber = true
                 },
             })
 
