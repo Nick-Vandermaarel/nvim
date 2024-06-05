@@ -1,4 +1,7 @@
 return {
+    {
+        "jmederosalvarado/roslyn.nvim",
+    },
     -- lspconfig
     {
         'neovim/nvim-lspconfig',
@@ -35,6 +38,15 @@ return {
                 vim.lsp.handlers.signature_help,
                 { border = "rounded" }
             )
+
+            -- This is not quite ready for production
+            -- local onAttach = require("nvdm.autocmd");
+            -- require("roslyn").setup({
+            --     dotnet_cmd = "dotnet",              -- this is the default
+            --     roslyn_version = "4.8.0-3.23475.7", -- this is the default
+            --     on_attach = onAttach,
+            --     capabilities = lsp_capabilities,
+            -- });
 
             require('mason').setup({})
             require('mason-lspconfig').setup({
