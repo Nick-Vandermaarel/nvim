@@ -29,7 +29,6 @@ Map("n", "<leader>Y", "\"+Y")
 Map("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 --Map("n", "<leader>x", ":split<CR> :resize -12<CR> :terminal<CR>")
-Map("t", "<esc>", "<C-\\><C-n>")
 
 -- Movement
 Map("n", "<C-h>", "<C-w>h")
@@ -54,6 +53,9 @@ Map("t", "<C-Up>", "<cmd>resize -2<CR>")
 Map("t", "<C-Down>", "<cmd>resize +2<CR>")
 Map("t", "<C-Left>", "<cmd>vertical resize -2<CR>")
 Map("t", "<C-Right>", "<cmd>vertical resize +2<CR>")
+Map("t", "<esc>", "<C-\\><C-n>")
+Map("n", "<C-\\>", "<cmd>ToggleTerm<CR>")
+Map("n", "2<C-\\>", "<cmd>2ToggleTerm<CR>")
 
 -- Neogen Documentation
 Map("n", "<leader>d", "<cmd>lua require('neogen').generate()<CR>")
