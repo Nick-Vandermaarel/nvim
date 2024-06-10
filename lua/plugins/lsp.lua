@@ -1,7 +1,27 @@
 return {
+    -- {
+    --     "jmederosalvarado/roslyn.nvim",
+    -- },
+
+
     {
-        "jmederosalvarado/roslyn.nvim",
+        "iabdelkareem/csharp.nvim",
+        dependencies = {
+            "williamboman/mason.nvim", -- Required, automatically installs omnisharp
+            "mfussenegger/nvim-dap",
+            "Tastyep/structlog.nvim",  -- Optional, but highly recommended for debugging
+        },
+        config = function()
+            require("mason").setup() -- Mason setup must run before csharp
+            require("csharp").setup({
+                lsp = {
+                    on_attach = require("nvdm.autocmd"),
+                }
+            })
+        end
     },
+
+
     -- lspconfig
     {
         'neovim/nvim-lspconfig',
@@ -51,7 +71,7 @@ return {
             require('mason').setup({})
             require('mason-lspconfig').setup({
                 ensure_installed = {
-                    "csharp_ls",
+                    -- "csharp_ls",
                     "lua_ls",
                     'tsserver',
                     'volar',
