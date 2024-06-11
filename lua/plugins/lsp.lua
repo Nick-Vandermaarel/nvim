@@ -21,13 +21,18 @@ return {
     --     end
     -- },
 
+    -- Must be setup before the lspconfig
+    {
+        "folke/lazydev.nvim",
+        ft = "lua", -- only load on lua files
+        opts = {}
+    },
 
     -- lspconfig
     {
         'neovim/nvim-lspconfig',
         event = "VeryLazy",
         dependencies = {
-            { "folke/neodev.nvim",  opts = {} },
             { "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
             "williamboman/mason.nvim",
             "williamboman/mason-lspconfig.nvim",
@@ -123,6 +128,13 @@ return {
                     end
                 },
             },
+            opts = function(_, opts)
+                opts.sources = opts.sources or {}
+                table.insert(opts.sources, {
+                    name = "lazydev",
+                    group_index = 0, -- set group index to 0 to skil loading LuaLs completions
+                })
+            end,
             config = function()
                 local cmp = require('cmp')
                 local cmp_select = { behavior = cmp.SelectBehavior.Select }
