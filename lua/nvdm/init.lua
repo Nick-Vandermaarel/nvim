@@ -17,9 +17,6 @@ vim.g.maplocalleader = " "
 
 require("lazy").setup("plugins")
 
--- Enable 24 bit color.
-vim.opt.termguicolors = true
-
 -- Disable netrw
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
