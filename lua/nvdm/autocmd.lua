@@ -34,11 +34,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
 vim.api.nvim_create_autocmd("BufWritePre", {
     pattern = "*",
     callback = function(args)
-        -- Remove usings from C#.
-        if vim.bo[0].filetype == "cs" then
-            vim.cmd("CSFixUsings")
-        end
-
         require("conform").format({
             bufnr = args.buf,
             async = false,
