@@ -174,7 +174,7 @@ return {
                         format = lspkind.cmp_format({
                             mode = "symbol",
                             max_width = 50,
-                            symbol_map = { Copilot = "" },
+                            symbol_map = { Copilot = "" }
                         }),
                     },
                     experimental = {
@@ -191,13 +191,7 @@ return {
 
                         -- Accept the completion. Default is <c-y>
                         ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-                        ['<tab>'] = vim.schedule_wrap(function(fallback)
-                            if cmp.visible() and has_words_before() then
-                                cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-                            else
-                                fallback()
-                            end
-                        end),
+                        ['<tab>'] = cmp.mapping.confirm({ select = true }),
 
                         -- Manually trigger a completion from nvim-cmp
                         ['<C-Space>'] = cmp.mapping.complete(),
