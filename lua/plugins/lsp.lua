@@ -1,31 +1,21 @@
 return {
-    -- {
-    --     "jmederosalvarado/roslyn.nvim",
-    -- },
-
-
-    -- {
-    --     "iabdelkareem/csharp.nvim",
-    --     dependencies = {
-    --         "williamboman/mason.nvim", -- Required, automatically installs omnisharp
-    --         "mfussenegger/nvim-dap",
-    --         "Tastyep/structlog.nvim",  -- Optional, but highly recommended for debugging
-    --     },
-    --     config = function()
-    --         require("mason").setup() -- Mason setup must run before csharp
-    --         require("csharp").setup({
-    --             lsp = {
-    --                 on_attach = require("nvdm.autocmd"),
-    --             }
-    --         })
-    --     end
-    -- },
-
     -- Must be setup before the lspconfig
     {
         "folke/lazydev.nvim",
         ft = "lua", -- only load on lua files
         opts = {}
+    },
+
+    {
+        "seblj/roslyn.nvim",
+        config = function()
+            local onAttach = require("nvdm.autocmd");
+            require("roslyn").setup({
+                config = {
+                   on_attach = onAttach,
+                },
+            });
+        end
     },
 
     -- lspconfig
@@ -64,18 +54,10 @@ return {
                 { border = "rounded" }
             )
 
-            -- local onattach = require("nvdm.autocmd");
-            -- require("roslyn").setup({
-            --     dotnet_cmd = "dotnet",              -- this is the default
-            --     roslyn_version = "4.8.0-3.23475.7", -- this is the default
-            --     on_attach = onattach,
-            --     capabilities = lsp_capabilities,
-            -- });
-
             require('mason').setup({})
             require('mason-lspconfig').setup({
                 ensure_installed = {
-                    "csharp_ls",
+                    -- "csharp_ls",
                     "lua_ls",
                     'tsserver',
                     'volar',
