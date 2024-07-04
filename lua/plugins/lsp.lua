@@ -13,10 +13,9 @@ return {
             require("roslyn").setup({
                 ---@diagnostic disable-next-line: missing-fields
                 config = {
-                    on_attach = function(event)
-                        lspUtils.onAttach(event);
-                        -- Currently not working.
-                        -- lspUtils.roslynSemanticHighlights(event);
+                    on_attach = function(client, bufnr)
+                        lspUtils.onAttach({ client = client, bufnr = bufnr });
+                        lspUtils.roslynSemanticHighlights(client);
                     end,
                 },
             });

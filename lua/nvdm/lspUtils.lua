@@ -47,10 +47,12 @@ function M.roslynSemanticHighlights(client)
             local function find_buf_by_uri(search_uri)
                 local bufs = vim.api.nvim_list_bufs()
                 for _, buf in ipairs(bufs) do
-                    local name = vim.api.nvim_buf_get_name(buf)
-                    local uri = "file://" .. name
-                    if uri == search_uri then
-                        return buf
+                    if vim.api.nvim_buf_is_valid(buf) then
+                        local name = vim.api.nvim_buf_get_name(buf)
+                        local uri = vim.uri_from_fname(name)
+                        if uri == search_uri then
+                            return buf
+                        end
                     end
                 end
             end
