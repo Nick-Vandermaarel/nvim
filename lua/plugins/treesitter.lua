@@ -1,8 +1,12 @@
+---@diagnostic disable: missing-fields
 return {
     {
         'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate',
         event = { "BufReadPre", "BufNewFile" },
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter-textobjects",
+        },
         config = function()
             require 'nvim-treesitter.configs'.setup {
                 -- A list of parser names, or "all" (the five listed parsers should always be installed)
@@ -24,10 +28,10 @@ return {
                 incremental_selection = {
                     enable = true,
                     keymaps = {
-                        --init_selection = "v",
-                        node_incremental = "v",
+                        init_selection = "<CR>",
+                        node_incremental = "<CR>",
                         scope_incremental = false,
-                        node_decremental = "V",
+                        node_decremental = "<BS>",
                     },
                 },
             }

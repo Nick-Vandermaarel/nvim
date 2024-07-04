@@ -57,5 +57,6 @@ return {
         require("kanagawa").setup(opts);
         vim.cmd("colorscheme kanagawa");
         vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = '#ffe5b4', bold = true })
-    end,
+        vim.api.nvim_set_hl(0, 'CmpGhostText', { fg = "#64778A" })
+    end
 };

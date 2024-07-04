@@ -9,10 +9,15 @@ return {
     {
         "seblj/roslyn.nvim",
         config = function()
-            local onAttach = require("nvdm.autocmd");
+            local lspUtils = require("nvdm.lspUtils");
             require("roslyn").setup({
+                ---@diagnostic disable-next-line: missing-fields
                 config = {
-                   on_attach = onAttach,
+                    on_attach = function(event)
+                        lspUtils.onAttach(event);
+                        -- Currently not working.
+                        -- lspUtils.roslynSemanticHighlights(event);
+                    end,
                 },
             });
         end
@@ -127,14 +132,6 @@ return {
                 local luasnip = require("luasnip")
                 require("luasnip.loaders.from_vscode").lazy_load()
 
-                -- Tab completion fix
-                local has_words_before = function()
-                    if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
-                    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-                    return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") ==
-                        nil
-                end
-
                 cmp.setup({
                     sources = cmp.config.sources({
                         { name = "nvim_lsp_signature_help" },
@@ -160,7 +157,7 @@ return {
                         }),
                     },
                     experimental = {
-                        ghost_text = true,
+                        ghost_text = { hl_group = "CmpGhostText" },
                     },
                     mapping = cmp.mapping.preset.insert({
                         -- Select the next item
