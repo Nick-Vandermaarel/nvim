@@ -104,9 +104,6 @@ return {
                 "hrsh7th/cmp-buffer",                  -- source for text in buffer
                 "hrsh7th/cmp-path",                    -- source for file system paths
                 "hrsh7th/cmp-nvim-lsp-signature-help", -- source for displaying function signatures
-                "L3MON4D3/LuaSnip",                    -- snippet engine
-                "saadparwaiz1/cmp_luasnip",            -- for autocompletion
-                "rafamadriz/friendly-snippets",        -- useful snippets
                 "onsails/lspkind.nvim",                -- vs-code like pictograms
                 {                                      -- Github Copilot suggestions
                     "zbirenbaum/copilot-cmp",
@@ -128,25 +125,16 @@ return {
 
                 local lspkind = require("lspkind")
 
-                local luasnip = require("luasnip")
-                require("luasnip.loaders.from_vscode").lazy_load()
-
                 cmp.setup({
                     sources = cmp.config.sources({
                         { name = "nvim_lsp_signature_help" },
                         { name = "copilot" },
                         { name = 'nvim_lsp' },
-                        { name = "luasnip" },
                         { name = "path" },
                     }),
                     window = {
                         documentation = cmp.config.window.bordered(),
                         completion = cmp.config.window.bordered(),
-                    },
-                    snippet = {
-                        expand = function(args)
-                            luasnip.lsp_expand(args.body)
-                        end,
                     },
                     formatting = {
                         format = lspkind.cmp_format({
