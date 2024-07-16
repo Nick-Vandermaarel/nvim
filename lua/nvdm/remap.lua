@@ -9,6 +9,7 @@ end
 Map("n", "<leader>w", ":w!<CR>")
 Map("n", "<leader>q", ":q!<CR>")
 Map("n", "<leader>x", ":x!<CR>")
+Map("n", "<leader>bd", ":bd<CR>")
 
 Map("v", "J", ":m '>+1<CR>gv=gv")
 Map("v", "K", ":m '<-2<CR>gv=gv")
