@@ -56,9 +56,6 @@ Map("t", "<C-Up>", "<cmd>resize -2<CR>")
 Map("t", "<C-Down>", "<cmd>resize +2<CR>")
 Map("t", "<C-Left>", "<cmd>vertical resize -2<CR>")
 Map("t", "<C-Right>", "<cmd>vertical resize +2<CR>")
-Map("t", "<esc>", "<C-\\><C-n>")
-Map("n", "<C-\\>", "<cmd>ToggleTerm<CR>")
-Map("n", "2<C-\\>", "<cmd>2ToggleTerm<CR>")
 
 -- Neogen Documentation
 Map("n", "<leader>d", "<cmd>lua require('neogen').generate()<CR>")

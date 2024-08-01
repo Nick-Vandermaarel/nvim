@@ -8,6 +8,7 @@ return {
 
     {
         "seblj/roslyn.nvim",
+        ft = "cs",
         config = function()
             local lspUtils = require("nvdm.lspUtils");
             require("roslyn").setup({
