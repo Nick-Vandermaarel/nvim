@@ -67,7 +67,8 @@ return {
                     'tsserver',
                     'volar',
                     'html',
-                    'rust_analyzer'
+                    'rust_analyzer',
+                    'tailwindcss',
                 },
                 handlers = {
                     default_setup,
