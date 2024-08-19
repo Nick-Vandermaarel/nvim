@@ -47,16 +47,15 @@ return {
         event = "InsertEnter",
     },
     {
-        "norcalli/nvim-colorizer.lua",
-        event = "BufReadPre",
-        opts = {},
-        config = function()
-            require("colorizer").setup({
-                user_default_options = {
-                    names = false,
-                }
-            })
-        end,
+        "NvChad/nvim-colorizer.lua",
+        opts = {
+            user_default_options = {
+                RGB = false,
+                names = false,
+                RRGGBB = true,
+                AARRGGBB = false,
+            },
+        },
     },
     {
         "folke/todo-comments.nvim",
