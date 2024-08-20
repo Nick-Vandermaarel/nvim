@@ -30,3 +30,4 @@ harpoon:setup();
 require("nvdm.autocmd")
 require("nvdm.remap")
 require("nvdm.set")
+require("nvdm.csharp_secrets")
