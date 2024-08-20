@@ -21,8 +21,6 @@ Note: This plugin requires Neovim and is designed for C# projects using the
 standard .NET Core/5+ project structure with user secrets.
 
 --]]
-
-
 local M = {}
 
 function M.find_sln_file()
