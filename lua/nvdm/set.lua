@@ -29,3 +29,8 @@ vim.opt.titlestring = [[%t - %{fnamemodify(getcwd(), ':t')}]]
 
 -- Sync clipboard between OS and Neovim
 vim.opt.clipboard = "unnamedplus"
+
+vim.opt.listchars = {
+    space = "⋅",
+}
+vim.opt.list = true
