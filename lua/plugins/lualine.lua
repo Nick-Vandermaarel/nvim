@@ -11,16 +11,26 @@ return {
                 vim.g.gitblame_enabled = 1
             end
         },
+        "otavioschwanck/arrow.nvim",
     },
     config = function()
         local theme = require "lualine.themes.auto"
         local git_blame = require "gitblame"
+        local arrow_sl = require "arrow.statusline"
+
         require("lualine").setup {
             options = {
                 theme = theme,
                 globalstatus = true
             },
             sections = {
+                lualine_b = {
+                    "branch", "diff", "diagnostics",
+                    -- Show the arrow marker if the current buffer is bookmarked.
+                    function()
+                        return arrow_sl.text_for_statusline_with_icons()
+                    end
+                },
                 lualine_c = { "filename" },
                 -- Show the git blame int the status line.
                 lualine_x = { { git_blame.get_current_blame_text, cond = git_blame.is_blame_text_available } },

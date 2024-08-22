@@ -24,9 +24,6 @@ vim.g.loaded_netrwPlugin = 1
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 vim.keymap.set("n", "<leader>gs", vim.cmd.Git);
 
-local harpoon = require("harpoon")
-harpoon:setup();
-
 require("nvdm.autocmd")
 require("nvdm.remap")
 require("nvdm.set")

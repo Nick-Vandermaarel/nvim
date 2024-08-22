@@ -45,6 +45,7 @@ return {
     {
         "windwp/nvim-ts-autotag",
         event = "InsertEnter",
+        opts = {}
     },
     {
         "NvChad/nvim-colorizer.lua",
