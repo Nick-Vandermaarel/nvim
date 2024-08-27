@@ -34,3 +34,7 @@ vim.opt.listchars = {
     space = "⋅",
 }
 vim.opt.list = true
+
+if vim.fn.has('win32') == 1 then
+    vim.g.undotree_DiffCommand = "FC"
+end

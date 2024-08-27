@@ -99,7 +99,9 @@ return {
     },
     {
         {
-            'hrsh7th/nvim-cmp',
+            --'hrsh7th/nvim-cmp',
+            "yioneko/nvim-cmp",
+            branch = "perf",
             event = "InsertEnter",
             dependencies = {
                 "hrsh7th/cmp-nvim-lsp",
@@ -120,6 +122,12 @@ return {
                     name = "lazydev",
                     group_index = 0, -- set group index to 0 to skil loading LuaLs completions
                 })
+
+                opts.performance = {
+                    debounce = 0, -- default is 60ms
+                    throttle = 0, -- default is 30ms
+                }
+                return opts;
             end,
             config = function()
                 local cmp = require('cmp')
