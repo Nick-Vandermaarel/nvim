@@ -1,8 +1,12 @@
 local M = {}
 
 local function enhanced_hover()
-    -- Store the original cursor position
-    local original_pos = vim.api.nvim_win_get_cursor(0)
+    -- Check if the current buffer is a C# file
+    if vim.bo.filetype ~= 'cs' then
+        -- If not a C# file, fall back to the default hover behavior
+        vim.lsp.buf.hover()
+        return
+    end
 
     -- Function to display hover information
     local function display_hover(result)
