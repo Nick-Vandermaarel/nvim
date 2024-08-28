@@ -1,5 +1,6 @@
 return {
     "nvim-treesitter/nvim-treesitter-refactor",
+    event = { "BufReadPre", "BufNewFile" },
     config = function()
         require('nvim-treesitter.configs').setup {
             refactor = {
