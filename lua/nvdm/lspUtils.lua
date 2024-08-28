@@ -1,5 +1,42 @@
 local M = {}
 
+local function enhanced_hover()
+    -- Store the original cursor position
+    local original_pos = vim.api.nvim_win_get_cursor(0)
+
+    -- Function to display hover information
+    local function display_hover(result)
+        if result and result.contents then
+            local contents = vim.lsp.util.convert_input_to_markdown_lines(result.contents)
+            vim.lsp.util.open_floating_preview(contents, "markdown", {})
+        end
+    end
+
+    -- Get hover information for current position
+    vim.lsp.buf_request(0, 'textDocument/hover', vim.lsp.util.make_position_params(), function(_, result)
+        display_hover(result)
+
+        -- Try to find parent class or interface
+        local line = vim.api.nvim_get_current_line()
+        local parent_name = line:match(":%s*(%w+)")
+
+        if parent_name then
+            -- Create a new params object for the parent
+            local parent_params = vim.lsp.util.make_position_params()
+            parent_params.position.character = line:find(parent_name) - 1
+
+            -- Get hover information for parent/interface
+            vim.lsp.buf_request(0, 'textDocument/hover', parent_params, function(_, parent_result)
+                if parent_result and parent_result.contents then
+                    vim.defer_fn(function()
+                        display_hover(parent_result)
+                    end, 100) -- Slight delay to ensure it appears after the first hover
+                end
+            end)
+        end
+    end)
+end
+
 --- Base on_attach event for LSP
 function M.onAttach(event)
     local nmap = function(keys, func, desc)
@@ -14,7 +51,8 @@ function M.onAttach(event)
     nmap("gd", builtin.lsp_definitions, "[G]oto [D]efinitions")
     nmap("gr", builtin.lsp_references, "[G]oto [R]eferences")
     nmap("gI", builtin.lsp_implementations, "[G]oto [I]mplementation")
-    nmap("K", vim.lsp.buf.hover, "Hover Documentation")
+    nmap("K", enhanced_hover, "Enhanced Hover Documentation");
+    -- nmap("K", vim.lsp.buf.hover, "Hover Documentation")
     nmap("sh", vim.lsp.buf.signature_help, "[S]ignature [H]elp")
     nmap("<leader>ws", builtin.lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
     nmap("[d", function() vim.diagnostic.goto_next() end)
