@@ -45,7 +45,7 @@ return {
                     },
                 },
                 move = {
-                    enabled = true,
+                    enable = true,
                     set_jumps = true,
                     to_next_start = {
                         ["]f"] = { query = "@call.outer", desc = "Next function call start" },
