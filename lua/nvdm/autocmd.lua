@@ -8,6 +8,40 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
 })
 
+-- CSharp Using sort method.
+-- Function to sort using statements while preserving spacing
+local function sort_usings()
+    -- Get buffer contents
+    local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+
+    -- Find using statements
+    local using_start, using_end
+    local usings = {}
+    local post_using_empty_lines = 0
+    for i, line in ipairs(lines) do
+        if line:match('^using') then
+            if not using_start then using_start = i end
+            table.insert(usings, line)
+        elseif using_start and line:match('^%s*$') then
+            post_using_empty_lines = post_using_empty_lines + 1
+        elseif using_start and not line:match('^using') and not line:match('^%s*$') then
+            using_end = i - 1 - post_using_empty_lines
+            break
+        end
+    end
+
+    -- Sort usings if found
+    if #usings > 0 then
+        table.sort(usings)
+        -- Add back the empty lines
+        for _ = 1, post_using_empty_lines do
+            table.insert(usings, '')
+        end
+        -- Replace old usings with sorted ones, preserving empty lines
+        vim.api.nvim_buf_set_lines(0, using_start - 1, using_end + post_using_empty_lines, false, usings)
+    end
+end
+
 -- Auto format AutoCMD
 vim.api.nvim_create_autocmd("BufWritePre", {
     pattern = "*",
@@ -18,6 +52,11 @@ vim.api.nvim_create_autocmd("BufWritePre", {
             timeout_ms = 5000,
             lsp_fallback = true,
         })
+
+        -- Plugin to sort usings on csharp files
+        if vim.fn.expand("%:e") == "cs" then
+            sort_usings()
+        end
     end,
 })
 
