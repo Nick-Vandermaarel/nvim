@@ -2,6 +2,9 @@
 
 return {
     {
+        "tpope/vim-fugitive"
+    },
+    {
         'numToStr/Comment.nvim',
         event = "BufReadPre",
         opts = {}
