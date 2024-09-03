@@ -67,3 +67,5 @@ Map("n", "<C-t>", "<cmd>:tabnew<CR>", { desc = 'New Tab' });
 -- Splits
 Map("n", "<C-x>", "<cmd>split<CR>", { desc = "Horizontal Split" });
 Map("n", "<C-v>", "<cmd>vsplit<CR>", { desc = "Vertical Split" });
+
+Map("n", "bd", "<cmd>bd<CR>", { desc = "Close Buffer" });
