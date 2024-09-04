@@ -5,7 +5,6 @@ return {
         ft = "lua", -- only load on lua files
         opts = {}
     },
-
     {
         "seblj/roslyn.nvim",
         ft = "cs",
@@ -109,12 +108,12 @@ return {
                 "hrsh7th/cmp-path",                    -- source for file system paths
                 "hrsh7th/cmp-nvim-lsp-signature-help", -- source for displaying function signatures
                 "onsails/lspkind.nvim",                -- vs-code like pictograms
-                {                                      -- Github Copilot suggestions
-                    "zbirenbaum/copilot-cmp",
-                    config = function()
-                        require("copilot_cmp").setup()
-                    end
-                },
+                -- {                                      -- Github Copilot suggestions
+                --     "zbirenbaum/copilot-cmp",
+                --     config = function()
+                --         require("copilot_cmp").setup()
+                --     end
+                -- },
             },
             opts = function(_, opts)
                 opts.sources = opts.sources or {}
@@ -138,7 +137,7 @@ return {
                 cmp.setup({
                     sources = cmp.config.sources({
                         { name = "nvim_lsp_signature_help" },
-                        { name = "copilot" },
+                        -- { name = "copilot" },
                         { name = 'nvim_lsp' },
                         { name = "path" },
                     }),
@@ -182,17 +181,17 @@ return {
                 )
             end
         },
-        {
-            "zbirenbaum/copilot.lua",
-            cmd = "Copilot",
-            event = "InsertEnter",
-            fix_pairs = true,
-            config = function()
-                require("copilot").setup({
-                    suggestion = { enabled = false },
-                    panel = { enabled = false }
-                })
-            end
-        },
+        -- {
+        --     "zbirenbaum/copilot.lua",
+        --     cmd = "Copilot",
+        --     event = "InsertEnter",
+        --     fix_pairs = true,
+        --     config = function()
+        --         require("copilot").setup({
+        --             suggestion = { enabled = false },
+        --             panel = { enabled = false }
+        --         })
+        --     end
+        -- },
     }
 }
