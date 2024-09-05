@@ -61,7 +61,6 @@ return {
             require('mason').setup({})
             require('mason-lspconfig').setup({
                 ensure_installed = {
-                    -- "csharp_ls",
                     "lua_ls",
                     'tsserver',
                     'volar',
@@ -71,7 +70,11 @@ return {
                 },
                 handlers = {
                     default_setup,
-                    tsserver = function()
+                    tsserver = function(server_name)
+                        if server_name == "tsserver" then
+                            server_name = "ts_ls"
+                        end
+
                         require('lspconfig').tsserver.setup({
                             capabilities = lsp_capabilities,
                             init_options = {
