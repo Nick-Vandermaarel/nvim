@@ -37,4 +37,13 @@ vim.opt.list = true
 
 if vim.fn.has('win32') == 1 then
     vim.g.undotree_DiffCommand = "FC"
+
+    -- Powershell core settings.
+    vim.opt.shell = 'pwsh'
+    vim.opt.shellcmdflag =
+    '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues[\'Out-File:Encoding\']=\'utf8\';'
+    vim.opt.shellredir = '2>&1 | %%{ \\"$_\\" } | Out-File %s; exit $LastExitCode'
+    vim.opt.shellpipe = '2>&1 | %%{ \\"$_\\" } | tee %s; exit $LastExitCode'
+    vim.opt.shellquote = ''
+    vim.opt.shellxquote = vim.fn.has('nvim') == 1 and '' or '"'
 end
