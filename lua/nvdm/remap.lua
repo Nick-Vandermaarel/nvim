@@ -14,6 +14,10 @@ Map("n", "<leader>bd", ":bd<CR>")
 Map("v", "J", ":m '>+1<CR>gv=gv")
 Map("v", "K", ":m '<-2<CR>gv=gv")
 
+-- Indents
+Map("v", "<", "<gv")
+Map("v", ">", ">gv")
+
 Map("n", "<C-d>", "<C-d>zz")
 Map("n", "<C-u>", "<C-u>zz")
 Map("n", "n", "nzzzv")
@@ -30,8 +34,9 @@ Map("n", "<leader>Y", "\"+Y")
 Map("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -- Buffer navigation
-Map("n", "]b", "<cmd>bn<cr>")
-Map("n", "[b", "<cmd>bp<cr>")
+Map("n", "]b", "<cmd>bn<cr>", { desc = "Next Buffer" });
+Map("n", "[b", "<cmd>bp<cr>", { desc = "Previous Buffer" });
+Map("n", "bd", "<cmd>bd<CR>", { desc = "Close Buffer" });
 
 -- Movement
 Map("n", "<C-h>", "<C-w>h")
@@ -67,5 +72,3 @@ Map("n", "<C-t>", "<cmd>:tabnew<CR>", { desc = 'New Tab' });
 -- Splits
 Map("n", "<C-x>", "<cmd>split<CR>", { desc = "Horizontal Split" });
 Map("n", "<C-v>", "<cmd>vsplit<CR>", { desc = "Vertical Split" });
-
-Map("n", "bd", "<cmd>bd<CR>", { desc = "Close Buffer" });
