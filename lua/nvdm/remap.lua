@@ -36,7 +36,7 @@ Map("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 -- Buffer navigation
 Map("n", "]b", "<cmd>bn<cr>", { desc = "Next Buffer" });
 Map("n", "[b", "<cmd>bp<cr>", { desc = "Previous Buffer" });
-Map("n", "bd", "<cmd>bd<CR>", { desc = "Close Buffer" });
+Map("n", "db", "<cmd>bd<CR>", { desc = "Delete Buffer" });
 
 -- Movement
 Map("n", "<C-h>", "<C-w>h")
