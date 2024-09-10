@@ -47,7 +47,7 @@ return {
                 move = {
                     enable = true,
                     set_jumps = true,
-                    to_next_start = {
+                    goto_next_start = {
                         ["]f"] = { query = "@call.outer", desc = "Next function call start" },
                         ["]m"] = { query = "@function.outer", desc = "Next method/function def start" },
                         ["]c"] = { query = "@class.outer", desc = "Next class start" },
