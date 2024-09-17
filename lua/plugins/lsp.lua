@@ -71,7 +71,7 @@ return {
                 handlers = {
                     default_setup,
                     ts_ls = function()
-                        require('lspconfig').tsserver.setup({
+                        require('lspconfig')["ts_ls"].setup({
                             capabilities = lsp_capabilities,
                             init_options = {
                                 plugins = {
