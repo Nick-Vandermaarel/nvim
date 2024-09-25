@@ -5,14 +5,14 @@ return {
     config = function()
         require("conform").setup({
             formatters_by_ft = {
-                javascript = { "biome" },
-                typescript = { "biome" },
-                vue = { "biome" },
-                scss = { "biome" },
-                json = { "biome" },
-                html = { "biome" },
-                css = { "biome" },
-                markdown = { "biome" },
+                javascript = { "prettierd" },
+                typescript = { "prettierd" },
+                vue = { "prettierd" },
+                scss = { "prettierd" },
+                json = { "prettierd" },
+                html = { "prettierd" },
+                css = { "prettierd" },
+                markdown = { "prettierd" },
                 -- cs = { { "csharpier" } },
             },
             format_on_save = {
