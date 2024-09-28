@@ -1,6 +1,8 @@
 return {
     {
         'nvimdev/dashboard-nvim',
+        lazy = false,
+        priority = 1001,
         dependencies = { { 'nvim-tree/nvim-web-devicons' } },
         config = function()
             local db = require("dashboard")
