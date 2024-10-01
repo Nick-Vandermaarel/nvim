@@ -2,7 +2,6 @@ local opts = {
     theme = "wave",
     commentStyle = { italic = true },
     keywordStyle = { italic = false },
-    transparent = true,
 
     colors = {
         theme = {
