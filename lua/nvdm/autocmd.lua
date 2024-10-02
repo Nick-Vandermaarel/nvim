@@ -76,4 +76,38 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "CursorHold" }, {
     end,
 })
 
+-- Roslyn Code lens auto cmd
+local codelens_refresh_timer = nil
+
+vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave", "BufWritePost" }, {
+    pattern = "*.cs",
+    callback = function()
+        local clients = vim.lsp.get_clients()
+        for _, client in ipairs(clients) do
+            if client.name == "roslyn" then
+                vim.lsp.codelens.refresh()
+                break
+            end
+        end
+    end,
+})
+
+vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+    pattern = "*.cs",
+    callback = function()
+        if codelens_refresh_timer then
+            vim.fn.timer_stop(codelens_refresh_timer)
+        end
+        codelens_refresh_timer = vim.fn.timer_start(1000, function()
+            local clients = vim.lsp.get_clients()
+            for _, client in ipairs(clients) do
+                if client.name == "roslyn" then
+                    vim.lsp.codelens.refresh()
+                    break
+                end
+            end
+        end)
+    end,
+})
+
 return onAttach;
