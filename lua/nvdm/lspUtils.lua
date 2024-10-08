@@ -8,35 +8,61 @@ local function enhanced_hover()
         return
     end
 
+    -- Function to check if hover content is meaningful
+    local function is_meaningful_hover(result)
+        if not result or not result.contents then
+            return false
+        end
+        local contents = vim.lsp.util.convert_input_to_markdown_lines(result.contents)
+        -- Check if contents are not empty and contain more than just whitespace
+        if #contents == 0 or (
+                #contents == 1 and contents[1]:match("^%s*$")
+            ) then
+            return false
+        end
+        -- Check for presence of code comments (lines starting with ///)
+        for _, line in ipairs(contents) do
+            if line:match("^///") then
+                return true
+            end
+        end
+        return false
+    end
+
     -- Function to display hover information
     local function display_hover(result)
-        if result and result.contents then
+        if is_meaningful_hover(result) then
             local contents = vim.lsp.util.convert_input_to_markdown_lines(result.contents)
             vim.lsp.util.open_floating_preview(contents, "markdown", {})
+            return true
         end
+        return false
     end
 
     -- Get hover information for current position
     vim.lsp.buf_request(0, 'textDocument/hover', vim.lsp.util.make_position_params(), function(_, result)
-        display_hover(result)
+        local hover_displayed = display_hover(result)
 
-        -- Try to find parent class or interface
-        local line = vim.api.nvim_get_current_line()
-        local parent_name = line:match(":%s*(%w+)")
-
-        if parent_name then
-            -- Create a new params object for the parent
-            local parent_params = vim.lsp.util.make_position_params()
-            parent_params.position.character = line:find(parent_name) - 1
-
-            -- Get hover information for parent/interface
-            vim.lsp.buf_request(0, 'textDocument/hover', parent_params, function(_, parent_result)
-                if parent_result and parent_result.contents then
-                    vim.defer_fn(function()
-                        display_hover(parent_result)
-                    end, 100) -- Slight delay to ensure it appears after the first hover
-                end
-            end)
+        if hover_displayed then
+            -- Try to find parent class or interface
+            local line = vim.api.nvim_get_current_line()
+            local parent_name = line:match(":%s*(%w+)")
+            if parent_name then
+                -- Create a new params object for the parent
+                local parent_params = vim.lsp.util.make_position_params()
+                parent_params.position.character = line:find(parent_name) - 1
+                -- Get hover information for parent/interface
+                vim.lsp.buf_request(0, 'textDocument/hover', parent_params, function(_, parent_result)
+                    if is_meaningful_hover(parent_result) then
+                        vim.defer_fn(function()
+                            display_hover(parent_result)
+                        end, 100) -- Slight delay to ensure it appears after the first hover
+                    end
+                end)
+            end
+        else
+            -- If no meaningful hover information for current symbol, fall back to default behavior
+            vim.lsp.buf.hover()
         end
     end)
 end
