@@ -79,14 +79,16 @@ function M.onAttach(event)
 
     local builtin = require("telescope.builtin")
     nmap("gd", builtin.lsp_definitions, "[G]oto [D]efinitions")
+    nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
     nmap("gr", builtin.lsp_references, "[G]oto [R]eferences")
     nmap("gI", builtin.lsp_implementations, "[G]oto [I]mplementation")
     nmap("K", enhanced_hover, "Enhanced Hover Documentation");
     -- nmap("K", vim.lsp.buf.hover, "Hover Documentation")
     nmap("sh", vim.lsp.buf.signature_help, "[S]ignature [H]elp")
     nmap("<leader>ws", builtin.lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
-    nmap("[d", function() vim.diagnostic.goto_next() end)
-    nmap("]d", function() vim.diagnostic.goto_prev() end)
+    nmap("<leader>d", vim.diagnostic.open_float, "Show line [d]iagnostics");
+    nmap("[d", vim.diagnostic.goto_next)
+    nmap("]d", vim.diagnostic.goto_prev)
     nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
     nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
     vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end)

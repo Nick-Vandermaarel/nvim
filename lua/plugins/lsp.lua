@@ -33,6 +33,7 @@ return {
         },
         config = function()
             local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities();
+            local lspUtils = require("nvdm.lspUtils");
 
             local default_setup = function(server)
                 require('lspconfig')[server].setup({
@@ -49,6 +50,20 @@ return {
                 { border = "rounded" }
             )
 
+            -- LSP Attach AutoCMD
+            vim.api.nvim_create_autocmd('LspAttach', {
+                desc = "LSP actions",
+                callback = function(event)
+                    lspUtils.onAttach(event);
+                end
+            })
+            -- Change the Diagnostic symbols in the sign column (gutter)
+            local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
+            for type, icon in pairs(signs) do
+                local hl = "DiagnosticSign" .. type
+                vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+            end
+
             require('mason').setup({})
             require('mason-lspconfig').setup({
                 ensure_installed = {
@@ -58,6 +73,13 @@ return {
                     'html',
                     'rust_analyzer',
                     'tailwindcss',
+                },
+                ui = {
+                    icons = {
+                        package_installed = "✓",
+                        package_pending = "➜",
+                        package_uninstalled = "✗",
+                    },
                 },
                 handlers = {
                     default_setup,

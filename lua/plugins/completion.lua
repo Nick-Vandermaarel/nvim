@@ -20,6 +20,7 @@ return {
     end,
     config = function()
         local cmp = require('cmp')
+        local lspkind = require("lspkind")
         local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
         cmp.setup({
@@ -46,6 +47,12 @@ return {
                 -- Manually trigger a completion from nvim-cmp
                 ['<C-Space>'] = cmp.mapping.complete(),
             }),
+            formatting = {
+                format = lspkind.cmp_format({
+                    maxwidth = 50,
+                    elipsis_char = "...",
+                })
+            }
         })
 
         -- Add parentheses after selecting function or method item.

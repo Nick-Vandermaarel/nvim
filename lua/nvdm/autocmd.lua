@@ -1,13 +1,3 @@
-local lspUtils = require("nvdm.lspUtils")
-
--- LSP Attach AutoCMD
-vim.api.nvim_create_autocmd('LspAttach', {
-    desc = "LSP actions",
-    callback = function(event)
-        lspUtils.onAttach(event);
-    end
-})
-
 -- CSharp Using sort method.
 -- Function to sort using statements while preserving spacing
 local function sort_usings()
@@ -109,5 +99,3 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "CursorHold" }, {
 --         end)
 --     end,
 -- })
-
-return onAttach;
