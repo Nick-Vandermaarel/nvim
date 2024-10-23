@@ -1,9 +1,16 @@
 return {
     'nvim-telescope/telescope.nvim',
+    event = "VeryLazy",
     dependencies = {
         'nvim-lua/plenary.nvim',
     },
-    event = "VeryLazy",
+    opts = {
+        defaults = {
+            path_display = {
+                "filename_first"
+            }
+        }
+    },
     config = function()
         local builtin = require('telescope.builtin')
         vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
