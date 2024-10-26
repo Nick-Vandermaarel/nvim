@@ -13,6 +13,7 @@ return {
                 html = { "prettierd" },
                 css = { "prettierd" },
                 markdown = { "prettierd" },
+                lua = { "stylua" },
                 -- cs = { { "csharpier" } },
             },
             format_on_save = {
