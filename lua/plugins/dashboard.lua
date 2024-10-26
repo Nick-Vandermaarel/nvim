@@ -85,6 +85,16 @@ return {
                 return stats
             end
 
+            local function get_config_path()
+                local is_win = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
+
+                if is_win then
+                    return vim.fn.stdpath('config') .. "/init.lua"
+                else
+                    return "~/.config/nvim/init.lua"
+                end
+            end
+
             db.setup {
                 theme = "doom",
                 config = {
@@ -111,6 +121,7 @@ return {
                         { action = "Telescope fd", desc = " Browse files", icon = "󰈔 ", key = "f" },
                         { action = "Telescope oldfiles", desc = " Recent files", icon = " ", key = "r" },
                         { action = 'lua require("persistence").load()', desc = " Restore Session", icon = " ", key = "s" },
+                        { action = "edit " .. get_config_path(), desc = "Open Neovim Config", key = "c", icon = '󰈙 ' }
                     },
                     footer = get_footer()
                 }
