@@ -37,7 +37,7 @@
   "persistence.nvim": { "branch": "main", "commit": "f6aad7dde7fcf54148ccfc5f622c6d5badd0cc3d" },
   "plenary.nvim": { "branch": "master", "commit": "2d9b06177a975543726ce5c73fca176cedbffe9d" },
   "render-markdown.nvim": { "branch": "main", "commit": "82184c4a3c3580a7a859b2cb7e58f16c10fd29ef" },
-  "roslyn.nvim": { "branch": "main", "commit": "322e5295d3cfe7400954ca1154fb4aff5b2aadfe" },
+  "roslyn.nvim": { "branch": "main", "commit": "9d2426f3a23d9a002d7f6e0cb546f6e09edb8ea3" },
   "telescope.nvim": { "branch": "master", "commit": "85922dde3767e01d42a08e750a773effbffaea3e" },
   "todo-comments.nvim": { "branch": "main", "commit": "ae0a2afb47cf7395dc400e5dc4e05274bf4fb9e0" },
   "trouble.nvim": { "branch": "main", "commit": "3dc00c0447c016cd43e03054c3d49436a1f2076d" },
