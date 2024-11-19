@@ -121,7 +121,7 @@ return {
                         { action = "Telescope fd", desc = " Browse files", icon = "󰈔 ", key = "f" },
                         { action = "Telescope oldfiles", desc = " Recent files", icon = " ", key = "r" },
                         { action = 'lua require("persistence").load()', desc = " Restore Session", icon = " ", key = "s" },
-                        { action = "edit " .. get_config_path(), desc = "Open Neovim Config", key = "c", icon = '󰈙 ' }
+                        { action = "edit " .. get_config_path(), desc = " Open Neovim Config", key = "c", icon = '󰈙 ' }
                     },
                     footer = get_footer()
                 }
