@@ -28,7 +28,6 @@ return {
                 { name = "nvim_lsp_signature_help" },
                 { name = 'nvim_lsp' },
                 { name = "path" },
-                { name = "buffer" }
             }),
             window = {
                 documentation = cmp.config.window.bordered(),
