@@ -8,7 +8,8 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
-vim.opt.smartindent = true
+-- True was causing indenting issues colliding with Treesitter.
+vim.opt.smartindent = false
 
 vim.opt.wrap = false
 
@@ -34,6 +35,9 @@ vim.opt.listchars = {
     space = "⋅",
 }
 vim.opt.list = true
+
+-- Sign column always visible for LSP/Git markers.
+vim.opt.signcolumn = "yes"
 
 if vim.fn.has('win32') == 1 then
     vim.g.undotree_DiffCommand = "FC"
