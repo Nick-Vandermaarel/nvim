@@ -71,8 +71,6 @@ return {
                     'ts_ls',
                     'volar',
                     'html',
-                    'rust_analyzer',
-                    'tailwindcss',
                 },
                 ui = {
                     icons = {
