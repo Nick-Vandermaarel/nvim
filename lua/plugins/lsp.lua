@@ -11,6 +11,7 @@ return {
         config = function()
             local lspUtils = require("nvdm.lspUtils");
             require("roslyn").setup({
+                filewatching = false,
                 ---@diagnostic disable-next-line: missing-fields
                 config = {
                     on_attach = function(client, bufnr)
@@ -35,20 +36,25 @@ return {
             local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities();
             local lspUtils = require("nvdm.lspUtils");
 
+            local handlers = {
+                ["textDocument/hover"] = vim.lsp.with(
+                    vim.lsp.handlers.hover,
+                    { border = "rounded" }
+                ),
+                ["textDocument/signatureHelp"] = vim.lsp.with(
+                    vim.lsp.handlers.signature_help,
+                    { border = "rounded" }
+                )
+            }
+
             local default_setup = function(server)
                 require('lspconfig')[server].setup({
                     capabilities = lsp_capabilities,
+                    handlers = handlers
                 })
             end
 
-            vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-                vim.lsp.handlers.hover,
-                { border = "rounded" }
-            )
-            vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-                vim.lsp.handlers.signature_help,
-                { border = "rounded" }
-            )
+            vim.lsp.handlers = vim.tbl_extend("force", vim.lsp.handlers, handlers)
 
             -- LSP Attach AutoCMD
             vim.api.nvim_create_autocmd('LspAttach', {
@@ -64,7 +70,12 @@ return {
                 vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
             end
 
-            require('mason').setup({})
+            require('mason').setup({
+                ui = {
+                    border = "rounded"
+                },
+            })
+
             require('mason-lspconfig').setup({
                 ensure_installed = {
                     "lua_ls",

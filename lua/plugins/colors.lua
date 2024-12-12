@@ -7,12 +7,13 @@ local opts = {
         theme = {
             all = {
                 ui = {
-                    bg_gutter = "none",
+                    bg_gutter = "none"
                 }
             }
         }
-    }
+    },
 }
+
 return {
     "rebelot/kanagawa.nvim",
     priority = 1000,
