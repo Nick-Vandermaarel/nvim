@@ -86,7 +86,7 @@ function M.onAttach(event)
     -- nmap("K", vim.lsp.buf.hover, "Hover Documentation")
     nmap("sh", vim.lsp.buf.signature_help, "[S]ignature [H]elp")
     nmap("<leader>ws", builtin.lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
-    -- nmap("<leader>d", vim.diagnostic.open_float, "Show line [d]iagnostics");
+    nmap("sd", vim.diagnostic.open_float, "Show line [d]iagnostics");
     nmap("[d", vim.diagnostic.goto_next)
     nmap("]d", vim.diagnostic.goto_prev)
     nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")

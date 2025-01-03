@@ -39,6 +39,10 @@ vim.opt.list = true
 -- Sign column always visible for LSP/Git markers.
 vim.opt.signcolumn = "yes"
 
+vim.diagnostic.config({
+    float = { border = "rounded" }
+})
+
 if vim.fn.has('win32') == 1 then
     vim.g.undotree_DiffCommand = "FC"
 
