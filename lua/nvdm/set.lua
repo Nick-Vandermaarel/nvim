@@ -10,7 +10,6 @@ vim.opt.expandtab = true
 
 -- True was causing indenting issues colliding with Treesitter.
 vim.opt.smartindent = false
-vim.opt.cindent = true
 
 vim.opt.wrap = false
 
