@@ -67,7 +67,7 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "CursorHold" }, {
 })
 
 -- Roslyn Code lens auto cmd
-vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave" }, {
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave", "LspAttach" }, {
     pattern = { "*.cs" },
     callback = function()
         vim.lsp.codelens.refresh({ bufnr = 0 })
