@@ -76,7 +76,7 @@ return {
             end
 
             local function get_footer()
-                local datetime = os.date("%Y-%m-%d %H:%M:%S %p")
+                local datetime = os.date("%Y-%m-%d %I:%M:%S %p")
 
                 local stats = {
                     string.format("%s", datetime)
