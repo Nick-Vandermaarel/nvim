@@ -16,7 +16,47 @@ return {
                     row = "90%",
                     col = "50%",
                 }
-            }
+            },
+            notify = {
+                -- Save messages are notifications, so we can adjust their size here
+                replace = true,
+                merge = true,
+                level = "INFO",
+            },
+            mini = {
+                -- Make the mini view (used for save messages) smaller
+                win_options = {
+                    winblend = 0,
+                    winhighlight = {
+                        Normal = "NoiceMini",
+                        IncSearch = "",
+                        Search = "",
+                    },
+                },
+                position = {
+                    row = -2,     -- Closer to bottom
+                    col = "100%", -- Right aligned
+                    width = "auto",
+                },
+                size = {
+                    height = 1, -- Just one line
+                    width = "auto",
+                },
+                border = {
+                    style = "none",
+                },
+            },
+        },
+        routes = {
+            {
+                -- Route file save messages to mini view
+                filter = {
+                    event = "msg_show",
+                    kind = "",
+                    find = "written",
+                },
+                view = "mini"
+            },
         },
         -- you can enable a preset for easier configuration
         presets = {

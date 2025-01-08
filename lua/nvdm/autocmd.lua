@@ -51,7 +51,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 })
 
 -- Hack for roslyn lsp, to refresh diagnostics on insert leave
-vim.api.nvim_create_autocmd({ "InsertLeave", "CursorHold" }, {
+vim.api.nvim_create_autocmd({ "InsertLeave", "BufWritePost" }, {
     pattern = "*",
     callback = function()
         local clients = vim.lsp.get_clients({ name = "roslyn" })
@@ -67,10 +67,17 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "CursorHold" }, {
 })
 
 -- Roslyn Code lens auto cmd
-vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave", "LspAttach" }, {
+vim.api.nvim_create_autocmd({
+    "BufEnter",
+    "BufWritePost",
+    "LspAttach",
+}, {
     pattern = { "*.cs" },
     callback = function()
-        vim.lsp.codelens.refresh({ bufnr = 0 })
+        -- Add a small delay to ensure LSP has time to process changes
+        vim.defer_fn(function()
+            vim.lsp.codelens.refresh({ bufnr = 0 })
+        end, 100)
     end,
     desc = "Refresh codelens"
 })
