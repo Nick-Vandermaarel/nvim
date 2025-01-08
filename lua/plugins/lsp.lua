@@ -11,9 +11,14 @@ return {
         config = function()
             local lspUtils = require("nvdm.lspUtils");
             require("roslyn").setup({
-                filewatching = false,
+                filewatching = true,
                 ---@diagnostic disable-next-line: missing-fields
                 config = {
+                    setings = {
+                        ['csharp|code_lens'] = {
+                            dotnet_enable_references_code_lens = true,
+                        }
+                    },
                     on_attach = function(client, bufnr)
                         lspUtils.onAttach({ client = client, bufnr = bufnr });
                         lspUtils.roslynSemanticHighlights(client);
