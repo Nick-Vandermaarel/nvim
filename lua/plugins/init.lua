@@ -24,14 +24,6 @@ return {
         end
     },
     {
-        "lewis6991/gitsigns.nvim",
-        event = "BufReadPre",
-        dependencies = {
-            "nvim-lua/plenary.nvim"
-        },
-        opts = {}
-    },
-    {
         "folke/which-key.nvim",
         event = "VeryLazy",
         opts = {},
