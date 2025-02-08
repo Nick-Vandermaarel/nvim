@@ -98,13 +98,15 @@ return {
                 handlers = {
                     default_setup,
                     ts_ls = function()
+                        local vue_typescript_pluigin_path = vim.fn.stdpath("data")
+                            .. '/mason/packages/vue-language-server/node_modules/@vue/language-server/node_modules/@vue/typescript-plugin'
                         require('lspconfig')["ts_ls"].setup({
                             capabilities = lsp_capabilities,
                             init_options = {
                                 plugins = {
                                     {
                                         name = "@vue/typescript-plugin",
-                                        location = "/usr/local/lib/node_modules/@vue/typescript-plugin",
+                                        location = vue_typescript_pluigin_path,
                                         languages = { "typescript", "vue" },
                                     }
                                 }
