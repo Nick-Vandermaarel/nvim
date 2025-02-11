@@ -8,8 +8,7 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
--- True was causing indenting issues colliding with Treesitter.
-vim.opt.smartindent = false
+vim.opt.smartindent = true
 
 vim.opt.wrap = false
 
