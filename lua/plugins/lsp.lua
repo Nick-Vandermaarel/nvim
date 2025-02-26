@@ -41,6 +41,7 @@ return {
             local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities();
             local lspUtils = require("nvdm.lspUtils");
 
+
             local handlers = {
                 ["textDocument/hover"] = vim.lsp.with(
                     vim.lsp.handlers.hover,
@@ -98,15 +99,34 @@ return {
                 handlers = {
                     default_setup,
                     ts_ls = function()
-                        local vue_typescript_pluigin_path = vim.fn.stdpath("data")
-                            .. '/mason/packages/vue-language-server/node_modules/@vue/language-server/node_modules/@vue/typescript-plugin'
+                        local function get_vue_typescript_plugin_path()
+                            local mason_path = vim.fn.stdpath("data") .. '/mason/packages/vue-language-server'
+
+                            -- Check both possible plugin locations
+                            local possible_paths = {
+                                mason_path .. '/node_modules/@vue/language-server/node_modules/@vue/typescript-plugin',
+                                mason_path .. '/node_modules/@vue/typescript-plugin'
+                            }
+
+                            for _, path in ipairs(possible_paths) do
+                                if vim.fn.isdirectory(path) == 1 then
+                                    return path
+                                end
+                            end
+
+                            -- Fallback to the original path if none found
+                            return mason_path .. '/node_modules/@vue/language-server/node_modules/@vue/typescript-plugin'
+                        end
+
+                        local vue_typescript_plugin_path = get_vue_typescript_plugin_path()
+
                         require('lspconfig')["ts_ls"].setup({
                             capabilities = lsp_capabilities,
                             init_options = {
                                 plugins = {
                                     {
                                         name = "@vue/typescript-plugin",
-                                        location = vue_typescript_pluigin_path,
+                                        location = vue_typescript_plugin_path,
                                         languages = { "typescript", "vue" },
                                     }
                                 }
