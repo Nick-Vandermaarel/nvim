@@ -72,3 +72,6 @@ Map("n", "<C-t>", "<cmd>:tabnew<CR>", { desc = 'New Tab' });
 -- Splits
 Map("n", "<C-x>", "<cmd>split<CR>", { desc = "Horizontal Split" });
 Map("n", "<C-v>", "<cmd>vsplit<CR>", { desc = "Vertical Split" });
+
+Map("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Undo tree" });
+Map("n", "<leader>gs", vim.cmd.Git, { desc = "Git" });

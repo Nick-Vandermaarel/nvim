@@ -77,15 +77,8 @@ function M.onAttach(event)
         vim.keymap.set("n", keys, func, { buffer = event.buf, desc = desc, remap = false })
     end
 
-    local builtin = require("telescope.builtin")
-    nmap("gd", builtin.lsp_definitions, "[G]oto [D]efinitions")
-    nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
-    nmap("gr", builtin.lsp_references, "[G]oto [R]eferences")
-    nmap("gI", builtin.lsp_implementations, "[G]oto [I]mplementation")
     nmap("K", enhanced_hover, "Enhanced Hover Documentation");
-    -- nmap("K", vim.lsp.buf.hover, "Hover Documentation")
     nmap("sh", vim.lsp.buf.signature_help, "[S]ignature [H]elp")
-    nmap("<leader>ws", builtin.lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
     nmap("sd", vim.diagnostic.open_float, "Show line [d]iagnostics");
     nmap("[d", vim.diagnostic.goto_next)
     nmap("]d", vim.diagnostic.goto_prev)

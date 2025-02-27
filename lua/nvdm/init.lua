@@ -21,10 +21,6 @@ require("lazy").setup("plugins")
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
-vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
-vim.keymap.set("n", "<leader>gs", vim.cmd.Git);
-
 require("nvdm.autocmd")
 require("nvdm.remap")
 require("nvdm.set")
-require("nvdm.csharp_secrets")
