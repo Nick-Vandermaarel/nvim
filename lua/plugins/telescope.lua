@@ -3,7 +3,8 @@ return {
     event = "VeryLazy",
     dependencies = {
         'nvim-lua/plenary.nvim',
-        "nvim-telescope/telescope-fzy-native.nvim"
+        "nvim-telescope/telescope-fzy-native.nvim",
+        'nvim-telescope/telescope-ui-select.nvim'
     },
     opts = {
         defaults = {
@@ -14,6 +15,7 @@ return {
     },
     config = function()
         require("telescope").load_extension("fzy_native")
+        require("telescope").load_extension("ui-select")
 
         local builtin = require('telescope.builtin')
         vim.keymap.set('n', '<leader>pf', builtin.find_files, {})

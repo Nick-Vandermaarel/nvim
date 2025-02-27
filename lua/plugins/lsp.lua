@@ -133,6 +133,9 @@ return {
                             },
                             filetypes = { "typescript", "javascript", "vue" },
                         })
+
+                        local lspconfig = require "lspconfig"
+                        lspconfig.volar.setup {}
                     end,
                 }
             })
