@@ -24,3 +24,4 @@ vim.g.loaded_netrwPlugin = 1
 require("nvdm.autocmd")
 require("nvdm.remap")
 require("nvdm.set")
+require("mini.surround").setup()

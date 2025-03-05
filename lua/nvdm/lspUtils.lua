@@ -78,8 +78,9 @@ function M.onAttach(event)
     end
 
     nmap("K", enhanced_hover, "Enhanced Hover Documentation");
-    nmap("sh", vim.lsp.buf.signature_help, "[S]ignature [H]elp")
-    nmap("sd", vim.diagnostic.open_float, "Show line [d]iagnostics");
+    -- Don't use these right now, and they are conflicting with mini.surround. Need to evaulate mapping.
+    -- nmap("sh", vim.lsp.buf.signature_help, "[S]ignature [H]elp")
+    -- nmap("sd", vim.diagnostic.open_float, "Show line [d]iagnostics");
     nmap("[d", vim.diagnostic.goto_next)
     nmap("]d", vim.diagnostic.goto_prev)
     nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
