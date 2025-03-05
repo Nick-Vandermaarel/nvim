@@ -14,7 +14,7 @@ return {
                 filewatching = true,
                 ---@diagnostic disable-next-line: missing-fields
                 config = {
-                    setings = {
+                    settings = {
                         ['csharp|code_lens'] = {
                             dotnet_enable_references_code_lens = true,
                         }
@@ -134,7 +134,10 @@ return {
                         })
 
                         local lspconfig = require "lspconfig"
-                        lspconfig.volar.setup {}
+                        lspconfig.volar.setup {
+                            capabilities = lsp_capabilities,
+                            handlers = handlers
+                        }
                     end,
                 }
             })

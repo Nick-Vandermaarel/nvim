@@ -155,6 +155,7 @@ function M.default_capabilities()
             'additionalTextEdits',
         }
     }
+    return capabilities;
 end
 
 return M;
