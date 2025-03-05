@@ -45,12 +45,6 @@ return {
                 auto_show = true,
                 auto_show_delay_ms = 250,
             },
-            menu = {
-                border = {
-                    enable = true,
-                    style = "rounded"
-                }
-            }
         },
     },
     opts_extend = { "sources.default" }
