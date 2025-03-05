@@ -1,64 +1,57 @@
 return {
-    "yioneko/nvim-cmp",
-    branch = "perf",
-    event = "InsertEnter",
-    dependencies = {
-        "hrsh7th/cmp-nvim-lsp",
-        "hrsh7th/cmp-buffer",                  -- source for text in buffer
-        "hrsh7th/cmp-path",                    -- source for file system paths
-        "hrsh7th/cmp-nvim-lsp-signature-help", -- source for displaying function signatures
-        "onsails/lspkind.nvim",                -- vs-code like pictograms
-    },
-    opts = function(_, opts)
-        opts.sources = opts.sources or {}
-        table.insert(opts.sources, {
-            name = "lazydev",
-            group_index = 0, -- set group index to 0 to skil loading LuaLs completions
-        })
+    'saghen/blink.cmp',
+    -- optional snippets
+    dependencies = 'rafamadriz/friendly-snippets',
+    -- use a version tag to download pre-built
+    version = "*",
+    opts = {
+        -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept, C-n/C-p for up/down)
+        -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys for up/down)
+        -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
+        --
+        -- All presets have the following mappings:
+        -- C-space: Open menu or open docs if already open
+        -- C-e: Hide menu
+        -- C-k: Toggle signature help
+        --
+        -- See the full "keymap" documentation for information on defining your own keymap.
+        keymap = { preset = 'super-tab' },
 
-        return opts;
-    end,
-    config = function()
-        local cmp = require('cmp')
-        local lspkind = require("lspkind")
-        local cmp_select = { behavior = cmp.SelectBehavior.Select }
+        appearance = {
+            -- Sets the fallback highlight groups to nvim-cmp's highlight groups
+            -- Useful for when your theme doesn't support blink.cmp
+            -- Will be removed in a future release
+            use_nvim_cmp_as_default = true,
+            -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+            -- Adjusts spacing to ensure icons are aligned
+            nerd_font_variant = 'mono'
+        },
 
-        cmp.setup({
-            sources = cmp.config.sources({
-                { name = "nvim_lsp_signature_help" },
-                { name = 'nvim_lsp' },
-                { name = "path" },
-            }),
-            window = {
-                documentation = cmp.config.window.bordered(),
-                completion = cmp.config.window.bordered(),
+        -- Default list of enabled providers defined so that you can extend it
+        -- elsewhere in your config, without redefining it, due to `opts_extend`
+        sources = {
+            default = { 'lsp', 'path', 'snippets', 'buffer' },
+        },
+
+        -- Blink.cmp uses a Rust fuzzy matcher by default for typo resistance and significantly better performance
+        -- You may use a lua implementation instead by using `implementation = "lua"` or fallback to the lua implementation,
+        -- when the Rust fuzzy matcher is not available, by using `implementation = "prefer_rust"`
+        --
+        -- See the fuzzy documentation for more information
+        fuzzy = { implementation = "prefer_rust_with_warning" },
+
+        completion = {
+            documentation = {
+                auto_show = true,
+                auto_show_delay_ms = 250,
             },
-            experimental = {
-                ghost_text = { hl_group = "CmpGhostText" },
-            },
-            mapping = cmp.mapping.preset.insert({
-                ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-                ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-
-                ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-                ['<tab>'] = cmp.mapping.confirm({ select = true }),
-
-                -- Manually trigger a completion from nvim-cmp
-                ['<C-Space>'] = cmp.mapping.complete(),
-            }),
-            formatting = {
-                format = lspkind.cmp_format({
-                    maxwidth = 50,
-                    elipsis_char = "...",
-                })
+            menu = {
+                border = {
+                    enable = true,
+                    style = "rounded"
+                }
             }
-        })
-
-        -- Add parentheses after selecting function or method item.
-        local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-        cmp.event:on(
-            "confirm_done",
-            cmp_autopairs.on_confirm_done()
-        )
-    end
+        },
+    },
+    opts_extend = { "sources.default" }
 }

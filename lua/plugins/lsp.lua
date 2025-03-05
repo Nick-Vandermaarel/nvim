@@ -38,9 +38,8 @@ return {
             "williamboman/mason-lspconfig.nvim",
         },
         config = function()
-            local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities();
             local lspUtils = require("nvdm.lspUtils");
-
+            local lsp_capabilities = lspUtils.default_capabilities();
 
             local handlers = {
                 ["textDocument/hover"] = vim.lsp.with(
