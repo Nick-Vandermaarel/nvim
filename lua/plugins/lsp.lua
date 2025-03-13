@@ -11,7 +11,7 @@ return {
         config = function()
             local lspUtils = require("nvdm.lspUtils");
             require("roslyn").setup({
-                filewatching = true,
+                filewatching = "auto",
                 ---@diagnostic disable-next-line: missing-fields
                 config = {
                     settings = {
