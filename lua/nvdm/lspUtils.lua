@@ -1,30 +1,27 @@
 local M = {}
 
 local function enhanced_hover()
-    -- Check if the current buffer is a C# file
+    -- Quick filetype check
     if vim.bo.filetype ~= 'cs' then
-        -- If not a C# file, fall back to the default hover behavior
         vim.lsp.buf.hover()
         return
     end
 
-    -- Function to check if hover content is meaningful
+    -- Cached parent name pattern for better performance
+    local parent_pattern = ":%s*(%w+)"
+
+    -- Optimize meaningful hover check
     local function is_meaningful_hover(result)
-        if not result or not result.contents then
-            return false
-        end
+        if not result or not result.contents then return false end
+
         local contents = vim.lsp.util.convert_input_to_markdown_lines(result.contents)
-        -- Check if contents are not empty and contain more than just whitespace
-        if #contents == 0 or (
-                #contents == 1 and contents[1]:match("^%s*$")
-            ) then
+        if #contents == 0 or (#contents == 1 and contents[1]:match("^%s*$")) then
             return false
         end
-        -- Check for presence of code comments (lines starting with ///)
+
+        -- Use ipairs for better performance on arrays
         for _, line in ipairs(contents) do
-            if line:match("^///") then
-                return true
-            end
+            if line:match("^///") then return true end
         end
         return false
     end
@@ -41,32 +38,33 @@ local function enhanced_hover()
 
     -- Get hover information for current position
     vim.lsp.buf_request(0, 'textDocument/hover', vim.lsp.util.make_position_params(), function(_, result)
-        local hover_displayed = display_hover(result)
-
-        if hover_displayed then
-            -- Try to find parent class or interface
+        if display_hover(result) then
+            -- Only look for parent if we displayed something
             local line = vim.api.nvim_get_current_line()
-            local parent_name = line:match(":%s*(%w+)")
-            if parent_name then
-                -- Create a new params object for the parent
-                local parent_params = vim.lsp.util.make_position_params()
-                parent_params.position.character = line:find(parent_name) - 1
-                -- Get hover information for parent/interface
-                vim.lsp.buf_request(0, 'textDocument/hover', parent_params, function(_, parent_result)
-                    if is_meaningful_hover(parent_result) then
-                        vim.defer_fn(function()
-                            display_hover(parent_result)
-                        end, 100) -- Slight delay to ensure it appears after the first hover
-                    end
-                end)
+            local parent_match_pos = line:find(parent_pattern)
+
+            -- Only proceed if we found a parent
+            if parent_match_pos then
+                local parent_name = line:match(parent_pattern)
+                if parent_name then
+                    -- Create params only when needed
+                    local parent_params = vim.lsp.util.make_position_params()
+                    parent_params.position.character = line:find(parent_name) - 1
+
+                    vim.lsp.buf_request(0, 'textDocument/hover', parent_params, function(_, parent_result)
+                        if is_meaningful_hover(parent_result) then
+                            vim.defer_fn(function()
+                                display_hover(parent_result)
+                            end, 100)
+                        end
+                    end)
+                end
             end
         else
-            -- If no meaningful hover information for current symbol, fall back to default behavior
             vim.lsp.buf.hover()
         end
     end)
 end
-
 --- Base on_attach event for LSP
 function M.onAttach(event)
     local nmap = function(keys, func, desc)

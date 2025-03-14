@@ -1,13 +1,27 @@
--- CSharp Using sort method.
--- Function to sort using statements while preserving spacing
+-- CSharp Using sort method - optimized
 local function sort_usings()
-    -- Get buffer contents
-    local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+    -- Only process visible part of buffer first to improve performance
+    local lines = vim.api.nvim_buf_get_lines(0, 0, 100, false) -- Just check first 100 lines
+
+    -- Quick check if there are any usings before processing
+    local has_usings = false
+    for _, line in ipairs(lines) do
+        if line:match('^using') then
+            has_usings = true
+            break
+        end
+    end
+
+    if not has_usings then return end
+
+    -- Now get full buffer only if we know we have usings
+    lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
 
     -- Find using statements
     local using_start, using_end
     local usings = {}
     local post_using_empty_lines = 0
+
     for i, line in ipairs(lines) do
         if line:match('^using') then
             if not using_start then using_start = i end
@@ -32,9 +46,24 @@ local function sort_usings()
     end
 end
 
--- Auto format AutoCMD
+-- Split into C# specific and general format commands
 vim.api.nvim_create_autocmd("BufWritePre", {
-    pattern = "*",
+    pattern = "*.cs",
+    callback = function(args)
+        -- Format
+        require("conform").format({
+            bufnr = args.buf,
+            async = false,
+            timeout_ms = 5000,
+            lsp_fallback = true,
+        })
+        -- Sort usings
+        sort_usings()
+    end,
+})
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+    pattern = { "*", "!*.cs" }, -- All files except .cs
     callback = function(args)
         require("conform").format({
             bufnr = args.buf,
@@ -42,11 +71,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
             timeout_ms = 5000,
             lsp_fallback = true,
         })
-
-        -- Plugin to sort usings on csharp files
-        if vim.fn.expand("%:e") == "cs" then
-            sort_usings()
-        end
     end,
 })
 
@@ -66,18 +90,51 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "BufWritePost" }, {
     end,
 })
 
--- Roslyn Code lens auto cmd
+-- Throttle Roslyn LSP refreshes
+local roslyn_timer = nil
+vim.api.nvim_create_autocmd({ "InsertLeave", "BufWritePost" }, {
+    pattern = "*.cs", -- Only for C# files
+    callback = function()
+        -- Cancel previous timer if still pending
+        if roslyn_timer then
+            vim.fn.timer_stop(roslyn_timer)
+        end
+
+        -- Debounce the refresh
+        roslyn_timer = vim.fn.timer_start(200, function()
+            local clients = vim.lsp.get_clients({ name = "roslyn" })
+            if not clients or #clients == 0 then
+                return
+            end
+
+            local bufnr = vim.api.nvim_get_current_buf()
+            if not vim.lsp.buf_is_attached(bufnr, clients[1].id) then
+                return
+            end
+
+            vim.lsp.util._refresh("textDocument/diagnostic", { bufnr = bufnr })
+        end)
+    end,
+})
+
+-- Debounce codelens refreshes
+local codelens_timer = nil
 vim.api.nvim_create_autocmd({
     "BufEnter",
     "BufWritePost",
     "LspAttach",
 }, {
-    pattern = { "*.cs" },
+    pattern = "*.cs",
     callback = function()
-        -- Add a small delay to ensure LSP has time to process changes
-        vim.defer_fn(function()
+        -- Cancel previous timer if still pending
+        if codelens_timer then
+            vim.fn.timer_stop(codelens_timer)
+        end
+
+        -- Debounce the refresh
+        codelens_timer = vim.fn.timer_start(200, function()
             vim.lsp.codelens.refresh({ bufnr = 0 })
-        end, 100)
+        end)
     end,
     desc = "Refresh codelens"
 })

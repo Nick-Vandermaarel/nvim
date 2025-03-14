@@ -54,14 +54,17 @@ return {
                 )
             }
 
+            -- Apply handlers once
+            for k, v in pairs(handlers) do
+                vim.lsp.handlers[k] = v
+            end
+
             local default_setup = function(server)
                 require('lspconfig')[server].setup({
                     capabilities = lsp_capabilities,
                     handlers = handlers
                 })
             end
-
-            vim.lsp.handlers = vim.tbl_extend("force", vim.lsp.handlers, handlers)
 
             -- LSP Attach AutoCMD
             vim.api.nvim_create_autocmd('LspAttach', {
@@ -100,26 +103,21 @@ return {
                 handlers = {
                     default_setup,
                     ts_ls = function()
-                        local function get_vue_typescript_plugin_path()
+                        -- Lazy path resolution - only compute when needed
+                        local vue_typescript_plugin_path = (function()
                             local mason_path = vim.fn.stdpath("data") .. '/mason/packages/vue-language-server'
 
-                            -- Check both possible plugin locations
-                            local possible_paths = {
+                            for _, path in ipairs({
                                 mason_path .. '/node_modules/@vue/language-server/node_modules/@vue/typescript-plugin',
                                 mason_path .. '/node_modules/@vue/typescript-plugin'
-                            }
-
-                            for _, path in ipairs(possible_paths) do
+                            }) do
                                 if vim.fn.isdirectory(path) == 1 then
                                     return path
                                 end
                             end
 
-                            -- Fallback to the original path if none found
                             return mason_path .. '/node_modules/@vue/language-server/node_modules/@vue/typescript-plugin'
-                        end
-
-                        local vue_typescript_plugin_path = get_vue_typescript_plugin_path()
+                        end)()
 
                         require('lspconfig')["ts_ls"].setup({
                             capabilities = lsp_capabilities,
@@ -134,9 +132,10 @@ return {
                             },
                             filetypes = { "typescript", "javascript", "vue" },
                         })
+                    end,
 
-                        local lspconfig = require "lspconfig"
-                        lspconfig.volar.setup {
+                    volar = function()
+                        require("lspconfig").volar.setup {
                             capabilities = lsp_capabilities,
                             handlers = handlers
                         }

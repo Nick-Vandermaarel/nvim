@@ -1,5 +1,6 @@
 return {
     'saghen/blink.cmp',
+    event = "VeryLazy",
     -- optional snippets
     dependencies = 'rafamadriz/friendly-snippets',
     -- use a version tag to download pre-built

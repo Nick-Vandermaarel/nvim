@@ -3,6 +3,7 @@
 return {
     {
         "tpope/vim-fugitive",
+        event = "VeryLazy",
     },
     {
         'numToStr/Comment.nvim',

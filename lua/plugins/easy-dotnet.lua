@@ -1,7 +1,7 @@
 return
 {
     "GustavEikaas/easy-dotnet.nvim",
-    dependencies = { "nvim-lua/plenary.nvim", 'nvim-telescope/telescope.nvim', },
+    dependencies = { "nvim-lua/plenary.nvim", 'folke/snacks.nvim', },
     event = "VeryLazy",
     config = function()
         require("easy-dotnet").setup({
