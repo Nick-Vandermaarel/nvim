@@ -84,6 +84,7 @@ return {
     opts = {
         input = {},
         notifier = {},
+        statuscolumn = {},
         indent = {
             priority = 1,
             enabled = true,
