@@ -2,7 +2,7 @@
 
 return {
     {
-        "tpope/vim-fugitive"
+        "tpope/vim-fugitive",
     },
     {
         'numToStr/Comment.nvim',
@@ -60,5 +60,8 @@ return {
         event = "VeryLazy",
         opts = {}
     },
-    { 'echasnovski/mini.surround', version = false },
+    {
+        'echasnovski/mini.surround',
+        version = false,
+    },
 }

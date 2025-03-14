@@ -40,6 +40,8 @@ return {
         config = function()
             local lspUtils = require("nvdm.lspUtils");
             local lsp_capabilities = lspUtils.default_capabilities();
+            -- until nvim 0.11
+            lsp_capabilities = require('blink.cmp').get_lsp_capabilities(lsp_capabilities)
 
             local handlers = {
                 ["textDocument/hover"] = vim.lsp.with(
