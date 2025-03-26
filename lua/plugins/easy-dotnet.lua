@@ -6,7 +6,7 @@ return {
         require("easy-dotnet").setup({
             test_runner = {
                 viewmode = "split",
-                enable_buffer_test_execution = true, // experimental
+                enable_buffer_test_execution = true, -- experimental
             },
             auto_bootstrap_namespace = {
                 type = "file_scoped",
