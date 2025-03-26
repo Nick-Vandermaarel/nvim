@@ -1,12 +1,12 @@
 return {
     "GustavEikaas/easy-dotnet.nvim",
     dependencies = { "nvim-lua/plenary.nvim", 'folke/snacks.nvim', },
-    event = "VeryLazy",
     config = function()
-        require("easy-dotnet").setup({
+        local dotnet = require("easy-dotnet")
+        dotnet.setup({
             test_runner = {
-                viewmode = "split",
-                enable_buffer_test_execution = true, -- experimental
+                viewmode = "buf",
+                enable_buffer_text_execution = true, -- experimental
                 icons = {
                     passed = "",
                     skipped = "",
@@ -26,5 +26,9 @@ return {
             },
             picker = "snacks",
         })
+
+        vim.keymap.set("n", "<C-b>", function()
+            dotnet.testrunner_refresh_build()
+        end)
     end
 }
