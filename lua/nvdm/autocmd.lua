@@ -4,6 +4,18 @@ vim.api.nvim_create_autocmd("BufEnter", {
     end
 })
 
+vim.api.nvim_create_autocmd("BufWritePre", {
+    pattern = { "*" },
+    callback = function(args)
+        require("conform").format({
+            bufnr = args.buf,
+            async = false,
+            timeout_ms = 5000,
+            lsp_fallback = true,
+        })
+    end,
+});
+
 -- Hack for roslyn lsp, to refresh diagnostics on insert leave
 vim.api.nvim_create_autocmd({ "InsertLeave", "BufWritePost" }, {
     pattern = "*",
