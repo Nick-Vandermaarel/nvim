@@ -82,8 +82,6 @@ function M.onAttach(event)
     -- Don't use these right now, and they are conflicting with mini.surround. Need to evaulate mapping.
     -- nmap("sh", vim.lsp.buf.signature_help, "[S]ignature [H]elp")
     -- nmap("sd", vim.diagnostic.open_float, "Show line [d]iagnostics");
-    nmap("[d", vim.diagnostic.goto_next)
-    nmap("]d", vim.diagnostic.goto_prev)
     nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
     nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
     vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end)
@@ -156,20 +154,6 @@ function M.default_capabilities()
             'additionalTextEdits',
         }
     }
-
-    capabilities = vim.tbl_deep_extend("force", capabilities, {
-        textDocument = {
-            completion = {
-                completionItem = {
-                    commitCharactersSupport = true,
-                    deprecatedSupport = true,
-                    documentationFormat = { "markdown", "plaintext" },
-                    preselectSupport = true,
-                    insertReplaceSupport = true,
-                }
-            }
-        }
-    })
     return capabilities;
 end
 

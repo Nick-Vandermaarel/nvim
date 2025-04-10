@@ -51,6 +51,8 @@ return {
         config = function()
             local lspUtils = require("nvdm.lspUtils");
             local lsp_capabilities = lspUtils.default_capabilities();
+            -- until nvim 0.11
+            lsp_capabilities = require('blink.cmp').get_lsp_capabilities(lsp_capabilities)
 
             local default_setup = function(server)
                 require('lspconfig')[server].setup({
@@ -65,12 +67,7 @@ return {
                     lspUtils.onAttach(event);
                 end
             })
-            -- Change the Diagnostic symbols in the sign column (gutter)
-            -- local signs = { Error = "󰅚", Warn = "󰀪", Hint = "󰌶", Info = "󰋽" }
-            -- for type, icon in pairs(signs) do
-            --     local hl = "DiagnosticSign" .. type
-            --     vim.diagnostic.config(hl, { text = icon, texthl = hl, numhl = "" })
-            --end
+
             vim.diagnostic.config({
                 signs = {
                     text = {
