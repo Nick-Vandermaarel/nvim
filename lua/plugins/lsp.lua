@@ -51,29 +51,10 @@ return {
         config = function()
             local lspUtils = require("nvdm.lspUtils");
             local lsp_capabilities = lspUtils.default_capabilities();
-            -- until nvim 0.11
-            lsp_capabilities = require('blink.cmp').get_lsp_capabilities(lsp_capabilities)
-
-            local handlers = {
-                ["textDocument/hover"] = vim.lsp.with(
-                    vim.lsp.handlers.hover,
-                    { border = "rounded" }
-                ),
-                ["textDocument/signatureHelp"] = vim.lsp.with(
-                    vim.lsp.handlers.signature_help,
-                    { border = "rounded" }
-                )
-            }
-
-            -- Apply handlers once
-            for k, v in pairs(handlers) do
-                vim.lsp.handlers[k] = v
-            end
 
             local default_setup = function(server)
                 require('lspconfig')[server].setup({
                     capabilities = lsp_capabilities,
-                    handlers = handlers
                 })
             end
 
@@ -85,11 +66,31 @@ return {
                 end
             })
             -- Change the Diagnostic symbols in the sign column (gutter)
-            local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
-            for type, icon in pairs(signs) do
-                local hl = "DiagnosticSign" .. type
-                vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-            end
+            -- local signs = { Error = "󰅚", Warn = "󰀪", Hint = "󰌶", Info = "󰋽" }
+            -- for type, icon in pairs(signs) do
+            --     local hl = "DiagnosticSign" .. type
+            --     vim.diagnostic.config(hl, { text = icon, texthl = hl, numhl = "" })
+            --end
+            vim.diagnostic.config({
+                signs = {
+                    text = {
+                        [vim.diagnostic.severity.ERROR] = "󰅚",
+                        [vim.diagnostic.severity.WARN] = "󰀪",
+                        [vim.diagnostic.severity.HINT] = "󰌶",
+                        [vim.diagnostic.severity.INFO] = "󰋽",
+                    },
+                    texthl = {
+                        [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+                        [vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
+                        [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+                        [vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
+                    }
+                },
+                virtual_text = true,
+                underline = true,
+                severity_sort = true,
+                update_in_insert = true
+            })
 
             require('mason').setup({
                 ui = {
@@ -148,7 +149,6 @@ return {
                     volar = function()
                         require("lspconfig").volar.setup {
                             capabilities = lsp_capabilities,
-                            handlers = handlers
                         }
                     end,
                 }

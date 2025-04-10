@@ -1,4 +1,3 @@
---vim.opt.guicursor = ""
 vim.opt.nu = true
 vim.opt.relativenumber = true
 vim.opt.cursorline = true
@@ -38,8 +37,9 @@ vim.opt.list = true
 -- Sign column always visible for LSP/Git markers.
 vim.opt.signcolumn = "yes"
 
+vim.o.winborder = "rounded"
+
 vim.diagnostic.config({
-    float = { border = "rounded" },
     virtual_text = true, -- Show diagnostics inline
     signs = true, -- Show signs in the sign column
     underline = true, -- Underline text with issues

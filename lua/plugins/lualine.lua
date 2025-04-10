@@ -21,17 +21,28 @@ return {
         require("lualine").setup {
             options = {
                 theme = theme,
-                globalstatus = true
+                globalstatus = true,
+                disabled_filetypes = {
+                    "snacks_dashboard",
+                    "lazy",
+                    "mason",
+                    "NvimTree"
+                }
             },
             sections = {
                 lualine_b = {
-                    "branch", "diff", "diagnostics",
+                    "branch", "diff", "filename",
+                    {
+                        "diagnostics",
+                        update_in_insert = true
+                    },
+                },
+                lualine_c = {
                     -- Show the arrow marker if the current buffer is bookmarked.
                     function()
                         return arrow_sl.text_for_statusline_with_icons()
                     end
                 },
-                lualine_c = { "filename" },
                 -- Show the git blame int the status line.
                 lualine_x = { { git_blame.get_current_blame_text, cond = git_blame.is_blame_text_available } },
                 lualine_y = { "filetype" },

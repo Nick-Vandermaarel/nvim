@@ -30,7 +30,10 @@ local function enhanced_hover()
     local function display_hover(result)
         if is_meaningful_hover(result) then
             local contents = vim.lsp.util.convert_input_to_markdown_lines(result.contents)
-            vim.lsp.util.open_floating_preview(contents, "markdown", {})
+            vim.lsp.util.open_floating_preview(contents, "markdown", {
+                border = "rounded",
+                focus = false
+            })
             return true
         end
         return false
@@ -101,9 +104,9 @@ function M.roslynSemanticHighlights(client)
 
         -- monkey patch the request proxy
         local request_inner = client.request
-        client.request = function(method, params, handler)
+        client.request = function(method, params, handler, bufnr)
             if method ~= vim.lsp.protocol.Methods.textDocument_semanticTokens_full then
-                return request_inner(method, params, handler)
+                return request_inner(method, params, handler, bufnr)
             end
 
             local function find_buf_by_uri(search_uri)
@@ -137,7 +140,7 @@ function M.roslynSemanticHighlights(client)
                         character = string.len(last_line) - 1,
                     },
                 },
-            }, handler)
+            }, handler, bufnr)
         end
     end
 end
@@ -153,6 +156,20 @@ function M.default_capabilities()
             'additionalTextEdits',
         }
     }
+
+    capabilities = vim.tbl_deep_extend("force", capabilities, {
+        textDocument = {
+            completion = {
+                completionItem = {
+                    commitCharactersSupport = true,
+                    deprecatedSupport = true,
+                    documentationFormat = { "markdown", "plaintext" },
+                    preselectSupport = true,
+                    insertReplaceSupport = true,
+                }
+            }
+        }
+    })
     return capabilities;
 end
 
