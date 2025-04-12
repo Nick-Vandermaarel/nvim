@@ -138,7 +138,7 @@ return {
                     footer = get_random_quote(),
                     padding = 3
                 },
-                { section = "keys",   gap = 1, padding = 1 },
+                { section = "keys",   padding = 1 },
                 { section = "startup" },
             }
         },

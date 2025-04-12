@@ -39,19 +39,6 @@ vim.opt.signcolumn = "yes"
 
 vim.o.winborder = "rounded"
 
-vim.diagnostic.config({
-    virtual_text = true, -- Show diagnostics inline
-    signs = true, -- Show signs in the sign column
-    underline = true, -- Underline text with issues
-    update_in_insert = false, -- Don't update diagnostics in insert mode
-    severity_sort = true, -- Sort diagnostics by severity
-    virtual_lines = false, -- Don't show virtual lines
-    message = { -- Configure message shown in command line
-        show = true, -- Show message in command line
-        prefix = "●" -- Prefix for messages
-    }
-})
-
 if vim.fn.has('win32') == 1 then
     vim.g.undotree_DiffCommand = "FC"
 
