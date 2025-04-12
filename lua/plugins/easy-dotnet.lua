@@ -1,5 +1,6 @@
 return {
     "GustavEikaas/easy-dotnet.nvim",
+    event = "VeryLazy",
     dependencies = { "nvim-lua/plenary.nvim", 'folke/snacks.nvim', },
     config = function()
         local dotnet = require("easy-dotnet")

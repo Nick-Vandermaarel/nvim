@@ -71,9 +71,41 @@ local quotes = {
     "It's not a bug – it's an undocumented feature. - Anonymous",
 }
 
+local function wrap_text(text, line_width)
+    line_width = line_width or 60 -- Default line width if not specified
+
+    local result = ""
+    local line_length = 0
+    local words = {}
+
+    -- Split the text into words
+    for word in text:gmatch("%S+") do
+        table.insert(words, word)
+    end
+
+    -- Process each word
+    for _, word in ipairs(words) do
+        -- Check if adding this word would exceed the line width
+        if line_length + #word + 1 > line_width and line_length > 0 then
+            result = result .. "\n"
+            line_length = 0
+        elseif line_length > 0 then
+            -- Add a space before the word if it's not the first word on the line
+            result = result .. " "
+            line_length = line_length + 1
+        end
+
+        -- Add the word
+        result = result .. word
+        line_length = line_length + #word
+    end
+
+    return result
+end
+
 local function get_random_quote()
     math.randomseed(os.time())
-    return quotes[math.random(#quotes)]
+    return wrap_text(quotes[math.random(#quotes)], 80)
 end
 
 return {
