@@ -27,9 +27,7 @@ return {
                             dotnet_show_completion_items_from_unimported_namespaces = true,
                         },
                         ["csharp|inlay_hints"] = {
-                            csharp_enable_inlay_hints_for_implicit_object_creation = true,
-                            csharp_enable_inlay_hints_for_implicit_variable_types = true,
-                            csharp_enable_inlay_hints_for_types = true,
+                            dotnet_enable_inlay_hints_for_literal_parameters = true,
                         },
                         ["csharp|formatting"] = {
                             dotnet_organize_imports_on_format = true,
@@ -37,7 +35,9 @@ return {
                     },
                     on_attach = function(client, bufnr)
                         lspUtils.onAttach({ client = client, bufnr = bufnr });
-                        lspUtils.roslynSemanticHighlights(client);
+                        if (client.server_capabilities.inlayHintProvider) then
+                            vim.lsp.inlay_hint.enable(true, { bufnr = bufnr });
+                        end
                     end,
                 },
             });
