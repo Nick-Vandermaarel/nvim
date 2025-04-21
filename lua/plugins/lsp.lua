@@ -79,7 +79,7 @@ return {
                         [vim.diagnostic.severity.ERROR] = "✘",
                         [vim.diagnostic.severity.WARN] = "▲",
                         [vim.diagnostic.severity.HINT] = "⚑",
-                        [vim.diagnostic.severity.INFO] = "ℹ",
+                        [vim.diagnostic.severity.INFO] = "󰋼"
                     },
                     texthl = {
                         [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
