@@ -20,7 +20,7 @@ return {
         config = function()
             require("persistence").setup {
                 dir = vim.fn.expand(vim.fn.stdpath "config" .. "/session/"),
-                options = { "buffers", "curdir", "tabpages", "winsize" },
+                options = { "buffers", "curdir", "winsize" },
             }
         end
     },
@@ -56,14 +56,9 @@ return {
         },
     },
     {
-        "folke/todo-comments.nvim",
-        dependencies = "nvim-lua/plenary.nvim",
-        event = "VeryLazy",
-        opts = {}
-    },
-    {
         'echasnovski/mini.surround',
         version = false,
         opts = {}
     },
+    { 'echasnovski/mini.pairs', version = false, opts = {} },
 }

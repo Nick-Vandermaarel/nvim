@@ -17,10 +17,6 @@ vim.g.maplocalleader = " "
 
 require("lazy").setup("plugins")
 
--- Disable netrw
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-
 require("nvdm.autocmd")
 require("nvdm.remap")
 require("nvdm.set")

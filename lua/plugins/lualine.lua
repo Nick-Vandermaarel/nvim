@@ -22,20 +22,21 @@ return {
             },
             sections = {
                 lualine_b = {
-                    "branch", "diff", "filename",
+                    "branch", "diff",
                     {
                         "diagnostics",
                         update_in_insert = true
                     },
                 },
                 lualine_c = {
+                    "filename",
                     -- Show the arrow marker if the current buffer is bookmarked.
                     function()
                         return arrow_sl.text_for_statusline_with_icons()
                     end
                 },
-                lualine_x = {},
-                lualine_y = { "filetype" },
+                lualine_x = { "filetype" },
+                lualine_y = { "progress" },
                 lualine_z = { "location" }
             },
         }
