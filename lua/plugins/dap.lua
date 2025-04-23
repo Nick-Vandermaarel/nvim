@@ -28,6 +28,17 @@ return {
         vim.keymap.set("n", "<F11>", dap.step_into, { desc = "Step Into" })
         vim.keymap.set("n", "<F12>", dap.step_out, { desc = "Step Out" })
 
+        vim.fn.sign_define('DapBreakpoint', {
+            text = '●',
+            texthl = 'DapBreakpoint',
+            linehl = '',
+            numhl = ''
+        })
+
+        vim.cmd([[
+            highlight DapBreakpoint guifg=#FF0000 ctermfg=red
+        ]])
+
         local easyDotNetDap = require("nvdm.easy-dotnet-dap");
         easyDotNetDap.register_net_dap();
     end

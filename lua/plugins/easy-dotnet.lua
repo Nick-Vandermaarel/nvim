@@ -1,12 +1,14 @@
 return {
     "GustavEikaas/easy-dotnet.nvim",
-    event = "VeryLazy",
     dependencies = { "nvim-lua/plenary.nvim", 'folke/snacks.nvim', },
+    ft = { "cs", "vb", "csproj", "sln", "slnx", "props", "csx", "targets" },
+    lazy = true,
+    cmd = "Dotnet",
     config = function()
         local dotnet = require("easy-dotnet")
         dotnet.setup({
             test_runner = {
-                viewmode = "buf",
+                viewmode = "float",
                 enable_buffer_text_execution = true, -- experimental
                 icons = {
                     passed = "",
