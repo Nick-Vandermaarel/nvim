@@ -35,8 +35,18 @@ return {
             numhl = ''
         })
 
+        vim.fn.sign_define('DapStopped', {
+            text = '▶',
+            texthl = 'DapStopped',
+            linehl = 'DapStoppedLine',
+            numhl = 'DapStoppedLineNr'
+        })
+
         vim.cmd([[
             highlight DapBreakpoint guifg=#FF0000 ctermfg=red
+            highlight DapStopped guifg=#00FF00 ctermfg=green
+            highlight DapStoppedLine guibg=#2d3d45 ctermbg=237
+            highlight DapStoppedLineNr guifg=#00FF00 ctermfg=green
         ]])
 
         local easyDotNetDap = require("nvdm.easy-dotnet-dap");

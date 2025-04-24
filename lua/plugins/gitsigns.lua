@@ -1,12 +1,13 @@
 return {
     "lewis6991/gitsigns.nvim",
-    event = "BufReadPre",
-    dependencies = {
-        "nvim-lua/plenary.nvim"
-    },
+    event = { "BufReadPre", "BufNewFile" },
     opts = {},
     config = function()
-        require("gitsigns").setup()
+        require("gitsigns").setup({
+            diff_opts = {
+                ignore_whitespace = true,
+            }
+        })
 
         vim.keymap.set("n", "<leader>gp", ":Gitsigns preview_hunk<CR>", { desc = "Git Preview" });
         vim.keymap.set("n", "<leader>gt", ":Gitsigns toggle_current_line_blame<CR>",
