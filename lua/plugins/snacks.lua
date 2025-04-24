@@ -116,7 +116,7 @@ return {
     opts = {
         input = {},
         notifier = {},
-        statuscolumn = {},
+        statuscolumn = { enabled = true },
         indent = {
             priority = 1,
             enabled = true,
