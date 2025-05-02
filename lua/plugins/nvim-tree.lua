@@ -3,10 +3,6 @@ return {
     dependencies = { 'nvim-tree/nvim-web-devicons', opt = true },
     event = "VeryLazy",
     config = function()
-        -- Disable netrw
-        vim.g.loaded_netrw = 1
-        vim.g.loaded_netrwPlugin = 1
-
         local function custom_on_attatch(bufnr)
             local api = require('nvim-tree.api')
             local function opts(desc)
