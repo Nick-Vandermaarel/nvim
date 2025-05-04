@@ -39,8 +39,11 @@ local function enhanced_hover()
         return false
     end
 
+    local bufnr = vim.api.nvim_get_current_buf()
+    local winnr = vim.api.nvim_get_current_win()
+
     -- Get hover information for current position
-    vim.lsp.buf_request(0, 'textDocument/hover', vim.lsp.util.make_position_params(), function(_, result)
+    vim.lsp.buf_request(bufnr, 'textDocument/hover', vim.lsp.util.make_position_params(winnr, "utf-16"), function(_, result)
         if display_hover(result) then
             -- Only look for parent if we displayed something
             local line = vim.api.nvim_get_current_line()
@@ -51,7 +54,7 @@ local function enhanced_hover()
                 local parent_name = line:match(parent_pattern)
                 if parent_name then
                     -- Create params only when needed
-                    local parent_params = vim.lsp.util.make_position_params()
+                    local parent_params = vim.lsp.util.make_position_params(winnr, "utf-16")
                     parent_params.position.character = line:find(parent_name) - 1
 
                     vim.lsp.buf_request(0, 'textDocument/hover', parent_params, function(_, parent_result)
