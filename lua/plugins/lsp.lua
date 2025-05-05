@@ -106,6 +106,7 @@ return {
                     'ts_ls',
                     'volar',
                     'html',
+                    'cssls'
                 },
                 ui = {
                     icons = {
