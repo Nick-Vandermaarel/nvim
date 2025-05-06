@@ -7,7 +7,7 @@ return {
     },
     {
         "seblj/roslyn.nvim",
-        ft = "cs",
+        ft = { "cs", "sln" },
         config = function()
             local lspUtils = require("nvdm.lspUtils");
             local lsp_capabilities = lspUtils.default_capabilities();
@@ -30,12 +30,6 @@ return {
                             dotnet_organize_imports_on_format = true,
                         },
                     },
-                    on_attach = function(client, bufnr)
-                        lspUtils.onAttach({ client = client, bufnr = bufnr });
-                        if (client.server_capabilities.inlayHintProvider) then
-                            vim.lsp.inlay_hint.enable(true, { bufnr = bufnr });
-                        end
-                    end,
                 },
             });
         end
@@ -95,6 +89,10 @@ return {
                 ui = {
                     border = "rounded"
                 },
+                registries = {
+                    'github:Crashdummyy/mason-registry',
+                    'github:mason-org/mason-registry'
+                }
             })
 
             require('mason-lspconfig').setup({
