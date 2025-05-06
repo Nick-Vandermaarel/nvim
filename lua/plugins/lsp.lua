@@ -26,9 +26,6 @@ return {
                         ["csharp|completion"] = {
                             dotnet_show_completion_items_from_unimported_namespaces = true,
                         },
-                        ["csharp|inlay_hints"] = {
-                            dotnet_enable_inlay_hints_for_literal_parameters = true,
-                        },
                         ["csharp|formatting"] = {
                             dotnet_organize_imports_on_format = true,
                         },
