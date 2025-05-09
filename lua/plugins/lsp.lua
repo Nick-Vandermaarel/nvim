@@ -11,8 +11,6 @@ return {
         config = function()
             local lspUtils = require("nvdm.lspUtils");
             local lsp_capabilities = lspUtils.default_capabilities();
-            -- until nvim 0.11
-            lsp_capabilities = require('blink.cmp').get_lsp_capabilities(lsp_capabilities)
 
             require("roslyn").setup({
                 filewatching = "auto",
@@ -34,36 +32,14 @@ return {
             });
         end
     },
-
-    -- lspconfig
     {
         'neovim/nvim-lspconfig',
-        event = "VeryLazy",
         dependencies = {
-            { "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
-            "williamboman/mason.nvim",
-            "williamboman/mason-lspconfig.nvim",
+            { 'mason-org/mason.nvim' },
+            { 'mason-org/mason-lspconfig.nvim' },
         },
+        lazy = false,
         config = function()
-            local lspUtils = require("nvdm.lspUtils");
-            local lsp_capabilities = lspUtils.default_capabilities();
-            -- until nvim 0.11
-            lsp_capabilities = require('blink.cmp').get_lsp_capabilities(lsp_capabilities)
-
-            local default_setup = function(server)
-                require('lspconfig')[server].setup({
-                    capabilities = lsp_capabilities,
-                })
-            end
-
-            -- LSP Attach AutoCMD
-            vim.api.nvim_create_autocmd('LspAttach', {
-                desc = "LSP actions",
-                callback = function(event)
-                    lspUtils.onAttach(event);
-                end
-            })
-
             vim.diagnostic.config({
                 signs = {
                     text = {
@@ -82,75 +58,44 @@ return {
                 virtual_text = true,
                 underline = true,
                 severity_sort = true,
-                update_in_insert = false
+                update_in_insert = true
             })
 
             require('mason').setup({
-                ui = {
-                    border = "rounded"
-                },
                 registries = {
                     'github:Crashdummyy/mason-registry',
                     'github:mason-org/mason-registry'
                 }
             })
-
             require('mason-lspconfig').setup({
-                ensure_installed = {
-                    "lua_ls",
-                    'ts_ls',
-                    'volar',
-                    'html',
-                    'cssls'
-                },
-                ui = {
-                    icons = {
-                        package_installed = "✓",
-                        package_pending = "➜",
-                        package_uninstalled = "✗",
-                    },
-                },
-                handlers = {
-                    default_setup,
-                    ts_ls = function()
-                        -- Lazy path resolution - only compute when needed
-                        local vue_typescript_plugin_path = (function()
-                            local mason_path = vim.fn.stdpath("data") .. '/mason/packages/vue-language-server'
+                automatic_enable = true,
+            })
 
-                            for _, path in ipairs({
-                                mason_path .. '/node_modules/@vue/language-server/node_modules/@vue/typescript-plugin',
-                                mason_path .. '/node_modules/@vue/typescript-plugin'
-                            }) do
-                                if vim.fn.isdirectory(path) == 1 then
-                                    return path
-                                end
-                            end
-
-                            return mason_path .. '/node_modules/@vue/language-server/node_modules/@vue/typescript-plugin'
-                        end)()
-
-                        require('lspconfig')["ts_ls"].setup({
-                            capabilities = lsp_capabilities,
-                            init_options = {
-                                plugins = {
-                                    {
-                                        name = "@vue/typescript-plugin",
-                                        location = vue_typescript_plugin_path,
-                                        languages = { "typescript", "vue" },
-                                    }
-                                }
-                            },
-                            filetypes = { "typescript", "javascript", "vue" },
-                        })
-                    end,
-
-                    volar = function()
-                        require("lspconfig").volar.setup {
-                            capabilities = lsp_capabilities,
-                        }
-                    end,
+            vim.lsp.config("volar", {
+                init_options = {
+                    vue = {
+                        hybridMode = false
+                    }
                 }
             })
-        end,
+
+            local mason_packages = vim.fn.stdpath("data") .. "/mason/packages"
+            local volar_path = mason_packages .. "/vue-language-server/node_modules/@vue/language-server/node_modules"
+            vim.lsp.config("ts_ls", {
+                settings = {
+                    ["ts_ls"] = {
+                        init_options = {
+                            plugins = {
+                                {
+                                    name = "@vue/typescript-plugin",
+                                    location = volar_path,
+                                    languages = { "vue" },
+                                },
+                            },
+                        }
+                    },
+                }
+            })
+        end
     }
 }
