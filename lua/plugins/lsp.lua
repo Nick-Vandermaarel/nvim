@@ -71,7 +71,19 @@ return {
                 automatic_enable = true,
             })
 
+            local lspUtils = require("nvdm.lspUtils");
+            local lsp_capabilities = lspUtils.default_capabilities();
+
+            -- LSP Attach AutoCMD
+            vim.api.nvim_create_autocmd('LspAttach', {
+                desc = "LSP actions",
+                callback = function(event)
+                    lspUtils.onAttach(event);
+                end
+            })
+
             vim.lsp.config("volar", {
+                capabilities = lsp_capabilities,
                 init_options = {
                     vue = {
                         hybridMode = false
