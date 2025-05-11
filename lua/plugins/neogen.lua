@@ -1,6 +1,9 @@
 return {
     -- Documentation Generation
-    "danymat/neogen",
+    -- "danymat/neogen",
+    "nick-vandermaarel/neogen",
+    branch = "cs-records",
+
     dependencies = "nvim-treesitter/nvim-treesitter",
     event = "BufReadPre",
     config = function()
