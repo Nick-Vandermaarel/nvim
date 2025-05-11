@@ -1,5 +1,5 @@
 -- PLUGINS FOR LAZY
-
+local rm = require("nvdm.remap");
 return {
     {
         "tpope/vim-fugitive",
@@ -13,6 +13,9 @@ return {
     {
         "mbbill/undotree",
         event = "VeryLazy",
+        config = function()
+            rm.Map("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Undo tree" });
+        end
     },
     {
         "folke/persistence.nvim",

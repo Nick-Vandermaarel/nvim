@@ -1,4 +1,5 @@
-function Map(mode, lhs, rhs, opts)
+local M = {}
+M.Map = function(mode, lhs, rhs, opts)
     local options = { noremap = true, silent = true }
     if opts then
         options = vim.tbl_extend("force", options, opts)
@@ -6,72 +7,58 @@ function Map(mode, lhs, rhs, opts)
     vim.keymap.set(mode, lhs, rhs, options)
 end
 
-Map("n", "<leader>w", ":w!<CR>")
-Map("n", "<leader>q", ":q!<CR>")
-Map("n", "<leader>x", ":x!<CR>")
-Map("n", "<leader>bd", ":bd<CR>")
+M.Map("n", "<leader>w", ":w!<CR>")
+M.Map("n", "<leader>q", ":q!<CR>")
+M.Map("n", "<leader>x", ":x!<CR>")
+M.Map("n", "<leader>bd", ":bd<CR>")
 
-Map("v", "J", ":m '>+1<CR>gv=gv")
-Map("v", "K", ":m '<-2<CR>gv=gv")
+M.Map("v", "J", ":m '>+1<CR>gv=gv")
+M.Map("v", "K", ":m '<-2<CR>gv=gv")
 
 -- Indents
-Map("v", "<", "<gv")
-Map("v", ">", ">gv")
+M.Map("v", "<", "<gv")
+M.Map("v", ">", ">gv")
 
-Map("n", "<C-d>", "<C-d>zz")
-Map("n", "<C-u>", "<C-u>zz")
-Map("n", "n", "nzzzv")
-Map("n", "N", "Nzzzv")
+M.Map("n", "<C-d>", "<C-d>zz")
+M.Map("n", "<C-u>", "<C-u>zz")
+M.Map("n", "n", "nzzzv")
+M.Map("n", "N", "Nzzzv")
 
-Map("x", "<leader>p", "\"_dp")
+M.Map("x", "<leader>p", "\"_dp")
 
 -- Copy to system keyboard
-Map("n", "<leader>y", "\"+y")
-Map("v", "<leader>y", "\"+y")
-Map("n", "<leader>Y", "\"+Y")
+M.Map("n", "<leader>y", "\"+y")
+M.Map("v", "<leader>y", "\"+y")
+M.Map("n", "<leader>Y", "\"+Y")
 
 -- Replace line i'm currently on
-Map("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+M.Map("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -- Buffer navigation
-Map("n", "]b", "<cmd>bn<cr>", { desc = "Next Buffer" });
-Map("n", "[b", "<cmd>bp<cr>", { desc = "Previous Buffer" });
-Map("n", "db", "<cmd>bd<CR>", { desc = "Delete Buffer" });
+M.Map("n", "]b", "<cmd>bn<cr>", { desc = "Next Buffer" });
+M.Map("n", "[b", "<cmd>bp<cr>", { desc = "Previous Buffer" });
+M.Map("n", "db", "<cmd>bd<CR>", { desc = "Delete Buffer" });
 
 -- Movement
-Map("n", "<C-h>", "<C-w>h")
-Map("n", "<C-j>", "<C-w>j")
-Map("n", "<C-k>", "<C-w>k")
-Map("n", "<C-l>", "<C-w>l")
+M.Map("n", "<C-h>", "<C-w>h")
+M.Map("n", "<C-j>", "<C-w>j")
+M.Map("n", "<C-k>", "<C-w>k")
+M.Map("n", "<C-l>", "<C-w>l")
 
 -- Terminal, movement
-Map("t", "<C-h>", "<cmd>wincmd h<CR>")
-Map("t", "<C-j>", "<cmd>wincmd j<CR>")
-Map("t", "<C-k>", "<cmd>wincmd k<CR>")
-Map("t", "<C-l>", "<cmd>wincmd l<CR>")
+M.Map("t", "<C-h>", "<cmd>wincmd h<CR>")
+M.Map("t", "<C-j>", "<cmd>wincmd j<CR>")
+M.Map("t", "<C-k>", "<cmd>wincmd k<CR>")
+M.Map("t", "<C-l>", "<cmd>wincmd l<CR>")
 
 -- Resizing
-Map("n", "<C-Up>", ":resize -2<CR>")
-Map("n", "<C-Down>", ":resize +2<CR>")
-Map("n", "<C-Left>", ":vertical resize -2<CR>")
-Map("n", "<C-Right>", ":vertical resize +2<CR>")
-
--- terminal
-Map("t", "<C-Up>", "<cmd>resize -2<CR>")
-Map("t", "<C-Down>", "<cmd>resize +2<CR>")
-Map("t", "<C-Left>", "<cmd>vertical resize -2<CR>")
-Map("t", "<C-Right>", "<cmd>vertical resize +2<CR>")
-
--- Neogen Documentation
-Map("n", "<leader>d", "<cmd>lua require('neogen').generate()<CR>")
-Map("n", "<leader>dc", "<cmd>lua require('neogen').generate({ type = 'class'})<CR>")
-
--- Create a new Tab.
-Map("n", "<C-t>", "<cmd>:tabnew<CR>", { desc = 'New Tab' });
+M.Map("n", "<C-Up>", ":resize -2<CR>")
+M.Map("n", "<C-Down>", ":resize +2<CR>")
+M.Map("n", "<C-Left>", ":vertical resize -2<CR>")
+M.Map("n", "<C-Right>", ":vertical resize +2<CR>")
 
 -- Splits
-Map("n", "<C-x>", "<cmd>split<CR>", { desc = "Horizontal Split" });
-Map("n", "<C-v>", "<cmd>vsplit<CR>", { desc = "Vertical Split" });
+M.Map("n", "<C-x>", "<cmd>split<CR>", { desc = "Horizontal Split" });
+M.Map("n", "<C-v>", "<cmd>vsplit<CR>", { desc = "Vertical Split" });
 
-Map("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Undo tree" });
-Map("n", "<leader>gs", vim.cmd.Git, { desc = "Git" });
+return M;

@@ -43,33 +43,34 @@ local function enhanced_hover()
     local winnr = vim.api.nvim_get_current_win()
 
     -- Get hover information for current position
-    vim.lsp.buf_request(bufnr, 'textDocument/hover', vim.lsp.util.make_position_params(winnr, "utf-16"), function(_, result)
-        if display_hover(result) then
-            -- Only look for parent if we displayed something
-            local line = vim.api.nvim_get_current_line()
-            local parent_match_pos = line:find(parent_pattern)
+    vim.lsp.buf_request(bufnr, 'textDocument/hover', vim.lsp.util.make_position_params(winnr, "utf-16"),
+        function(_, result)
+            if display_hover(result) then
+                -- Only look for parent if we displayed something
+                local line = vim.api.nvim_get_current_line()
+                local parent_match_pos = line:find(parent_pattern)
 
-            -- Only proceed if we found a parent
-            if parent_match_pos then
-                local parent_name = line:match(parent_pattern)
-                if parent_name then
-                    -- Create params only when needed
-                    local parent_params = vim.lsp.util.make_position_params(winnr, "utf-16")
-                    parent_params.position.character = line:find(parent_name) - 1
+                -- Only proceed if we found a parent
+                if parent_match_pos then
+                    local parent_name = line:match(parent_pattern)
+                    if parent_name then
+                        -- Create params only when needed
+                        local parent_params = vim.lsp.util.make_position_params(winnr, "utf-16")
+                        parent_params.position.character = line:find(parent_name) - 1
 
-                    vim.lsp.buf_request(0, 'textDocument/hover', parent_params, function(_, parent_result)
-                        if is_meaningful_hover(parent_result) then
-                            vim.defer_fn(function()
-                                display_hover(parent_result)
-                            end, 100)
-                        end
-                    end)
+                        vim.lsp.buf_request(0, 'textDocument/hover', parent_params, function(_, parent_result)
+                            if is_meaningful_hover(parent_result) then
+                                vim.defer_fn(function()
+                                    display_hover(parent_result)
+                                end, 100)
+                            end
+                        end)
+                    end
                 end
+            else
+                vim.lsp.buf.hover()
             end
-        else
-            vim.lsp.buf.hover()
-        end
-    end)
+        end)
 end
 --- Base on_attach event for LSP
 function M.onAttach(event)
@@ -82,9 +83,8 @@ function M.onAttach(event)
     end
 
     nmap("K", enhanced_hover, "Enhanced Hover Documentation");
-    -- Don't use these right now, and they are conflicting with mini.surround. Need to evaulate mapping.
-    -- nmap("sh", vim.lsp.buf.signature_help, "[S]ignature [H]elp")
-    -- nmap("sd", vim.diagnostic.open_float, "Show line [d]iagnostics");
+    nmap("<leader>sh", vim.lsp.buf.signature_help, "[S]ignature [H]elp")
+    nmap("<leader>sd", vim.diagnostic.open_float, "Show line [d]iagnostics");
     nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
     nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
     vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end)

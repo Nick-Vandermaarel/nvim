@@ -1,3 +1,18 @@
+-- Waiting on more plugin support, i don't want to be configuing every plugin again...
+-- return {
+--     "webhooked/kanso.nvim",
+--     lazy = false,
+--     priority = 1000,
+--     config = function()
+--         require("kanso").setup({
+--             keywordStyle = { italic = false },
+--             background = {
+--                 dark = "zen"
+--             }
+--         });
+--         vim.cmd("colorscheme kanso");
+--     end
+-- }
 local opts = {
     theme = "wave",
     commentStyle = { italic = true },

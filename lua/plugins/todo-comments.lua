@@ -14,6 +14,8 @@ return {
             todo_comments.jump_prev()
         end, { desc = "Previous todo comment" })
 
+        keymap.set("n", "<leader>tt", ":TodoLocList<CR>", { desc = "Todo location list" })
+
         todo_comments.setup()
     end
 }

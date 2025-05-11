@@ -126,8 +126,6 @@ return {
         picker = {
             enabled = true,
         },
-        -- TODO: Explorer is too slow for now.
-        -- exporer = {},
         dashboard = {
             preset = {
                 header = header,

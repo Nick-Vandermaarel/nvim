@@ -9,8 +9,10 @@ return {
         "seblj/roslyn.nvim",
         ft = { "cs", "sln" },
         config = function()
+            -- Required until rosln lspconfig update is live.
             local lspUtils = require("nvdm.lspUtils");
             local lsp_capabilities = lspUtils.default_capabilities();
+            lsp_capabilities = require('blink.cmp').get_lsp_capabilities(lsp_capabilities)
 
             require("roslyn").setup({
                 filewatching = "auto",
