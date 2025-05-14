@@ -15,6 +15,9 @@ return {
             lsp_capabilities = require('blink.cmp').get_lsp_capabilities(lsp_capabilities)
 
             require("roslyn").setup({
+                -- For connecting to Godot Engine.
+                cmd = vim.lsp.rpc.connect("127.0.0.1", 6005),
+
                 filewatching = "auto",
                 ---@diagnostic disable-next-line: missing-fields
                 config = {
