@@ -1,18 +1,3 @@
--- Waiting on more plugin support, i don't want to be configuing every plugin again...
--- return {
---     "webhooked/kanso.nvim",
---     lazy = false,
---     priority = 1000,
---     config = function()
---         require("kanso").setup({
---             keywordStyle = { italic = false },
---             background = {
---                 dark = "zen"
---             }
---         });
---         vim.cmd("colorscheme kanso");
---     end
--- }
 local opts = {
     theme = "wave",
     commentStyle = { italic = true },
@@ -76,5 +61,11 @@ return {
         vim.api.nvim_set_hl(0, 'BlinkCmpSignatureHelpBorder', { fg = palette.crystalBlue, bg = "NONE" }) -- Match menu border color
         vim.api.nvim_set_hl(0, 'BlinkCmpSignatureHelpActiveParameter',
             { fg = palette.sakuraPink, bg = theme.ui.bg_p1, bold = true })                               -- More vibrant active parameter
+
+        -- Right-click menu (Pmenu) styling with Kanagawa wave theme
+        vim.api.nvim_set_hl(0, 'Pmenu', { fg = theme.ui.fg, bg = theme.ui.bg_m3 })                          -- Match BlinkCmpMenu darker background
+        vim.api.nvim_set_hl(0, 'PmenuSel', { fg = palette.fujiWhite, bg = palette.waveBlue2, bold = true }) -- Match your selection highlight
+        vim.api.nvim_set_hl(0, 'PmenuSbar', { bg = theme.ui.bg_m1 })                                        -- Match your scrollbar gutter
+        vim.api.nvim_set_hl(0, 'PmenuThumb', { bg = palette.crystalBlue })                                  -- Match your scrollbar thumb
     end
 };
