@@ -17,7 +17,6 @@ return {
                     "snacks_dashboard",
                     "lazy",
                     "mason",
-                    "NvimTree"
                 }
             },
             sections = {

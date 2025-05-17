@@ -78,6 +78,7 @@ return {
 
             local lspUtils = require("nvdm.lspUtils");
             local lsp_capabilities = lspUtils.default_capabilities();
+            lsp_capabilities = require('blink.cmp').get_lsp_capabilities(lsp_capabilities)
 
             -- LSP Attach AutoCMD
             vim.api.nvim_create_autocmd('LspAttach', {
@@ -99,6 +100,7 @@ return {
             local mason_packages = vim.fn.stdpath("data") .. "/mason/packages"
             local volar_path = mason_packages .. "/vue-language-server/node_modules/@vue/language-server/node_modules"
             vim.lsp.config("ts_ls", {
+                capabilities = lsp_capabilities,
                 settings = {
                     ["ts_ls"] = {
                         init_options = {

@@ -62,7 +62,7 @@ return {
         vim.api.nvim_set_hl(0, 'BlinkCmpSignatureHelpActiveParameter',
             { fg = palette.sakuraPink, bg = theme.ui.bg_p1, bold = true })                               -- More vibrant active parameter
 
-        -- Right-click menu (Pmenu) styling with Kanagawa wave theme
+        -- Right-click menu (Pmenu)
         vim.api.nvim_set_hl(0, 'Pmenu', { fg = theme.ui.fg, bg = theme.ui.bg_m3 })                          -- Match BlinkCmpMenu darker background
         vim.api.nvim_set_hl(0, 'PmenuSel', { fg = palette.fujiWhite, bg = palette.waveBlue2, bold = true }) -- Match your selection highlight
         vim.api.nvim_set_hl(0, 'PmenuSbar', { bg = theme.ui.bg_m1 })                                        -- Match your scrollbar gutter
