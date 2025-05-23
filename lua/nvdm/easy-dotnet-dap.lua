@@ -41,8 +41,10 @@ M.register_net_dap = function()
                 request = "launch",
                 env = function()
                     local dll = ensure_dll()
-                    local vars = dotnet.get_environment_variables(dll.project_name, dll.relative_project_path)
-                    return vars or nil
+                    -- Fix duplicate path by removing the first occurrence of the base path
+                    local project_dir = dll.relative_project_path:gsub("^(/[^/]+/[^/]+/[^/]+/[^/]+)%1", "%1")
+                    local vars = dotnet.get_environment_variables(dll.project_name, project_dir)
+                    return vars or {}
                 end,
                 program = function()
                     local dll = ensure_dll()
@@ -52,7 +54,9 @@ M.register_net_dap = function()
                 end,
                 cwd = function()
                     local dll = ensure_dll()
-                    return dll.relative_project_path
+                    -- Fix duplicate path by removing the first occurrence of the base path
+                    local project_dir = dll.relative_project_path:gsub("^(/[^/]+/[^/]+/[^/]+/[^/]+)%1", "%1")
+                    return project_dir
                 end,
 
             }
