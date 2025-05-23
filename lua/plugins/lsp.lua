@@ -45,7 +45,7 @@ return {
             { 'mason-org/mason.nvim' },
             { 'mason-org/mason-lspconfig.nvim' },
         },
-        lazy = false,
+        lazy = true,
         config = function()
             vim.diagnostic.config({
                 signs = {
