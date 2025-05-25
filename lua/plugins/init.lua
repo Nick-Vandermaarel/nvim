@@ -63,5 +63,10 @@ return {
         version = false,
         opts = {}
     },
-    { 'echasnovski/mini.pairs', version = false, opts = {} },
+    {
+        'echasnovski/mini.pairs',
+        version = false,
+        event = "InsertEnter",
+        opts = {}
+    },
 }

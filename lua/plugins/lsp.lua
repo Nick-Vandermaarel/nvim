@@ -45,7 +45,7 @@ return {
             { 'mason-org/mason.nvim' },
             { 'mason-org/mason-lspconfig.nvim' },
         },
-        lazy = false,
+        event = { "BufReadPre", "BufNewFile" },
         config = function()
             vim.diagnostic.config({
                 signs = {
@@ -65,7 +65,7 @@ return {
                 virtual_text = true,
                 underline = true,
                 severity_sort = true,
-                update_in_insert = true
+                update_in_insert = false
             })
 
             require('mason').setup({
