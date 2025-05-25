@@ -89,6 +89,7 @@ return {
             })
 
             vim.lsp.config("vue_ls", {
+                cmd = { "vue-language-server", "--stdio" },
                 init_options = {
                     vue = {
                         hybridMode = false
@@ -121,18 +122,17 @@ return {
             local mason_packages = vim.fn.stdpath("data") .. "/mason/packages"
             local volar_path = mason_packages .. "/vue-language-server/node_modules/@vue/language-server/node_modules"
             vim.lsp.config("ts_ls", {
-                settings = {
-                    ["ts_ls"] = {
-                        init_options = {
-                            plugins = {
-                                {
-                                    name = "@vue/typescript-plugin",
-                                    location = volar_path,
-                                    languages = { "vue" },
-                                },
-                            },
-                        }
+                cmd = { "typescript-language-server", "--stdio" },
+                init_options = {
+                    plugins = {
+                        {
+                            name = "@vue/typescript-plugin",
+                            location = volar_path,
+                            languages = { "vue, typescript, javascript" },
+                        },
                     },
+                },
+                settings = {
                     typescript = {
                         inlayHints = {
                             includeInlayParameterNameHints = "all",
