@@ -8,36 +8,7 @@ return {
     {
         "seblj/roslyn.nvim",
         ft = { "cs", "sln" },
-        config = function()
-            -- Required until rosln lspconfig update is live.
-            local lsp_capabilities = require('blink.cmp').get_lsp_capabilities({}, true)
-
-            require("roslyn").setup({
-                -- For connecting to Godot Engine.
-                cmd = vim.lsp.rpc.connect("127.0.0.1", 6005),
-
-                filewatching = "auto",
-                ---@diagnostic disable-next-line: missing-fields
-                config = {
-                    capabilities = lsp_capabilities,
-                    settings = {
-                        ['csharp|code_lens'] = {
-                            dotnet_enable_references_code_lens = true,
-                        },
-                        ["csharp|completion"] = {
-                            dotnet_show_completion_items_from_unimported_namespaces = true,
-                            dotnet_show_name_completion_suggestions = true,
-                        },
-                        ["csharp|formatting"] = {
-                            dotnet_organize_imports_on_format = true,
-                        },
-                        ["csharp|symbol_search"] = {
-                            dotnet_search_reference_assemblies = true,
-                        }
-                    },
-                },
-            });
-        end
+        opts = {}
     },
     {
         'neovim/nvim-lspconfig',
@@ -146,6 +117,25 @@ return {
                         },
                     },
                 }
+            })
+
+            vim.lsp.config("roslyn", {
+                -- cmd = vim.lsp.rpc.connect("127.0.0.1", 6005),
+                settings = {
+                    ['csharp|code_lens'] = {
+                        dotnet_enable_references_code_lens = true,
+                    },
+                    ["csharp|completion"] = {
+                        dotnet_show_completion_items_from_unimported_namespaces = true,
+                        dotnet_show_name_completion_suggestions = true,
+                    },
+                    ["csharp|formatting"] = {
+                        dotnet_organize_imports_on_format = true,
+                    },
+                    ["csharp|symbol_search"] = {
+                        dotnet_search_reference_assemblies = true,
+                    }
+                },
             })
         end
     }
