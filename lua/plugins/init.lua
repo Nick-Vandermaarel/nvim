@@ -47,18 +47,6 @@ return {
         opts = {}
     },
     {
-        "NvChad/nvim-colorizer.lua",
-        event = "VeryLazy",
-        opts = {
-            user_default_options = {
-                RGB = false,
-                names = false,
-                RRGGBB = true,
-                AARRGGBB = false,
-            },
-        },
-    },
-    {
         'echasnovski/mini.surround',
         version = false,
         opts = {}

@@ -54,8 +54,9 @@ return {
             -- LSP Attach AutoCMD
             vim.api.nvim_create_autocmd('LspAttach', {
                 desc = "LSP actions",
-                callback = function(event)
-                    lspUtils.onAttach(event);
+                callback = function(args)
+                    lspUtils.onAttach(args);
+                    vim.lsp.document_color.enable(true, args.buf)
                 end
             })
 
