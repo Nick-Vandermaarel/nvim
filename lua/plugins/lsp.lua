@@ -56,7 +56,12 @@ return {
                 desc = "LSP actions",
                 callback = function(args)
                     lspUtils.onAttach(args);
-                    vim.lsp.document_color.enable(true, args.buf)
+                    local client = vim.lsp.get_client_by_id(args.data.client_id);
+
+                    -- 0.11 does not support document color yet
+                    if vim.lsp.document_color and client:supports_method('textDocument/document_color') then
+                        vim.lsp.document_color.enable(true, args.buf)
+                    end
                 end
             })
 
