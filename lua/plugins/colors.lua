@@ -67,5 +67,8 @@ return {
         vim.api.nvim_set_hl(0, 'PmenuSel', { fg = palette.fujiWhite, bg = palette.waveBlue2, bold = true }) -- Match your selection highlight
         vim.api.nvim_set_hl(0, 'PmenuSbar', { bg = theme.ui.bg_m1 })                                        -- Match your scrollbar gutter
         vim.api.nvim_set_hl(0, 'PmenuThumb', { bg = palette.crystalBlue })                                  -- Match your scrollbar thumb
+
+        -- Private cs fields
+        vim.api.nvim_set_hl(0, '@lsp.type.field.cs', { fg = palette.oldWhite })
     end
 };
