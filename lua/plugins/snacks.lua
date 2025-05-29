@@ -121,6 +121,9 @@ return {
             priority = 1,
             enabled = true,
             animate = { enabled = false },
+            indent = {
+                enabled = false,
+            }
         },
         words = {},
         picker = {
