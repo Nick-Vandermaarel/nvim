@@ -1,5 +1,30 @@
 local M = {}
 
+function M.toggle_basedpyright_settings(opts)
+    opts = opts or {}
+
+    -- Get the LSP client for basedpyright
+    local client = vim.lsp.get_clients({ name = "basedpyright" })[1]
+    if not client then
+        vim.notify("BasedPyright LSP is not active", vim.log.levels.WARN)
+        return
+    end
+
+    -- Toggle the typeCheckingMode
+    local analysis = client.config.settings.basedpyright.analysis
+    if analysis.typeCheckingMode == "basic" then
+        analysis.typeCheckingMode = "recommended"
+    else
+        analysis.typeCheckingMode = "basic"
+    end
+
+    client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
+
+    if not opts.silent then
+        vim.notify("TypeCheckingMode: " .. analysis.typeCheckingMode)
+    end
+end
+
 local function enhanced_hover()
     -- Quick filetype check
     if vim.bo.filetype ~= 'cs' then
@@ -81,6 +106,8 @@ function M.onAttach(event)
 
         vim.keymap.set("n", keys, func, { buffer = event.buf, desc = desc, remap = false })
     end
+
+    nmap("<leader>bp", function() M.toggle_basedpyright_settings() end, "Toggle BasedPyright Settings")
 
     nmap("K", enhanced_hover, "Enhanced Hover Documentation");
     nmap("<leader>sh", vim.lsp.buf.signature_help, "[S]ignature [H]elp")
