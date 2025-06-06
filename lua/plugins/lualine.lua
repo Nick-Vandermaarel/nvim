@@ -34,7 +34,7 @@ return {
                         return arrow_sl.text_for_statusline_with_icons()
                     end
                 },
-                lualine_x = { "filetype" },
+                lualine_x = {},
                 lualine_y = { "progress" },
                 lualine_z = { "location" }
             },

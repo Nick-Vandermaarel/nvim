@@ -10,7 +10,6 @@ end
 M.Map("n", "<leader>w", ":w!<CR>")
 M.Map("n", "<leader>q", ":q!<CR>")
 M.Map("n", "<leader>x", ":x!<CR>")
-M.Map("n", "<leader>bd", ":bd<CR>")
 
 M.Map("v", "J", ":m '>+1<CR>gv=gv")
 M.Map("v", "K", ":m '<-2<CR>gv=gv")
