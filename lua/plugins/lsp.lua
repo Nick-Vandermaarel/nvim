@@ -71,28 +71,6 @@ return {
                     vue = {
                         hybridMode = false
                     }
-                },
-                settings = {
-                    typescript = {
-                        inlayHints = {
-                            enumMemberValues = {
-                                enabled = true,
-                            },
-                            functionLikeReturnTypes = {
-                                enabled = true,
-                            },
-                            propertyDeclarationTypes = {
-                                enabled = true,
-                            },
-                            parameterTypes = {
-                                enabled = true,
-                                suppressWhenArgumentMatchesName = true,
-                            },
-                            variableTypes = {
-                                enabled = true,
-                            }
-                        }
-                    }
                 }
             })
 
@@ -105,21 +83,7 @@ return {
                         {
                             name = "@vue/typescript-plugin",
                             location = volar_path,
-                            languages = { "vue, typescript, javascript" },
-                        },
-                    },
-                },
-                settings = {
-                    typescript = {
-                        inlayHints = {
-                            includeInlayParameterNameHints = "all",
-                            includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-                            includeInlayFunctionParameterTypeHints = true,
-                            includeInlayVariableTypeHints = true,
-                            includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-                            includeInlayPropertyDeclarationTypeHints = true,
-                            includeInlayFunctionLikeReturnTypeHints = true,
-                            includeInlayEnumMemberValueHints = true,
+                            languages = { "vue", "typescript", "javascript" },
                         },
                     },
                 }
