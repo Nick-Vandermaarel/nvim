@@ -38,6 +38,17 @@ M.Map("n", "]b", "<cmd>bn<cr>", { desc = "Next Buffer" });
 M.Map("n", "[b", "<cmd>bp<cr>", { desc = "Previous Buffer" });
 M.Map("n", "db", "<cmd>bd<CR>", { desc = "Delete Buffer" });
 
+-- Diagnostic navigation
+M.Map("n", "]d", function()
+    vim.diagnostic.jump({ count = 1 })
+    vim.cmd("normal! zz")
+end)
+
+M.Map("n", "[d", function()
+    vim.diagnostic.jump({ count = -1 })
+    vim.cmd("normal! zz")
+end)
+
 -- Movement
 M.Map("n", "<C-h>", "<C-w>h")
 M.Map("n", "<C-j>", "<C-w>j")
