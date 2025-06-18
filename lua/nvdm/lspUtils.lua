@@ -97,6 +97,7 @@ local function enhanced_hover()
             end
         end)
 end
+
 --- Base on_attach event for LSP
 function M.onAttach(event)
     local nmap = function(keys, func, desc)

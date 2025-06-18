@@ -6,11 +6,6 @@ return {
         event = "VeryLazy",
     },
     {
-        'numToStr/Comment.nvim',
-        event = "BufReadPre",
-        opts = {}
-    },
-    {
         "mbbill/undotree",
         event = "VeryLazy",
         config = function()

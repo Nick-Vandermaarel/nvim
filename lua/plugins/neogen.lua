@@ -1,5 +1,4 @@
 return {
-    -- Documentation Generation
     -- "danymat/neogen",
     "nick-vandermaarel/neogen",
     branch = "cs-records",

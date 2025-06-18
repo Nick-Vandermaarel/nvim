@@ -21,6 +21,27 @@ vim.g.loaded_netrwPlugin = 1
 
 require("lazy").setup("plugins")
 
+-- Function to get just the icon
+_G.get_file_icon = function()
+    local filename = vim.fn.expand('%:t')
+    local extension = vim.fn.expand('%:e')
+    local icon, _ = require('nvim-web-devicons').get_icon(filename, extension)
+    return icon or ''
+end
+
+-- Function to get the highlight group name
+_G.get_file_icon_hl = function()
+    local filename = vim.fn.expand('%:t')
+    local extension = vim.fn.expand('%:e')
+    local _, hl_name = require('nvim-web-devicons').get_icon(filename, extension)
+    return hl_name or 'WinBar'
+end
+
+-- Use separate expressions for highlight and icon
+vim.opt.winbar =
+'%#MyModified#%{&modified ? "● " : "  "}%{%"%#" . v:lua.get_file_icon_hl() . "#"%}%{v:lua.get_file_icon()} %#WinBar#%t'
+vim.api.nvim_set_hl(0, 'MyModified', { fg = '#ff6b6b' })
+
 require("nvdm.autocmd")
 require("nvdm.remap")
 require("nvdm.set")

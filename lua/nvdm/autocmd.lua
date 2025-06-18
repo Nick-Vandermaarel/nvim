@@ -1,3 +1,4 @@
+-- Auto format.
 vim.api.nvim_create_autocmd("BufWritePre", {
     pattern = { "*" },
     callback = function(args)
@@ -57,4 +58,11 @@ vim.api.nvim_create_autocmd({
         end)
     end,
     desc = "Refresh codelens"
+})
+
+-- lsp cleanup
+vim.api.nvim_create_autocmd("VimLeavePre", {
+    callback = function()
+        vim.lsp.stop_client(vim.lsp.get_clients(), true)
+    end
 })
