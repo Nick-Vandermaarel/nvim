@@ -40,7 +40,7 @@ end
 -- Use separate expressions for highlight and icon
 vim.opt.winbar =
 '%#MyModified#%{&modified ? "● " : "  "}%{%"%#" . v:lua.get_file_icon_hl() . "#"%}%{v:lua.get_file_icon()} %#WinBar#%t'
-vim.api.nvim_set_hl(0, 'MyModified', { fg = '#ff6b6b' })
+vim.api.nvim_set_hl(0, 'MyModified', { fg = '#ff9800' })
 
 require("nvdm.autocmd")
 require("nvdm.remap")
