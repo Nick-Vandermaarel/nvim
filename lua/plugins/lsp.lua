@@ -83,7 +83,7 @@ return {
                         {
                             name = "@vue/typescript-plugin",
                             location = volar_path,
-                            languages = { "vue", "typescript", "javascript" },
+                            languages = { "typescript", "javascript" },
                         },
                     },
                 }
