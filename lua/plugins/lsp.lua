@@ -78,6 +78,7 @@ return {
             local volar_path = mason_packages .. "/vue-language-server/node_modules/@vue/language-server/node_modules"
             vim.lsp.config("ts_ls", {
                 cmd = { "typescript-language-server", "--stdio" },
+                filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact" },
                 init_options = {
                     plugins = {
                         {
