@@ -1,11 +1,10 @@
 return {
     'saghen/blink.cmp',
     event = "InsertEnter",
-    -- optional snippets
     dependencies = 'rafamadriz/friendly-snippets',
     version = "*",
     opts = {
-        keymap = { preset = 'super-tab' },
+        keymap = { preset = 'default' },
         appearance = {
             use_nvim_cmp_as_default = true,
             nerd_font_variant = 'mono'
@@ -24,9 +23,8 @@ return {
                 }
             },
             menu = {
-                border = "rounded"
+                border = "rounded",
             },
         },
-    },
-    opts_extend = { "sources.default" }
+    }
 }
