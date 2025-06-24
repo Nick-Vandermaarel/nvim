@@ -51,7 +51,7 @@ return {
         vim.api.nvim_set_hl(0, 'PmenuSbar', { bg = palette.zen0 })                                         -- Match scrollbar gutter
         vim.api.nvim_set_hl(0, 'PmenuThumb', { bg = palette.inkBlue2 })                                    -- Match scrollbar thumb
 
-        vim.api.nvim_set_hl(0, 'WinSeparator', { fg = palette.inkBlue2 })
+        vim.api.nvim_set_hl(0, 'WinSeparator', { fg = palette.zenAqua2 })
 
         -- Private cs fields
         vim.api.nvim_set_hl(0, '@lsp.type.field.cs', { fg = palette.oldWhite })
