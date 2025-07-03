@@ -58,6 +58,8 @@ return {
                     lspUtils.onAttach(args);
                     local client = vim.lsp.get_client_by_id(args.data.client_id);
 
+                    -- vim.lsp.inlay_hint.enable(true);
+
                     -- 0.11 does not support document color yet
                     if vim.lsp.document_color and client:supports_method('textDocument/document_color') then
                         vim.lsp.document_color.enable(true, args.buf)
@@ -95,6 +97,13 @@ return {
                 settings = {
                     ['csharp|code_lens'] = {
                         dotnet_enable_references_code_lens = true,
+                    },
+                    ["csharp|inlay_hints"] = {
+                        dotnet_enable_inlay_hints_for_parameters = true, -- master switch
+                        dotnet_enable_inlay_hints_for_object_creation_parameters = true,
+                        dotnet_enable_inlay_hints_for_other_parameters = false,
+                        dotnet_enable_inlay_hints_for_indexer_parameters = false,
+                        dotnet_enable_inlay_hints_for_literal_parameters = false,
                     },
                     ["csharp|completion"] = {
                         dotnet_show_completion_items_from_unimported_namespaces = true,
