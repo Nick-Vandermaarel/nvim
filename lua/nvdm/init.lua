@@ -58,6 +58,13 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter', 'TextChanged', 'InsertL
     end
 })
 
+vim.keymap.set('n', '<leader>c', function()
+    vim.cmd('enew')
+    vim.bo.buftype = 'nofile'
+    vim.bo.bufhidden = 'hide'
+    vim.bo.swapfile = false
+end, { desc = 'Create scratch buffer' })
+
 require("nvdm.autocmd")
 require("nvdm.remap")
 require("nvdm.set")
