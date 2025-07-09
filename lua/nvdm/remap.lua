@@ -30,9 +30,6 @@ M.Map("n", "<leader>y", "\"+y")
 M.Map("v", "<leader>y", "\"+y")
 M.Map("n", "<leader>Y", "\"+Y")
 
--- Replace line i'm currently on
-M.Map("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
-
 -- Buffer navigation
 M.Map("n", "]b", "<cmd>bn<cr>", { desc = "Next Buffer" });
 M.Map("n", "[b", "<cmd>bp<cr>", { desc = "Previous Buffer" });
@@ -54,12 +51,6 @@ M.Map("n", "<C-h>", "<C-w>h")
 M.Map("n", "<C-j>", "<C-w>j")
 M.Map("n", "<C-k>", "<C-w>k")
 M.Map("n", "<C-l>", "<C-w>l")
-
--- Terminal, movement
-M.Map("t", "<C-h>", "<cmd>wincmd h<CR>")
-M.Map("t", "<C-j>", "<cmd>wincmd j<CR>")
-M.Map("t", "<C-k>", "<cmd>wincmd k<CR>")
-M.Map("t", "<C-l>", "<cmd>wincmd l<CR>")
 
 -- Resizing
 M.Map("n", "<C-Up>", ":resize -2<CR>")
