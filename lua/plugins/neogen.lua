@@ -18,7 +18,8 @@ return {
             },
         }
         local rm = require("nvdm.remap");
-        rm.Map("n", "<leader>d", "<cmd>lua require('neogen').generate()<CR>")
-        rm.Map("n", "<leader>dc", "<cmd>lua require('neogen').generate({ type = 'class'})<CR>")
+        rm.Map("n", "<leader>dm", "<cmd>lua require('neogen').generate()<CR>", { desc = "Document method" })
+        rm.Map("n", "<leader>dc", "<cmd>lua require('neogen').generate({ type = 'class'})<CR>",
+            { desc = "Document class" })
     end,
 }

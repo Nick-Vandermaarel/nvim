@@ -21,6 +21,5 @@ return {
 
         -- Private cs fields
         vim.api.nvim_set_hl(0, '@lsp.type.field.cs', { fg = palette.oldWhite })
-        -- vim.api.nvim_set_hl(0, '@lsp.type.property.vue', { fg = palette.inkGray2 })
     end
 }
