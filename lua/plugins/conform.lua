@@ -7,7 +7,7 @@ return {
             formatters_by_ft = {
                 javascript = { "prettierd" },
                 typescript = { "prettierd" },
-                vue = { "prettierd" },
+                vue = { "prettierd", "eslint_d" },
                 scss = { "prettierd" },
                 json = { "prettierd" },
                 html = { "prettierd" },

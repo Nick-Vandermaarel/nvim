@@ -116,8 +116,6 @@ return {
     opts = {
         input = {},
         notifier = {},
-        -- I think this was causing bugs.
-        -- statuscolumn = { enabled = true },
         indent = {
             priority = 1,
             enabled = true,
@@ -126,7 +124,6 @@ return {
                 enabled = false,
             }
         },
-        words = {},
         picker = {
             enabled = true,
         },
