@@ -38,9 +38,9 @@ _G.get_file_icon_hl = function()
 end
 
 -- Use separate expressions for highlight and icon
-vim.opt.winbar =
-'%#MyModified#%{&modified ? "● " : "  "}%{%"%#" . v:lua.get_file_icon_hl() . "#"%}%{v:lua.get_file_icon()} %#WinBar#%t'
+vim.opt.winbar = '%#MyFileIcon#%{v:lua.get_file_icon()} %#WinBar#%t%r%#MyModified#%{&modified ? " ●" : " "}'
 vim.api.nvim_set_hl(0, 'MyModified', { fg = '#ff9800' })
+vim.api.nvim_set_hl(0, 'MyFileIcon', { fg = '#00a3ff' })
 
 -- todo, hack, note, comment plugin
 vim.api.nvim_set_hl(0, 'TodoComment', { bg = '#50fa7b', fg = '#000000', bold = true })
