@@ -1,53 +1,63 @@
-vim.opt.nu = true
-vim.opt.relativenumber = true
-vim.opt.cursorline = true
+local a = vim.api
+local o = vim.opt
 
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
+o.nu = true
+o.relativenumber = true
+o.cursorline = true
 
-vim.opt.smartindent = true
+o.tabstop = 4
+o.softtabstop = 4
+o.shiftwidth = 4
+o.expandtab = true
 
-vim.opt.wrap = false
+o.autoindent = true
+o.breakindent = true
+o.smartindent = true
 
-vim.opt.swapfile = false
-vim.opt.backup = false
-vim.opt.undofile = true
+o.wrap = false
 
-vim.opt.hlsearch = false
-vim.opt.incsearch = true
+o.swapfile = false
+o.backup = false
+o.undofile = true
 
-vim.opt.termguicolors = true
+o.ignorecase = true
+o.smartcase = true
+o.hlsearch = false
 
-vim.opt.scrolloff = 8
-vim.opt.updatetime = 50
+o.incsearch = true
 
-vim.opt.title = true
-vim.opt.titlestring = [[%t - %{fnamemodify(getcwd(), ':t')}]]
+o.termguicolors = true
+
+o.scrolloff = 8
+o.updatetime = 50
+
+o.title = true
+o.titlestring = [[%t - %{fnamemodify(getcwd(), ':t')}]]
+
+a.nvim_command('aunmenu PopUp.How-to\\ disable\\ mouse')
+a.nvim_command('aunmenu PopUp.-1-')
 
 -- Sync clipboard between OS and Neovim
-vim.opt.clipboard = "unnamedplus"
+o.clipboard = "unnamedplus"
 
-vim.opt.listchars = {
+o.listchars = {
     space = "⋅",
 }
-vim.opt.list = true
+o.list = true
 
 -- Sign column always visible for LSP/Git markers.
-vim.opt.signcolumn = "yes"
-
-vim.o.winborder = "rounded"
+o.signcolumn = "yes"
+o.winborder = "rounded"
 
 if vim.fn.has('win32') == 1 then
     vim.g.undotree_DiffCommand = "FC"
 
     -- Powershell core settings.
-    vim.opt.shell = 'pwsh'
-    vim.opt.shellcmdflag =
+    o.shell = 'pwsh'
+    o.shellcmdflag =
     '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues[\'Out-File:Encoding\']=\'utf8\';'
-    vim.opt.shellredir = '2>&1 | %%{ \\"$_\\" } | Out-File %s; exit $LastExitCode'
-    vim.opt.shellpipe = '2>&1 | %%{ \\"$_\\" } | tee %s; exit $LastExitCode'
-    vim.opt.shellquote = ''
-    vim.opt.shellxquote = vim.fn.has('nvim') == 1 and '' or '"'
+    o.shellredir = '2>&1 | %%{ \\"$_\\" } | Out-File %s; exit $LastExitCode'
+    o.shellpipe = '2>&1 | %%{ \\"$_\\" } | tee %s; exit $LastExitCode'
+    o.shellquote = ''
+    o.shellxquote = vim.fn.has('nvim') == 1 and '' or '"'
 end

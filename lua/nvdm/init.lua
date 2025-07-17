@@ -58,12 +58,16 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter', 'TextChanged', 'InsertL
     end
 })
 
-vim.keymap.set('n', '<leader>c', function()
-    vim.cmd('enew')
-    vim.bo.buftype = 'nofile'
-    vim.bo.bufhidden = 'hide'
-    vim.bo.swapfile = false
-end, { desc = 'Create scratch buffer' })
+-- disable unused plugins
+for _, plugin in pairs({
+    "netrwFileHandlers",
+    "2html_plugin",
+    "spellfile_plugin",
+    "matchit"
+}) do
+    vim.g["loaded_" .. plugin] = 1
+end
+
 
 require("nvdm.autocmd")
 require("nvdm.remap")
