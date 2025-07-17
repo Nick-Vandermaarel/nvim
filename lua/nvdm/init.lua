@@ -37,10 +37,24 @@ _G.get_file_icon_hl = function()
     return hl_name or 'WinBar'
 end
 
+-- Get the foreground color from the devicon highlight group
+_G.get_file_icon_color = function()
+    local hl_name = _G.get_file_icon_hl()
+    local hl = vim.api.nvim_get_hl(0, { name = hl_name })
+    return hl.fg or ''
+end
+
+-- Then set MyFileIcon with the dynamic color
+vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'BufReadPost' }, {
+    callback = function()
+        local color = _G.get_file_icon_color()
+        vim.api.nvim_set_hl(0, 'MyFileIcon', { fg = color })
+    end
+})
+
 -- Use separate expressions for highlight and icon
 vim.opt.winbar = '%#MyFileIcon#%{v:lua.get_file_icon()} %#WinBar#%t%r%#MyModified#%{&modified ? " ●" : " "}'
 vim.api.nvim_set_hl(0, 'MyModified', { fg = '#ff9800' })
-vim.api.nvim_set_hl(0, 'MyFileIcon', { fg = '#00a3ff' })
 
 -- todo, hack, note, comment plugin
 vim.api.nvim_set_hl(0, 'TodoComment', { bg = '#50fa7b', fg = '#000000', bold = true })
