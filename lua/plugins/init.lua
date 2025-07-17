@@ -44,6 +44,7 @@ return {
                         end,
                     },
                 },
+                n_lines = 100
             })
         end
     },
