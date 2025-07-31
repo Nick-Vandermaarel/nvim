@@ -61,11 +61,16 @@ vim.api.nvim_set_hl(0, 'TodoComment', { bg = '#50fa7b', fg = '#000000', bold = t
 vim.api.nvim_set_hl(0, 'HackComment', { bg = '#ffb86c', fg = '#000000', bold = true })
 vim.api.nvim_set_hl(0, 'NoteComment', { bg = '#8be9fd', fg = '#000000', bold = true })
 
-vim.cmd([[
-  syntax match TodoComment /\v<(TODO|Todo|todo)>.*$/ containedin=.*Comment,.*comment
-  syntax match HackComment /\v<(HACK|Hack|hack)>.*$/ containedin=.*Comment,.*comment
-  syntax match NoteComment /\v<(NOTE|Note|note)>.*$/ containedin=.*Comment,.*comment
-]])
+-- Apply highlights on buffer events
+vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter', 'TextChanged', 'InsertLeave' }, {
+    pattern = '*',
+    callback = function()
+        vim.fn.clearmatches()
+        vim.fn.matchadd('TodoComment', '\\c\\<TODO\\>.*$')
+        vim.fn.matchadd('HackComment', '\\c\\<HACK\\>.*$')
+        vim.fn.matchadd('NoteComment', '\\c\\<NOTE\\>.*$')
+    end
+})
 
 -- disable unused plugins
 for _, plugin in pairs({
