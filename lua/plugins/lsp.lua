@@ -95,6 +95,17 @@ return {
             vim.lsp.config("vue_ls", vue_ls_config)
             vim.lsp.enable({ "vtsls", "vue_ls" })
 
+            vim.lsp.config("cssls", {
+                settings = {
+                    css = {
+                        validate = true,
+                        lint = {
+                            unknownAtRules = "ignore",
+                        }
+                    }
+                }
+            })
+
             vim.lsp.config("roslyn", {
                 -- cmd = vim.lsp.rpc.connect("127.0.0.1", 6005),
                 settings = {
