@@ -95,23 +95,6 @@ return {
             vim.lsp.config("vue_ls", vue_ls_config)
             vim.lsp.enable({ "vtsls", "vue_ls" })
 
-            vim.lsp.config("cssls", {
-                on_attach = function(client, bufnr)
-                    local fname = vim.api.nvim_buf_get_name(bufnr)
-                    if fname:match("wofi") or fname:match("gtk") then
-                        vim.lsp.buf_detach_client(bufnr, client.id)
-                    end
-                end,
-                settings = {
-                    css = {
-                        validate = true,
-                        lint = {
-                            unknownAtRules = "ignore",
-                        }
-                    }
-                }
-            })
-
             vim.lsp.config("roslyn", {
                 -- cmd = vim.lsp.rpc.connect("127.0.0.1", 6005),
                 settings = {
