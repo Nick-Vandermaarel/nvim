@@ -96,6 +96,12 @@ return {
             vim.lsp.enable({ "vtsls", "vue_ls" })
 
             vim.lsp.config("cssls", {
+                on_attach = function(client, bufnr)
+                    local fname = vim.api.nvim_buf_get_name(bufnr)
+                    if fname:match("wofi") or fname:match("gtk") then
+                        vim.lsp.buf_detach_client(bufnr, client.id)
+                    end
+                end,
                 settings = {
                     css = {
                         validate = true,
