@@ -28,7 +28,7 @@ return {
         opts = {}
     },
     {
-        'echasnovski/mini.surround',
+        'nvim-mini/mini.surround',
         version = false,
         opts = {},
         config = function()
@@ -49,7 +49,7 @@ return {
         end
     },
     {
-        'echasnovski/mini.pairs',
+        'nvim-mini/mini.pairs',
         version = false,
         event = "InsertEnter",
         opts = {}
