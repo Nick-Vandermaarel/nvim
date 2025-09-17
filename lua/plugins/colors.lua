@@ -17,10 +17,9 @@ return {
                     ['@lsp.type.field.cs'] = { fg = colors.palette.fg },
                     ['@lsp.type.constant.cs'] = { fg = colors.palette.orange },
 
-                    -- LSP Document Highlights - subtle approach
-                    LspReferenceText = { bg = colors.palette.zenBg1 },
-                    LspReferenceRead = { bg = colors.palette.zenBg1 },
-                    LspReferenceWrite = { bg = colors.palette.zenBg3, bold = true },
+                    LspReferenceText = { bg = "#2a2e3e" },                                 -- Subtle blue-gray
+                    LspReferenceRead = { bg = "#2a2e3e" },
+                    LspReferenceWrite = { bg = "#3e3449", bold = true, underline = true }, -- Slightly purple
                 }
             end,
         })
