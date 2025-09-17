@@ -60,9 +60,35 @@ return {
 
                     -- vim.lsp.inlay_hint.enable(true);
 
-                    -- 0.11 does not support document color yet
-                    if vim.lsp.document_color and client:supports_method('textDocument/document_color') then
-                        vim.lsp.document_color.enable(true, args.buf)
+                    if client ~= nil then
+                        -- 0.11 does not support document color yet
+                        if vim.lsp.document_color and client:supports_method('textDocument/document_color') then
+                            vim.lsp.document_color.enable(true, args.buf)
+                        end
+
+                        -- Semantic highlighting when hovering
+                        if client.server_capabilities.documentHighlightProvider then
+                            local group = vim.api.nvim_create_augroup("lsp_document_highlight_" .. args.buf,
+                                { clear = true })
+
+                            -- Clear before highlighting to prevent lingering
+                            local function highlight_references()
+                                vim.lsp.buf.clear_references()
+                                vim.lsp.buf.document_highlight()
+                            end
+
+                            vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+                                group = group,
+                                buffer = args.buf,
+                                callback = highlight_references,
+                            })
+
+                            vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI", "InsertLeave", "BufLeave" }, {
+                                group = group,
+                                buffer = args.buf,
+                                callback = vim.lsp.buf.clear_references,
+                            })
+                        end
                     end
                 end
             })

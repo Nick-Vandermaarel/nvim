@@ -16,6 +16,11 @@ return {
                     -- Private cs fields
                     ['@lsp.type.field.cs'] = { fg = colors.palette.fg },
                     ['@lsp.type.constant.cs'] = { fg = colors.palette.orange },
+
+                    -- LSP Document Highlights - subtle approach
+                    LspReferenceText = { bg = colors.palette.zenBg1 },
+                    LspReferenceRead = { bg = colors.palette.zenBg1 },
+                    LspReferenceWrite = { bg = colors.palette.zenBg3, bold = true },
                 }
             end,
         })
