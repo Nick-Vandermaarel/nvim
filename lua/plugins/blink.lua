@@ -18,6 +18,12 @@ return {
                     module = "easy-dotnet.completion.blink",
                     score_offset = 1000,
                     async = true,
+                },
+                snippets = {
+                    -- Prevent snippets after a dot.
+                    should_show_items = function(ctx)
+                        return ctx.trigger.initial_kind ~= "trigger_character"
+                    end
                 }
             }
         },
