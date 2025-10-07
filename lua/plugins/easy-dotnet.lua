@@ -7,6 +7,9 @@ return {
     config = function()
         local dotnet = require("easy-dotnet")
         dotnet.setup({
+            lsp = {
+                enabled = false,
+            },
             test_runner = {
                 viewmode = "float",
                 enable_buffer_text_execution = true, -- experimental
