@@ -17,6 +17,7 @@ return {
             { 'mason-org/mason-lspconfig.nvim' },
         },
         event = { "BufReadPre", "BufNewFile" },
+        opts = { diagnostics = { virtual_text = false } },
         config = function()
             vim.diagnostic.config({
                 signs = {
@@ -33,10 +34,7 @@ return {
                         [vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
                     }
                 },
-                virtual_text = true,
                 underline = true,
-                severity_sort = true,
-                update_in_insert = false
             })
 
             require('mason').setup({
