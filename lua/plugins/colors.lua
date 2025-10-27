@@ -7,9 +7,10 @@ return {
             keywordStyle = { italic = false },
             overrides = function(colors)
                 return {
+                    Normal = { bg = "#16181e" },
                     WinSeparator = { fg = colors.palette.zenBg3 },
                     -- Right-click menu (Pmenu) - darker version
-                    Pmenu = { fg = colors.palette.gray2, bg = colors.palette.zenBg0 },
+                    Pmenu = { fg = colors.palette.gray2, bg = colors.palette.zenBg1 },
                     PmenuSel = { fg = colors.palette.fg, bg = colors.palette.zenBg2, bold = true },
                     PmenuSbar = { bg = colors.palette.zenBg0 },
                     PmenuThumb = { bg = colors.palette.gray4 },
