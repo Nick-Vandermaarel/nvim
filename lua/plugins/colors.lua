@@ -7,7 +7,6 @@ return {
             keywordStyle = { italic = false },
             overrides = function(colors)
                 return {
-                    Normal = { bg = "#16181e" },
                     WinSeparator = { fg = colors.palette.zenBg3 },
                     -- Right-click menu (Pmenu) - darker version
                     Pmenu = { fg = colors.palette.gray2, bg = colors.palette.zenBg1 },
@@ -24,6 +23,6 @@ return {
                 }
             end,
         })
-        vim.cmd("colorscheme kanso-zen")
+        vim.cmd("colorscheme kanso-ink")
     end
 }

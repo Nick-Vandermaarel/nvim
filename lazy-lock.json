@@ -30,6 +30,7 @@
   "roslyn.nvim": { "branch": "main", "commit": "7ba2dd0a5628c5ad3d8cc5a22e66ece3efc371bc" },
   "snacks.nvim": { "branch": "main", "commit": "9eafe00070532040b5f13e78090c0861ae7fa38c" },
   "supermaven-nvim": { "branch": "main", "commit": "07d20fce48a5629686aefb0a7cd4b25e33947d50" },
+  "tiny-inline-diagnostic.nvim": { "branch": "main", "commit": "6e37efc9d16186c21a1cf0e8385b10f673ec582e" },
   "undotree": { "branch": "master", "commit": "0f1c9816975b5d7f87d5003a19c53c6fd2ff6f7f" },
   "vim-fugitive": { "branch": "master", "commit": "61b51c09b7c9ce04e821f6cf76ea4f6f903e3cf4" }
 }
