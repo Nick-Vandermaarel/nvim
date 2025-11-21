@@ -32,7 +32,7 @@ return {
                         return arrow_sl.text_for_statusline_with_icons()
                     end
                 },
-                lualine_x = {},
+                lualine_x = { "lsp_status" },
                 lualine_y = { "progress" },
                 lualine_z = { "location" }
             },
