@@ -69,16 +69,10 @@ return {
                             local group = vim.api.nvim_create_augroup("lsp_document_highlight_" .. args.buf,
                                 { clear = true })
 
-                            -- Clear before highlighting to prevent lingering
-                            local function highlight_references()
-                                vim.lsp.buf.clear_references()
-                                vim.lsp.buf.document_highlight()
-                            end
-
                             vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
                                 group = group,
                                 buffer = args.buf,
-                                callback = highlight_references,
+                                callback = vim.lsp.buf.document_highlight,
                             })
 
                             vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI", "InsertLeave", "BufLeave" }, {
@@ -132,13 +126,13 @@ return {
                 settings = {
                     ['csharp|code_lens'] = {
                         dotnet_enable_references_code_lens = true,
+                        dotnet_enable_tests_code_lens = true, -- Run/debug tests inline
                     },
                     ["csharp|inlay_hints"] = {
-                        dotnet_enable_inlay_hints_for_parameters = true, -- master switch
+                        dotnet_enable_inlay_hints_for_parameters = true,
+                        csharp_enable_inlay_hints_for_implicit_variable_types = true,  -- Shows what 'var' resolves to
+                        csharp_enable_inlay_hints_for_implicit_object_creation = true, -- Shows types in 'new()'
                         dotnet_enable_inlay_hints_for_object_creation_parameters = true,
-                        dotnet_enable_inlay_hints_for_other_parameters = false,
-                        dotnet_enable_inlay_hints_for_indexer_parameters = false,
-                        dotnet_enable_inlay_hints_for_literal_parameters = false,
                     },
                     ["csharp|completion"] = {
                         dotnet_show_completion_items_from_unimported_namespaces = true,
@@ -149,7 +143,11 @@ return {
                     },
                     ["csharp|symbol_search"] = {
                         dotnet_search_reference_assemblies = true,
-                    }
+                    },
+                    ["csharp|background_analysis"] = {
+                        dotnet_analyzer_diagnostics_scope = "fullSolution",
+                        dotnet_compiler_diagnostics_scope = "fullSolution",
+                    },
                 },
             })
         end
