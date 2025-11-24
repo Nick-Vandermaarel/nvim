@@ -144,10 +144,10 @@ return {
                     ["csharp|symbol_search"] = {
                         dotnet_search_reference_assemblies = true,
                     },
-                    ["csharp|background_analysis"] = {
-                        dotnet_analyzer_diagnostics_scope = "fullSolution",
-                        dotnet_compiler_diagnostics_scope = "fullSolution",
-                    },
+                    -- ["csharp|background_analysis"] = {
+                    --     dotnet_analyzer_diagnostics_scope = "fullSolution",
+                    --     dotnet_compiler_diagnostics_scope = "fullSolution",
+                    -- },
                 },
             })
         end
