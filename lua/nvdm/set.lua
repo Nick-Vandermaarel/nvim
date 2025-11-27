@@ -1,4 +1,3 @@
-local a = vim.api
 local o = vim.opt
 
 o.nu = true
@@ -34,8 +33,8 @@ o.updatetime = 50
 o.title = true
 o.titlestring = [[%t - %{fnamemodify(getcwd(), ':t')}]]
 
-a.nvim_command('aunmenu PopUp.How-to\\ disable\\ mouse')
-a.nvim_command('aunmenu PopUp.-1-')
+vim.api.nvim_command('aunmenu PopUp.How-to\\ disable\\ mouse')
+vim.api.nvim_command('aunmenu PopUp.-1-')
 
 -- Sync clipboard between OS and Neovim
 o.clipboard = "unnamedplus"

@@ -19,7 +19,6 @@ vim.g.maplocalleader = " "
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
-require("lazy").setup("plugins")
 -- disable unused plugins
 for _, plugin in pairs({
     "netrwFileHandlers",
@@ -29,6 +28,8 @@ for _, plugin in pairs({
 }) do
     vim.g["loaded_" .. plugin] = 1
 end
+
+require("lazy").setup("plugins")
 
 require("nvdm.autocmd")
 require("nvdm.remap")

@@ -56,8 +56,6 @@ return {
                     lspUtils.onAttach(args);
                     local client = vim.lsp.get_client_by_id(args.data.client_id);
 
-                    -- vim.lsp.inlay_hint.enable(true);
-
                     if client ~= nil then
                         -- 0.11 does not support document color yet
                         if vim.lsp.document_color and client:supports_method('textDocument/document_color') then
@@ -122,7 +120,6 @@ return {
             })
 
             vim.lsp.config("roslyn", {
-                -- cmd = vim.lsp.rpc.connect("127.0.0.1", 6005),
                 settings = {
                     ['csharp|code_lens'] = {
                         dotnet_enable_references_code_lens = true,
@@ -144,10 +141,6 @@ return {
                     ["csharp|symbol_search"] = {
                         dotnet_search_reference_assemblies = true,
                     },
-                    -- ["csharp|background_analysis"] = {
-                    --     dotnet_analyzer_diagnostics_scope = "fullSolution",
-                    --     dotnet_compiler_diagnostics_scope = "fullSolution",
-                    -- },
                 },
             })
         end

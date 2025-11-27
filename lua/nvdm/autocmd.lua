@@ -1,16 +1,3 @@
--- Auto format.
-vim.api.nvim_create_autocmd("BufWritePre", {
-    pattern = { "*" },
-    callback = function(args)
-        require("conform").format({
-            bufnr = args.buf,
-            async = false,
-            timeout_ms = 5000,
-            lsp_fallback = true,
-        })
-    end,
-});
-
 -- Throttle Roslyn LSP refreshes
 local roslyn_timer = nil
 vim.api.nvim_create_autocmd({ "InsertLeave", "BufWritePost" }, {

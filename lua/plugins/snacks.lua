@@ -149,8 +149,6 @@ return {
         },
     },
     keys = {
-        -- { "<leader>e",  function() Snacks.explorer() end,                                       desc = "File Explorer" },
-
         { "<leader>pb", function() Snacks.picker.buffers() end,                                 desc = "Buffers" },
         { "<leader>pc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
         { "<leader>pf", function() Snacks.picker.files() end,                                   desc = "Find Files" },
