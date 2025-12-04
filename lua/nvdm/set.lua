@@ -47,16 +47,3 @@ o.list = true
 -- Sign column always visible for LSP/Git markers.
 o.signcolumn = "yes"
 o.winborder = "rounded"
-
-if vim.fn.has('win32') == 1 then
-    vim.g.undotree_DiffCommand = "FC"
-
-    -- Powershell core settings.
-    o.shell = 'pwsh'
-    o.shellcmdflag =
-    '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues[\'Out-File:Encoding\']=\'utf8\';'
-    o.shellredir = '2>&1 | %%{ \\"$_\\" } | Out-File %s; exit $LastExitCode'
-    o.shellpipe = '2>&1 | %%{ \\"$_\\" } | tee %s; exit $LastExitCode'
-    o.shellquote = ''
-    o.shellxquote = vim.fn.has('nvim') == 1 and '' or '"'
-end
