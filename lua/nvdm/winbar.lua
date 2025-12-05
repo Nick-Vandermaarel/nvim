@@ -24,7 +24,7 @@ function M.setup()
     _G.get_file_icon_hl = get_file_icon_hl
 
     -- Set window-local highlight for file icon
-    vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'BufReadPost' }, {
+    vim.api.nvim_create_autocmd({ 'BufEnter', 'BufReadPost' }, {
         callback = function()
             local filename = vim.fn.expand('%:t')
             local extension = vim.fn.expand('%:e')

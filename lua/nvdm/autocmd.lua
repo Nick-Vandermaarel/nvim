@@ -9,7 +9,7 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "BufWritePost" }, {
         end
 
         -- Debounce the refresh
-        roslyn_timer = vim.fn.timer_start(200, function()
+        roslyn_timer = vim.fn.timer_start(500, function()
             local clients = vim.lsp.get_clients({ name = "roslyn" })
             if not clients or #clients == 0 then
                 return
@@ -40,7 +40,7 @@ vim.api.nvim_create_autocmd({
         end
 
         -- Debounce the refresh
-        codelens_timer = vim.fn.timer_start(200, function()
+        codelens_timer = vim.fn.timer_start(500, function()
             vim.lsp.codelens.refresh({ bufnr = 0 })
         end)
     end,

@@ -4,7 +4,7 @@ local M = {}
 function M.setup()
     local group = vim.api.nvim_create_augroup('TodoHighlights', { clear = true })
 
-    vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter', 'TextChanged', 'InsertLeave', 'ColorScheme' }, {
+    vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter', 'InsertLeave', 'ColorScheme' }, {
         group = group,
         pattern = '*',
         callback = function()
