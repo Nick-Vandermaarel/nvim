@@ -20,7 +20,7 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "BufWritePost" }, {
                 return
             end
 
-            vim.lsp.util._refresh("textDocument/diagnostic", { bufnr = bufnr })
+            vim.lsp.buf_request(bufnr, "textDocument/diagnostic", { textDocument = vim.lsp.util.make_text_document_params(burnf)})
         end)
     end,
 })
