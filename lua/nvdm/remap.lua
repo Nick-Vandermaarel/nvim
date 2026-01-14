@@ -47,10 +47,10 @@ M.Map("n", "[d", function()
 end)
 
 -- Movement
-M.Map("n", "<C-h>", "<C-w>h")
-M.Map("n", "<C-j>", "<C-w>j")
-M.Map("n", "<C-k>", "<C-w>k")
-M.Map("n", "<C-l>", "<C-w>l")
+M.Map({ "n", "t" }, "<C-h>", "<C-w>h")
+M.Map({ "n", "t" }, "<C-j>", "<C-w>j")
+M.Map({ "n", "t" }, "<C-k>", "<C-w>k")
+M.Map({ "n", "t" }, "<C-l>", "<C-w>l")
 
 -- Resizing
 M.Map("n", "<C-Up>", ":resize -2<CR>")
