@@ -1,6 +1,7 @@
 ---@diagnostic disable: missing-fields
 return {
     'nvim-treesitter/nvim-treesitter',
+    branch = 'master', -- todo: migrate to the main branch and fix breaking changes.
     build = ':TSUpdate',
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
