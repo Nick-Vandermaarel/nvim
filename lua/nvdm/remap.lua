@@ -23,17 +23,17 @@ M.Map("n", "<C-u>", "<C-u>zz")
 M.Map("n", "n", "nzzzv")
 M.Map("n", "N", "Nzzzv")
 
-M.Map("x", "<leader>p", "\"_dp")
+M.Map("x", "<leader>p", '"_dp')
 
 -- Copy to system keyboard
-M.Map("n", "<leader>y", "\"+y")
-M.Map("v", "<leader>y", "\"+y")
-M.Map("n", "<leader>Y", "\"+Y")
+M.Map("n", "<leader>y", '"+y')
+M.Map("v", "<leader>y", '"+y')
+M.Map("n", "<leader>Y", '"+Y')
 
 -- Buffer navigation
-M.Map("n", "]b", "<cmd>bn<cr>", { desc = "Next Buffer" });
-M.Map("n", "[b", "<cmd>bp<cr>", { desc = "Previous Buffer" });
-M.Map("n", "db", "<cmd>bd<CR>", { desc = "Delete Buffer" });
+M.Map("n", "]b", "<cmd>bn<cr>", { desc = "Next Buffer" })
+M.Map("n", "[b", "<cmd>bp<cr>", { desc = "Previous Buffer" })
+M.Map("n", "db", "<cmd>bd<CR>", { desc = "Delete Buffer" })
 
 -- Diagnostic navigation
 M.Map("n", "]d", function()
@@ -59,7 +59,9 @@ M.Map("n", "<C-Left>", ":vertical resize -2<CR>")
 M.Map("n", "<C-Right>", ":vertical resize +2<CR>")
 
 -- Splits
-M.Map("n", "<C-x>", "<cmd>split<CR>", { desc = "Horizontal Split" });
-M.Map("n", "<C-v>", "<cmd>vsplit<CR>", { desc = "Vertical Split" });
+M.Map("n", "<C-x>", "<cmd>split<CR>", { desc = "Horizontal Split" })
+M.Map("n", "<C-v>", "<cmd>vsplit<CR>", { desc = "Vertical Split" })
 
-return M;
+M.Map("n", "<leader>ng", ":lua require('neogen').generate()<CR>", { desc = "Neogen comment" })
+
+return M

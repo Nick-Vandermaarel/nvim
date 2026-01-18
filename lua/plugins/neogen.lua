@@ -1,0 +1,20 @@
+-- romamihalich/neogen
+
+return {
+    "romamihalich/neogen",
+    config = true,
+    -- Uncomment next line if you want to follow only stable versions
+    -- version = "*"
+    config = function()
+        require("neogen").setup({
+            enabled = true,
+            languages = {
+                cs = {
+                    template = {
+                        annotation_convention = "xmldoc",
+                    },
+                },
+            },
+        })
+    end,
+}
