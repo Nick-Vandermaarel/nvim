@@ -62,6 +62,9 @@ M.Map("n", "<C-Right>", ":vertical resize +2<CR>")
 M.Map("n", "<C-x>", "<cmd>split<CR>", { desc = "Horizontal Split" })
 M.Map("n", "<C-v>", "<cmd>vsplit<CR>", { desc = "Vertical Split" })
 
-M.Map("n", "<leader>ng", ":lua require('neogen').generate()<CR>", { desc = "Neogen comment" })
+M.Map("n", "<leader>v", "<C-v>", { desc = "Visual Block" })
+M.Map("v", "<leader>r", ":s/\\%V", { desc = "Find and replace visual mode" })
+
+M.Map("n", "<leader>ng", ":lua require('neogen').generate()<CR>", { remap = true, desc = "Neogen comment" })
 
 return M
