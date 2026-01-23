@@ -1,5 +1,4 @@
 -- PLUGINS FOR LAZY
-local rm = require("nvdm.remap");
 return {
     {
         "tpope/vim-fugitive",
@@ -7,28 +6,28 @@ return {
     },
     {
         "mbbill/undotree",
-        event = "VeryLazy",
-        config = function()
-            rm.Map("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Undo tree" });
-        end
+        config = true,
+        keys = {
+            { "<leader>u", vim.cmd.UndotreeToggle, { desc = "Undo tree" } },
+        },
     },
     {
         "folke/persistence.nvim",
         event = "BufReadPre",
         config = function()
-            require("persistence").setup {
-                dir = vim.fn.expand(vim.fn.stdpath "config" .. "/session/"),
+            require("persistence").setup({
+                dir = vim.fn.expand(vim.fn.stdpath("config") .. "/session/"),
                 options = { "buffers", "curdir", "winsize" },
-            }
-        end
+            })
+        end,
     },
     {
         "windwp/nvim-ts-autotag",
         event = "BufReadPre",
-        opts = {}
+        opts = {},
     },
     {
-        'nvim-mini/mini.surround',
+        "nvim-mini/mini.surround",
         version = false,
         event = "VeryLazy",
         opts = {},
@@ -37,22 +36,24 @@ return {
                 -- Allows for tag replacements while keeping the inner content (attributes)
                 custom_surroundings = {
                     T = {
-                        input = { '<(%w+)[^<>]->.-</%1>', '^<()%w+().*</()%w+()>$' },
+                        input = { "<(%w+)[^<>]->.-</%1>", "^<()%w+().*</()%w+()>$" },
                         output = function()
-                            local tag_name = MiniSurround.user_input('Tag name')
-                            if tag_name == nil then return nil end
+                            local tag_name = MiniSurround.user_input("Tag name")
+                            if tag_name == nil then
+                                return nil
+                            end
                             return { left = tag_name, right = tag_name }
                         end,
                     },
                 },
-                n_lines = 100
+                n_lines = 100,
             })
-        end
+        end,
     },
     {
-        'nvim-mini/mini.pairs',
+        "nvim-mini/mini.pairs",
         version = false,
         event = "InsertEnter",
-        opts = {}
+        opts = {},
     },
 }

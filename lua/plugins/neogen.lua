@@ -1,10 +1,10 @@
 -- romamihalich/neogen
 
 return {
-    "romamihalich/neogen",
-    config = true,
-    -- Uncomment next line if you want to follow only stable versions
-    -- version = "*"
+    "romamihalich/neogen", -- include some c# fixes.
+    keys = {
+        { "<leader>ng", "<cmd>lua require('neogen').generate()<CR>", desc = "Neogen comment", mode = "n" },
+    },
     config = function()
         require("neogen").setup({
             enabled = true,

@@ -20,7 +20,11 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "BufWritePost" }, {
                 return
             end
 
-            vim.lsp.buf_request(bufnr, "textDocument/diagnostic", { textDocument = vim.lsp.util.make_text_document_params(burnf)})
+            vim.lsp.buf_request(
+                bufnr,
+                "textDocument/diagnostic",
+                { textDocument = vim.lsp.util.make_text_document_params(bufnr) }
+            )
         end)
     end,
 })
@@ -44,14 +48,14 @@ vim.api.nvim_create_autocmd({
             vim.lsp.codelens.refresh({ bufnr = 0 })
         end)
     end,
-    desc = "Refresh codelens"
+    desc = "Refresh codelens",
 })
 
 -- lsp cleanup
 vim.api.nvim_create_autocmd("VimLeavePre", {
     callback = function()
         vim.lsp.stop_client(vim.lsp.get_clients(), true)
-    end
+    end,
 })
 
 -- Yank highlight

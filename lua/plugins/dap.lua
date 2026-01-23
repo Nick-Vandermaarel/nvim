@@ -1,9 +1,45 @@
 return {
     "mfussenegger/nvim-dap",
-    event = "VeryLazy",
+    keys = {
+        {
+            "<Leader>tb",
+            function()
+                require("dap").toggle_breakpoint()
+            end,
+            desc = "Toggle Breakpoint",
+        },
+        {
+            "<F5>",
+            function()
+                require("dap").continue()
+            end,
+            desc = "Continue Debugging",
+        },
+        {
+            "<F10>",
+            function()
+                require("dap").step_over()
+            end,
+            desc = "Step Over",
+        },
+        {
+            "<F11>",
+            function()
+                require("dap").step_into()
+            end,
+            desc = "Step Into",
+        },
+        {
+            "<F12>",
+            function()
+                require("dap").step_out()
+            end,
+            desc = "Step Out",
+        },
+    },
     dependencies = {
         "rcarriga/nvim-dap-ui",
-        "nvim-neotest/nvim-nio"
+        "nvim-neotest/nvim-nio",
     },
     config = function()
         local dap, dapui = require("dap"), require("dapui")
@@ -22,24 +58,18 @@ return {
             dapui.close()
         end
 
-        vim.keymap.set("n", "<Leader>tb", dap.toggle_breakpoint, { desc = "Toggle Breakpoint" })
-        vim.keymap.set("n", "<F5>", dap.continue, { desc = "Continue Debugging" })
-        vim.keymap.set("n", "<F10>", dap.step_over, { desc = "Step Over" })
-        vim.keymap.set("n", "<F11>", dap.step_into, { desc = "Step Into" })
-        vim.keymap.set("n", "<F12>", dap.step_out, { desc = "Step Out" })
-
-        vim.fn.sign_define('DapBreakpoint', {
-            text = '●',
-            texthl = 'DapBreakpoint',
-            linehl = '',
-            numhl = ''
+        vim.fn.sign_define("DapBreakpoint", {
+            text = "●",
+            texthl = "DapBreakpoint",
+            linehl = "",
+            numhl = "",
         })
 
-        vim.fn.sign_define('DapStopped', {
-            text = '▶',
-            texthl = 'DapStopped',
-            linehl = 'DapStoppedLine',
-            numhl = 'DapStoppedLineNr'
+        vim.fn.sign_define("DapStopped", {
+            text = "▶",
+            texthl = "DapStopped",
+            linehl = "DapStoppedLine",
+            numhl = "DapStoppedLineNr",
         })
 
         vim.cmd([[
@@ -49,7 +79,7 @@ return {
             highlight DapStoppedLineNr guifg=#00FF00 ctermfg=green
         ]])
 
-        local easyDotNetDap = require("nvdm.easy-dotnet-dap");
-        easyDotNetDap.register_net_dap();
-    end
+        local easyDotNetDap = require("nvdm.easy-dotnet-dap")
+        easyDotNetDap.register_net_dap()
+    end,
 }

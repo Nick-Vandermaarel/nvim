@@ -65,6 +65,4 @@ M.Map("n", "<C-v>", "<cmd>vsplit<CR>", { desc = "Vertical Split" })
 M.Map("n", "<leader>v", "<C-v>", { desc = "Visual Block" })
 M.Map("v", "<leader>r", ":s/\\%V", { desc = "Find and replace visual mode" })
 
-M.Map("n", "<leader>ng", ":lua require('neogen').generate()<CR>", { remap = true, desc = "Neogen comment" })
-
 return M
