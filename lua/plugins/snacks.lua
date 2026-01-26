@@ -5,8 +5,7 @@ local header = [[
 ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║
 ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
 ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
-]];
-
+]]
 
 local quotes = {
     "The only way to do great work is to love what you do. - Steve Jobs",
@@ -48,9 +47,7 @@ local quotes = {
     "The Internet? We are not interested in it. - Bill Gates, 1993",
     "The most important single aspect of software development is to be clear about what you are trying to build. - Bjarne Stroustrup",
     "Measuring programming progress by lines of code is like measuring aircraft building progress by weight. - Bill Gates",
-    "The best programmers are not marginally better than merely good ones. They are an order-of-magnitude better, measured by whatever standard: conceptual creativity, speed, ingenuity of design, or problem-solving ability. - Randall E. Stross",
     "A language that doesn't affect the way you think about programming is not worth knowing. - Alan J. Perlis",
-    "The trouble with programmers is that you can never tell what a programmer is doing until it's too late. - Seymour Cray",
     "Most good programmers do programming not because they expect to get paid or get adulation by the public, but because it is fun to program. - Linus Torvalds",
     "Always code as if the guy who ends up maintaining your code will be a violent psychopath who knows where you live. - John Woods",
     "Programming today is a race between software engineers striving to build bigger and better idiot-proof programs, and the Universe trying to produce bigger and better idiots. So far, the Universe is winning. - Rick Cook",
@@ -69,6 +66,8 @@ local quotes = {
     "I don't care if it works on your machine! We are not shipping your machine! - Vidiu Platon",
     "Deleted code is debugged code. - Jeff Sickel",
     "It's not a bug – it's an undocumented feature. - Anonymous",
+    "Complexity is the root of all evil. - Me",
+    "A computer can never be held accountable, therefore a computer must never make a management decision. - IBM 1979",
 }
 
 local function wrap_text(text, line_width)
@@ -122,7 +121,7 @@ return {
             animate = { enabled = false },
             indent = {
                 enabled = false,
-            }
+            },
         },
         picker = {
             enabled = true,
@@ -133,7 +132,13 @@ return {
                 keys = {
                     { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
                     { icon = " ", key = "s", desc = "Restore Session", section = "session" },
-                    { icon = "󰒲 ", key = "L", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
+                    {
+                        icon = "󰒲 ",
+                        key = "L",
+                        desc = "Lazy",
+                        action = ":Lazy",
+                        enabled = package.loaded.lazy ~= nil,
+                    },
                     { icon = " ", key = "q", desc = "Quit", action = ":qa" },
                 },
             },
@@ -141,34 +146,138 @@ return {
                 { section = "header" },
                 {
                     footer = get_random_quote(),
-                    padding = 3
+                    padding = 3,
                 },
-                { section = "keys",   padding = 1 },
+                { section = "keys", padding = 1 },
                 { section = "startup" },
-            }
+            },
         },
     },
     keys = {
-        { "<leader>pb", function() Snacks.picker.buffers() end,                                 desc = "Buffers" },
-        { "<leader>pc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
-        { "<leader>pf", function() Snacks.picker.files() end,                                   desc = "Find Files" },
-        { "<leader>pg", function() Snacks.picker.git_files() end,                               desc = "Find Git Files" },
-        { "<leader>pp", function() Snacks.picker.projects() end,                                desc = "Projects" },
-        { "<leader>pr", function() Snacks.picker.recent() end,                                  desc = "Recent" },
+        {
+            "<leader>pb",
+            function()
+                Snacks.picker.buffers()
+            end,
+            desc = "Buffers",
+        },
+        {
+            "<leader>pc",
+            function()
+                Snacks.picker.files({ cwd = vim.fn.stdpath("config") })
+            end,
+            desc = "Find Config File",
+        },
+        {
+            "<leader>pf",
+            function()
+                Snacks.picker.files()
+            end,
+            desc = "Find Files",
+        },
+        {
+            "<leader>pg",
+            function()
+                Snacks.picker.git_files()
+            end,
+            desc = "Find Git Files",
+        },
+        {
+            "<leader>pp",
+            function()
+                Snacks.picker.projects()
+            end,
+            desc = "Projects",
+        },
+        {
+            "<leader>pr",
+            function()
+                Snacks.picker.recent()
+            end,
+            desc = "Recent",
+        },
 
         -- LSP
-        { "gd",         function() Snacks.picker.lsp_definitions() end,                         desc = "Goto Definition" },
-        { "gD",         function() Snacks.picker.lsp_declarations() end,                        desc = "Goto Declaration" },
-        { "gr",         function() Snacks.picker.lsp_references() end,                          nowait = true,                     desc = "References" },
-        { "gI",         function() Snacks.picker.lsp_implementations() end,                     desc = "Goto Implementation" },
-        { "gy",         function() Snacks.picker.lsp_type_definitions() end,                    desc = "Goto T[y]pe Definition" },
-        { "<leader>ss", function() Snacks.picker.lsp_symbols() end,                             desc = "LSP Symbols" },
-        { "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end,                   desc = "LSP Workspace Symbols" },
+        {
+            "gd",
+            function()
+                Snacks.picker.lsp_definitions()
+            end,
+            desc = "Goto Definition",
+        },
+        {
+            "gD",
+            function()
+                Snacks.picker.lsp_declarations()
+            end,
+            desc = "Goto Declaration",
+        },
+        {
+            "gr",
+            function()
+                Snacks.picker.lsp_references()
+            end,
+            nowait = true,
+            desc = "References",
+        },
+        {
+            "gI",
+            function()
+                Snacks.picker.lsp_implementations()
+            end,
+            desc = "Goto Implementation",
+        },
+        {
+            "gy",
+            function()
+                Snacks.picker.lsp_type_definitions()
+            end,
+            desc = "Goto T[y]pe Definition",
+        },
+        {
+            "<leader>ss",
+            function()
+                Snacks.picker.lsp_symbols()
+            end,
+            desc = "LSP Symbols",
+        },
+        {
+            "<leader>sS",
+            function()
+                Snacks.picker.lsp_workspace_symbols()
+            end,
+            desc = "LSP Workspace Symbols",
+        },
 
         -- Grep
-        { "<leader>sb", function() Snacks.picker.lines() end,                                   desc = "Buffer Lines" },
-        { "<leader>sg", function() Snacks.picker.grep() end,                                    desc = "Grep" },
-        { "<leader>sB", function() Snacks.picker.grep_buffers() end,                            desc = "Grep Open Buffers" },
-        { "<leader>sw", function() Snacks.picker.grep_word() end,                               desc = "Visual selection or word", mode = { "n", "x" } },
-    }
+        {
+            "<leader>sb",
+            function()
+                Snacks.picker.lines()
+            end,
+            desc = "Buffer Lines",
+        },
+        {
+            "<leader>sg",
+            function()
+                Snacks.picker.grep()
+            end,
+            desc = "Grep",
+        },
+        {
+            "<leader>sB",
+            function()
+                Snacks.picker.grep_buffers()
+            end,
+            desc = "Grep Open Buffers",
+        },
+        {
+            "<leader>sw",
+            function()
+                Snacks.picker.grep_word()
+            end,
+            desc = "Visual selection or word",
+            mode = { "n", "x" },
+        },
+    },
 }
