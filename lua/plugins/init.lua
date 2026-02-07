@@ -61,8 +61,4 @@ return {
         dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
         opts = {},
     },
-    {
-        "sindrets/diffview.nvim",
-        opts = {},
-    },
 }
