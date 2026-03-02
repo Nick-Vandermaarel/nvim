@@ -14,15 +14,15 @@ return {
                     PmenuSbar = { bg = colors.palette.zenBg0 },
                     PmenuThumb = { bg = colors.palette.gray4 },
                     -- Private cs fields
-                    ['@lsp.type.field.cs'] = { fg = colors.palette.fg },
-                    ['@lsp.type.constant.cs'] = { fg = colors.palette.orange },
+                    ["@lsp.type.field.cs"] = { fg = colors.palette.fg },
+                    ["@lsp.type.constant.cs"] = { fg = colors.palette.orange },
 
-                    LspReferenceText = { bg = "#2a2e3e" },                                 -- Subtle blue-gray
+                    LspReferenceText = { bg = "#2a2e3e" }, -- Subtle blue-gray
                     LspReferenceRead = { bg = "#2a2e3e" },
                     LspReferenceWrite = { bg = "#3e3449", bold = true, underline = true }, -- Slightly purple
                 }
             end,
         })
-        vim.cmd("colorscheme kanso-ink")
-    end
+        vim.cmd("colorscheme kanso-zen")
+    end,
 }
