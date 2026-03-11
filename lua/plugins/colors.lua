@@ -32,13 +32,24 @@ return {
     config = function()
         require("kanagawa").setup({
             keywordStyle = { italic = false },
+            colors = {
+                theme = {
+                    all = {
+                        ui = {
+                            bg_gutter = "none",
+                        },
+                    },
+                },
+            },
             overrides = function(colors)
+                local theme = colors.theme
                 return {
                     -- Right-click menu (Pmenu) - darker version
-                    Pmenu = { fg = colors.palette.dragonBlue2, bg = colors.palette.dragonBlack1 },
-                    -- PmenuSel = { fg = colors.palette.fg, bg = colors.palette.zenBg2, bold = true },
-                    -- PmenuSbar = { bg = colors.palette.zenBg0 },
-                    -- PmenuThumb = { bg = colors.palette.gray4 },
+                    Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1 }, -- add `blend = vim.o.pumblend` to enable transparency,,
+                    PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
+                    PmenuSbar = { bg = theme.ui.bg_m1 },
+                    PmenuThumb = { bg = "#C0A36E" },
+                    BlinkCmpMenuBorder = { fg = "", bg = "" },
                     --
                     -- Private cs fields
                     ["@lsp.type.field.cs"] = { fg = colors.palette.fg },
