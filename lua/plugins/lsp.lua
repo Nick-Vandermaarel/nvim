@@ -12,10 +12,6 @@ return {
     },
     {
         "neovim/nvim-lspconfig",
-        dependencies = {
-            { "mason-org/mason.nvim" },
-            { "mason-org/mason-lspconfig.nvim" },
-        },
         event = { "BufReadPre", "BufNewFile" },
         opts = { diagnostics = { virtual_text = false } },
         config = function()
@@ -57,10 +53,7 @@ return {
                     local client = vim.lsp.get_client_by_id(args.data.client_id)
 
                     if client ~= nil then
-                        -- 0.11 does not support document color yet
-                        if vim.lsp.document_color and client:supports_method("textDocument/document_color") then
-                            vim.lsp.document_color.enable(true, args.buf)
-                        end
+                        vim.lsp.document_color.enable(true, args.buf)
 
                         -- Semantic highlighting when hovering
                         if client.server_capabilities.documentHighlightProvider then
@@ -128,7 +121,7 @@ return {
                     },
                     ["csharp|inlay_hints"] = {
                         dotnet_enable_inlay_hints_for_parameters = true,
-                        csharp_enable_inlay_hints_for_implicit_variable_types = true, -- Shows what 'var' resolves to
+                        csharp_enable_inlay_hints_for_implicit_variable_types = true,  -- Shows what 'var' resolves to
                         csharp_enable_inlay_hints_for_implicit_object_creation = true, -- Shows types in 'new()'
                         dotnet_enable_inlay_hints_for_object_creation_parameters = true,
                     },

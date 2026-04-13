@@ -16,6 +16,8 @@ vim.api.nvim_create_autocmd("PackChanged", {
     end,
 })
 
+require("vim._core.ui2").enable({})
+
 -- Settings
 require("nvdm.autocmd")
 require("nvdm.remap")
@@ -23,6 +25,7 @@ require("nvdm.set")
 
 vim.pack.add({
     "https://github.com/mason-org/mason.nvim",
+    "https://github.com/mason-org/mason-lspconfig.nvim",
     "https://github.com/neovim/nvim-lspconfig",
     "https://github.com/rebelot/kanagawa.nvim",
     "https://github.com/tpope/vim-fugitive",
@@ -36,8 +39,18 @@ require("nvdm.winbar").setup()
 require("nvdm.todohl").setup()
 
 -- LSP
-require("mason").setup()
-vim.lsp.enable({ "lua_ls" })
+require("mason").setup({
+    registries = {
+        "github:Crashdummyy/mason-registry",
+        "github:mason-org/mason-registry",
+    },
+})
+require("mason-lspconfig").setup({
+    automatic_enable = true,
+})
+-- require("nvim-lspconfig").setup({
+--     diagnostics = { virtual_text = false },
+-- })
 
 -- color theme
 require("kanagawa").setup({

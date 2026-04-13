@@ -125,6 +125,7 @@ require("snacks").setup({
     picker = {
         enabled = true,
     },
+    -- this is nice, but only really works well with lazy.nvim right now.
     -- dashboard = {
     --     preset = {
     --         header = header,
