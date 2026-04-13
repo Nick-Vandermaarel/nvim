@@ -107,177 +107,99 @@ local function get_random_quote()
     return wrap_text(quotes[math.random(#quotes)], 80)
 end
 
-return {
-    "folke/snacks.nvim",
-    lazy = false,
-    priority = 1000,
-    ---@type snacks.Config
-    opts = {
-        input = {},
-        notifier = {},
+vim.pack.add({
+    "https://github.com/folke/snacks.nvim",
+})
+
+require("snacks").setup({
+    input = {},
+    notifier = {},
+    indent = {
+        priority = 1,
+        enabled = true,
+        animate = { enabled = false },
         indent = {
-            priority = 1,
-            enabled = true,
-            animate = { enabled = false },
-            indent = {
-                enabled = false,
-            },
-        },
-        picker = {
-            enabled = true,
-        },
-        dashboard = {
-            preset = {
-                header = header,
-                keys = {
-                    { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
-                    { icon = " ", key = "s", desc = "Restore Session", section = "session" },
-                    {
-                        icon = "󰒲 ",
-                        key = "L",
-                        desc = "Lazy",
-                        action = ":Lazy",
-                        enabled = package.loaded.lazy ~= nil,
-                    },
-                    { icon = " ", key = "q", desc = "Quit", action = ":qa" },
-                },
-            },
-            sections = {
-                { section = "header" },
-                {
-                    footer = get_random_quote(),
-                    padding = 3,
-                },
-                { section = "keys", padding = 1 },
-                { section = "startup" },
-            },
+            enabled = false,
         },
     },
-    keys = {
-        {
-            "<leader>pb",
-            function()
-                Snacks.picker.buffers()
-            end,
-            desc = "Buffers",
-        },
-        {
-            "<leader>pc",
-            function()
-                Snacks.picker.files({ cwd = vim.fn.stdpath("config") })
-            end,
-            desc = "Find Config File",
-        },
-        {
-            "<leader>pf",
-            function()
-                Snacks.picker.files()
-            end,
-            desc = "Find Files",
-        },
-        {
-            "<leader>pg",
-            function()
-                Snacks.picker.git_files()
-            end,
-            desc = "Find Git Files",
-        },
-        {
-            "<leader>pp",
-            function()
-                Snacks.picker.projects()
-            end,
-            desc = "Projects",
-        },
-        {
-            "<leader>pr",
-            function()
-                Snacks.picker.recent()
-            end,
-            desc = "Recent",
-        },
-
-        -- LSP
-        {
-            "gd",
-            function()
-                Snacks.picker.lsp_definitions()
-            end,
-            desc = "Goto Definition",
-        },
-        {
-            "gD",
-            function()
-                Snacks.picker.lsp_declarations()
-            end,
-            desc = "Goto Declaration",
-        },
-        {
-            "gr",
-            function()
-                Snacks.picker.lsp_references()
-            end,
-            nowait = true,
-            desc = "References",
-        },
-        {
-            "gI",
-            function()
-                Snacks.picker.lsp_implementations()
-            end,
-            desc = "Goto Implementation",
-        },
-        {
-            "gy",
-            function()
-                Snacks.picker.lsp_type_definitions()
-            end,
-            desc = "Goto T[y]pe Definition",
-        },
-        {
-            "<leader>ss",
-            function()
-                Snacks.picker.lsp_symbols()
-            end,
-            desc = "LSP Symbols",
-        },
-        {
-            "<leader>sS",
-            function()
-                Snacks.picker.lsp_workspace_symbols()
-            end,
-            desc = "LSP Workspace Symbols",
-        },
-
-        -- Grep
-        {
-            "<leader>sb",
-            function()
-                Snacks.picker.lines()
-            end,
-            desc = "Buffer Lines",
-        },
-        {
-            "<leader>sg",
-            function()
-                Snacks.picker.grep()
-            end,
-            desc = "Grep",
-        },
-        {
-            "<leader>sB",
-            function()
-                Snacks.picker.grep_buffers()
-            end,
-            desc = "Grep Open Buffers",
-        },
-        {
-            "<leader>sw",
-            function()
-                Snacks.picker.grep_word()
-            end,
-            desc = "Visual selection or word",
-            mode = { "n", "x" },
-        },
+    picker = {
+        enabled = true,
     },
-}
+    -- dashboard = {
+    --     preset = {
+    --         header = header,
+    --         keys = {
+    --             { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
+    --             { icon = " ", key = "s", desc = "Restore Session", section = "session" },
+    --             { icon = " ", key = "q", desc = "Quit", action = ":qa" },
+    --         },
+    --     },
+    --     sections = {
+    --         { section = "header" },
+    --         {
+    --             footer = get_random_quote(),
+    --             padding = 3,
+    --         },
+    --         { section = "keys", padding = 1 },
+    --         { section = "startup" },
+    --     },
+    -- },
+})
+
+---@type snacks.Config
+-- Picker keymaps
+vim.keymap.set("n", "<leader>pb", function()
+    Snacks.picker.buffers()
+end, { desc = "Buffers" })
+vim.keymap.set("n", "<leader>pc", function()
+    Snacks.picker.files({ cwd = vim.fn.stdpath("config") })
+end, { desc = "Find Config File" })
+vim.keymap.set("n", "<leader>pf", function()
+    Snacks.picker.files()
+end, { desc = "Find Files" })
+vim.keymap.set("n", "<leader>pg", function()
+    Snacks.picker.git_files()
+end, { desc = "Find Git Files" })
+vim.keymap.set("n", "<leader>pp", function()
+    Snacks.picker.projects()
+end, { desc = "Projects" })
+vim.keymap.set("n", "<leader>pr", function()
+    Snacks.picker.recent()
+end, { desc = "Recent" })
+
+-- LSP
+vim.keymap.set("n", "gd", function()
+    Snacks.picker.lsp_definitions()
+end, { desc = "Goto Definition" })
+vim.keymap.set("n", "gD", function()
+    Snacks.picker.lsp_declarations()
+end, { desc = "Goto Declaration" })
+vim.keymap.set("n", "gr", function()
+    Snacks.picker.lsp_references()
+end, { desc = "References", nowait = true })
+vim.keymap.set("n", "gI", function()
+    Snacks.picker.lsp_implementations()
+end, { desc = "Goto Implementation" })
+vim.keymap.set("n", "gy", function()
+    Snacks.picker.lsp_type_definitions()
+end, { desc = "Goto T[y]pe Definition" })
+vim.keymap.set("n", "<leader>ss", function()
+    Snacks.picker.lsp_symbols()
+end, { desc = "LSP Symbols" })
+vim.keymap.set("n", "<leader>sS", function()
+    Snacks.picker.lsp_workspace_symbols()
+end, { desc = "LSP Workspace Symbols" })
+
+-- Grep
+vim.keymap.set("n", "<leader>sb", function()
+    Snacks.picker.lines()
+end, { desc = "Buffer Lines" })
+vim.keymap.set("n", "<leader>sg", function()
+    Snacks.picker.grep()
+end, { desc = "Grep" })
+vim.keymap.set("n", "<leader>sB", function()
+    Snacks.picker.grep_buffers()
+end, { desc = "Grep Open Buffers" })
+vim.keymap.set({ "n", "x" }, "<leader>sw", function()
+    Snacks.picker.grep_word()
+end, { desc = "Visual selection or word" })

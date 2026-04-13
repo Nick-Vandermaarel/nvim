@@ -3,18 +3,18 @@ return {
     {
         "folke/lazydev.nvim",
         ft = "lua",
-        opts = {}
+        opts = {},
     },
     {
         "seblj/roslyn.nvim",
         ft = { "cs", "sln" },
-        opts = {}
+        opts = {},
     },
     {
-        'neovim/nvim-lspconfig',
+        "neovim/nvim-lspconfig",
         dependencies = {
-            { 'mason-org/mason.nvim' },
-            { 'mason-org/mason-lspconfig.nvim' },
+            { "mason-org/mason.nvim" },
+            { "mason-org/mason-lspconfig.nvim" },
         },
         event = { "BufReadPre", "BufNewFile" },
         opts = { diagnostics = { virtual_text = false } },
@@ -25,47 +25,47 @@ return {
                         [vim.diagnostic.severity.ERROR] = "●",
                         [vim.diagnostic.severity.WARN] = "●",
                         [vim.diagnostic.severity.HINT] = "●",
-                        [vim.diagnostic.severity.INFO] = "●"
+                        [vim.diagnostic.severity.INFO] = "●",
                     },
                     texthl = {
                         [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
                         [vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
                         [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
                         [vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
-                    }
+                    },
                 },
                 underline = true,
             })
 
-            require('mason').setup({
+            require("mason").setup({
                 registries = {
-                    'github:Crashdummyy/mason-registry',
-                    'github:mason-org/mason-registry'
-                }
+                    "github:Crashdummyy/mason-registry",
+                    "github:mason-org/mason-registry",
+                },
             })
-            require('mason-lspconfig').setup({
+            require("mason-lspconfig").setup({
                 automatic_enable = true,
             })
 
-            local lspUtils = require("nvdm.lspUtils");
+            local lspUtils = require("nvdm.lspUtils")
 
             -- LSP Attach AutoCMD
-            vim.api.nvim_create_autocmd('LspAttach', {
+            vim.api.nvim_create_autocmd("LspAttach", {
                 desc = "LSP actions",
                 callback = function(args)
-                    lspUtils.onAttach(args);
-                    local client = vim.lsp.get_client_by_id(args.data.client_id);
+                    lspUtils.onAttach(args)
+                    local client = vim.lsp.get_client_by_id(args.data.client_id)
 
                     if client ~= nil then
                         -- 0.11 does not support document color yet
-                        if vim.lsp.document_color and client:supports_method('textDocument/document_color') then
+                        if vim.lsp.document_color and client:supports_method("textDocument/document_color") then
                             vim.lsp.document_color.enable(true, args.buf)
                         end
 
                         -- Semantic highlighting when hovering
                         if client.server_capabilities.documentHighlightProvider then
-                            local group = vim.api.nvim_create_augroup("lsp_document_highlight_" .. args.buf,
-                                { clear = true })
+                            local group =
+                                vim.api.nvim_create_augroup("lsp_document_highlight_" .. args.buf, { clear = true })
 
                             vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
                                 group = group,
@@ -80,18 +80,19 @@ return {
                             })
                         end
                     end
-                end
+                end,
             })
 
-            local vue_language_server_path = vim.fn.expand '$MASON/packages' ..
-                '/vue-language-server' .. '/node_modules/@vue/language-server'
-            local tsserver_filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' }
+            local vue_language_server_path = vim.fn.expand("$MASON/packages")
+                .. "/vue-language-server"
+                .. "/node_modules/@vue/language-server"
+            local tsserver_filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" }
 
             local vue_plugin = {
                 name = "@vue/typescript-plugin",
                 location = vue_language_server_path,
                 languages = { "vue" },
-                configNamespace = "typescript"
+                configNamespace = "typescript",
             }
             local ts_ls_config = {
                 init_options = {
@@ -104,7 +105,7 @@ return {
 
             local vue_ls_config = {}
 
-            vim.lsp.config('ts_ls', ts_ls_config)
+            vim.lsp.config("ts_ls", ts_ls_config)
             vim.lsp.config("vue_ls", vue_ls_config)
             vim.lsp.enable({ "ts_ls", "vue_ls" })
 
@@ -114,20 +115,20 @@ return {
                         validate = true,
                         lint = {
                             unknownAtRules = "ignore",
-                        }
-                    }
-                }
+                        },
+                    },
+                },
             })
 
             vim.lsp.config("roslyn", {
                 settings = {
-                    ['csharp|code_lens'] = {
+                    ["csharp|code_lens"] = {
                         dotnet_enable_references_code_lens = true,
                         dotnet_enable_tests_code_lens = true, -- Run/debug tests inline
                     },
                     ["csharp|inlay_hints"] = {
                         dotnet_enable_inlay_hints_for_parameters = true,
-                        csharp_enable_inlay_hints_for_implicit_variable_types = true,  -- Shows what 'var' resolves to
+                        csharp_enable_inlay_hints_for_implicit_variable_types = true, -- Shows what 'var' resolves to
                         csharp_enable_inlay_hints_for_implicit_object_creation = true, -- Shows types in 'new()'
                         dotnet_enable_inlay_hints_for_object_creation_parameters = true,
                     },
@@ -143,6 +144,6 @@ return {
                     },
                 },
             })
-        end
-    }
+        end,
+    },
 }

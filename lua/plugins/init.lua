@@ -1,17 +1,6 @@
 -- PLUGINS FOR LAZY
 return {
     {
-        "tpope/vim-fugitive",
-        event = "VeryLazy",
-    },
-    {
-        "mbbill/undotree",
-        config = true,
-        keys = {
-            { "<leader>u", vim.cmd.UndotreeToggle, { desc = "Undo tree" } },
-        },
-    },
-    {
         "folke/persistence.nvim",
         event = "BufReadPre",
         config = function()
@@ -54,11 +43,6 @@ return {
         "nvim-mini/mini.pairs",
         version = false,
         event = "InsertEnter",
-        opts = {},
-    },
-    {
-        "MeanderingProgrammer/render-markdown.nvim",
-        dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
         opts = {},
     },
 }
