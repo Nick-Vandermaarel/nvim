@@ -1,4 +1,13 @@
 -- return {
+--     "danfry1/lume",
+--     lazy = false,
+--     priority = 1000,
+--     config = function()
+--         require("lume").setup()
+--         vim.cmd("colorscheme lume")
+--     end,
+-- }
+-- return {
 --     "webhooked/kanso.nvim",
 --     lazy = false,
 --     priority = 1000,
