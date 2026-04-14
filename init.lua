@@ -259,7 +259,7 @@ vim.keymap.set("n", "<leader>gt", ":Gitsigns toggle_current_line_blame<CR>", { d
 vim.pack.add({ "https://github.com/folke/persistence.nvim" })
 require("persistence").setup({
     dir = vim.fn.expand(vim.fn.stdpath("config") .. "/session/"),
-    options = { "buffers", "curdir", "winsize" },
+    options = { "buffers", "curdir", "tabpages", "winsize" },
 })
 vim.keymap.set("n", "<leader>rl", function()
     require("persistence").load()

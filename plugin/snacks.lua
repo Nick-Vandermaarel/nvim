@@ -126,25 +126,24 @@ require("snacks").setup({
         enabled = true,
     },
     -- this is nice, but only really works well with lazy.nvim right now.
-    -- dashboard = {
-    --     preset = {
-    --         header = header,
-    --         keys = {
-    --             { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
-    --             { icon = " ", key = "s", desc = "Restore Session", section = "session" },
-    --             { icon = " ", key = "q", desc = "Quit", action = ":qa" },
-    --         },
-    --     },
-    --     sections = {
-    --         { section = "header" },
-    --         {
-    --             footer = get_random_quote(),
-    --             padding = 3,
-    --         },
-    --         { section = "keys", padding = 1 },
-    --         { section = "startup" },
-    --     },
-    -- },
+    dashboard = {
+        preset = {
+            header = header,
+            keys = {
+                { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
+                { icon = " ", key = "s", desc = "Restore Session", action = ":lua require('persistence').load()" },
+                { icon = " ", key = "q", desc = "Quit", action = ":qa" },
+            },
+        },
+        sections = {
+            { section = "header" },
+            {
+                footer = get_random_quote(),
+                padding = 3,
+            },
+            { section = "keys", padding = 1 },
+        },
+    },
 })
 
 ---@type snacks.Config

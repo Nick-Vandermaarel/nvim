@@ -2,21 +2,24 @@ vim.pack.add({
     "https://github.com/nvim-tree/nvim-tree.lua",
     "https://github.com/nvim-tree/nvim-web-devicons",
 })
+local function custom_on_attatch(bufnr)
+    local api = require("nvim-tree.api")
+    local function opts(desc)
+        return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+    end
+    api.map.on_attach.default(bufnr)
+
+    -- custom easy-dotnet config.
+    vim.keymap.set("n", "A", function()
+        local node = api.tree.get_node_under_cursor()
+        if node ~= nil then
+            local path = node.type == "directory" and node.absolute_path or vim.fs.dirname(node.absolute_path)
+            require("easy-dotnet").create_new_item(path)
+        end
+    end, opts("Create file from dotnet template"))
+end
+
 require("nvim-tree").setup({
-    -- local function custom_on_attatch(bufnr)
-    --     local api = require("nvim-tree.api")
-    --     local function opts(desc)
-    --         return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
-    --     end
-    --     api.config.mappings.default_on_attach(bufnr)
-    --
-    --     -- custom easy-dotnet config.
-    --     vim.keymap.set("n", "A", function()
-    --         local node = api.tree.get_node_under_cursor()
-    --         local path = node.type == "directory" and node.absolute_path or vim.fs.dirname(node.absolute_path)
-    --         require("easy-dotnet").create_new_item(path)
-    --     end, opts("Create file from dotnet template"))
-    -- end
 
     require("nvim-tree").setup({
         sort = {
