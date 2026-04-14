@@ -22,6 +22,7 @@ require("vim._core.ui2").enable({})
 require("nvdm.autocmd")
 require("nvdm.remap")
 require("nvdm.set")
+require("nvdm.diagnostic")
 
 vim.pack.add({
     "https://github.com/mason-org/mason.nvim",
@@ -29,15 +30,31 @@ vim.pack.add({
     "https://github.com/neovim/nvim-lspconfig",
     "https://github.com/rebelot/kanagawa.nvim",
     "https://github.com/tpope/vim-fugitive",
-    "https://github.com/MeanderingProgrammer/render-markdown.nvim",
-    "https://github.com/rachartier/tiny-inline-diagnostic.nvim",
+    "https://github.com/seblj/roslyn.nvim",
+    "https://github.com/folke/lazydev.nvim",
+
+    -- Note: Some languages require the tree-sitter-cli installed to the OS
+    "https://github.com/nvim-treesitter/nvim-treesitter",
+
+    -- Less important
     "https://github.com/romamihalich/neogen",
+    "https://github.com/MeanderingProgrammer/render-markdown.nvim",
     "https://github.com/lewis6991/gitsigns.nvim",
+    "https://github.com/rachartier/tiny-inline-diagnostic.nvim",
+    "https://github.com/windwp/nvim-ts-autotag",
+    "https://github.com/nvim-mini/mini.pairs",
 })
 
 require("nvdm.winbar").setup()
 require("nvdm.todohl").setup()
 
+require("lazydev").setup()
+
+require("tiny-inline-diagnostic").setup()
+require("nvim-ts-autotag").setup()
+require("mini.pairs").setup()
+
+------
 -- LSP
 require("mason").setup({
     registries = {
@@ -48,11 +65,99 @@ require("mason").setup({
 require("mason-lspconfig").setup({
     automatic_enable = true,
 })
--- require("nvim-lspconfig").setup({
---     diagnostics = { virtual_text = false },
--- })
+vim.lsp.codelens.enable(true)
+local lspUtils = require("nvdm.lspUtils")
+vim.api.nvim_create_autocmd("LspAttach", {
+    desc = "LSP actions",
+    callback = function(args)
+        lspUtils.onAttach(args)
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
 
--- color theme
+        if client ~= nil then
+            vim.lsp.document_color.enable(true)
+
+            -- Semantic highlighting when hovering
+            if client.server_capabilities.documentHighlightProvider then
+                local group = vim.api.nvim_create_augroup("lsp_document_highlight_" .. args.buf, { clear = true })
+
+                vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+                    group = group,
+                    buffer = args.buf,
+                    callback = vim.lsp.buf.document_highlight,
+                })
+
+                vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI", "InsertLeave", "BufLeave" }, {
+                    group = group,
+                    buffer = args.buf,
+                    callback = vim.lsp.buf.clear_references,
+                })
+            end
+        end
+    end,
+})
+
+local vue_language_server_path = vim.fn.expand("$MASON/packages")
+    .. "/vue-language-server"
+    .. "/node_modules/@vue/language-server"
+local tsserver_filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" }
+
+local vue_plugin = {
+    name = "@vue/typescript-plugin",
+    location = vue_language_server_path,
+    languages = { "vue" },
+    configNamespace = "typescript",
+}
+local ts_ls_config = {
+    init_options = {
+        plugins = {
+            vue_plugin,
+        },
+    },
+    filetypes = tsserver_filetypes,
+}
+
+local vue_ls_config = {}
+vim.lsp.config("ts_ls", ts_ls_config)
+vim.lsp.config("vue_ls", vue_ls_config)
+vim.lsp.enable({ "ts_ls", "vue_ls" })
+
+vim.lsp.config("cssls", {
+    settings = {
+        css = {
+            validate = true,
+            lint = {
+                unknownAtRules = "ignore",
+            },
+        },
+    },
+})
+
+vim.lsp.config("roslyn", {
+    settings = {
+        ["csharp|code_lens"] = {
+            dotnet_enable_references_code_lens = true,
+            dotnet_enable_tests_code_lens = true, -- Run/debug tests inline
+        },
+        ["csharp|inlay_hints"] = {
+            dotnet_enable_inlay_hints_for_parameters = true,
+            csharp_enable_inlay_hints_for_implicit_variable_types = true, -- Shows what 'var' resolves to
+            csharp_enable_inlay_hints_for_implicit_object_creation = true, -- Shows types in 'new()'
+            dotnet_enable_inlay_hints_for_object_creation_parameters = true,
+        },
+        ["csharp|completion"] = {
+            dotnet_show_completion_items_from_unimported_namespaces = true,
+            dotnet_show_name_completion_suggestions = true,
+        },
+        ["csharp|formatting"] = {
+            dotnet_organize_imports_on_format = true,
+        },
+        ["csharp|symbol_search"] = {
+            dotnet_search_reference_assemblies = true,
+        },
+    },
+})
+
+-- Color theme
 require("kanagawa").setup({
     keywordStyle = { italic = false },
     colors = {
@@ -149,3 +254,13 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 })
 vim.keymap.set("n", "<leader>gp", ":Gitsigns preview_hunk<CR>", { desc = "Git Preview" })
 vim.keymap.set("n", "<leader>gt", ":Gitsigns toggle_current_line_blame<CR>", { desc = "Git Toggle Current Line Blame" })
+
+-- Session persistence
+vim.pack.add({ "https://github.com/folke/persistence.nvim" })
+require("persistence").setup({
+    dir = vim.fn.expand(vim.fn.stdpath("config") .. "/session/"),
+    options = { "buffers", "curdir", "winsize" },
+})
+vim.keymap.set("n", "<leader>rl", function()
+    require("persistence").load()
+end, { desc = "Reload last session" })

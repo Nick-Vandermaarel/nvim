@@ -45,7 +45,7 @@ vim.api.nvim_create_autocmd({
 
         -- Debounce the refresh
         codelens_timer = vim.fn.timer_start(500, function()
-            vim.lsp.codelens.refresh({ bufnr = 0 })
+            vim.lsp.codelens.run()
         end)
     end,
     desc = "Refresh codelens",

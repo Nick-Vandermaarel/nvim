@@ -35,17 +35,6 @@ M.Map("n", "]b", "<cmd>bn<cr>", { desc = "Next Buffer" })
 M.Map("n", "[b", "<cmd>bp<cr>", { desc = "Previous Buffer" })
 M.Map("n", "db", "<cmd>bd<CR>", { desc = "Delete Buffer" })
 
--- Diagnostic navigation
-M.Map("n", "]d", function()
-    vim.diagnostic.jump({ count = 1 })
-    vim.cmd("normal! zz")
-end)
-
-M.Map("n", "[d", function()
-    vim.diagnostic.jump({ count = -1 })
-    vim.cmd("normal! zz")
-end)
-
 -- Movement
 M.Map({ "n", "t" }, "<C-h>", "<C-w>h")
 M.Map({ "n", "t" }, "<C-j>", "<C-w>j")
@@ -64,5 +53,21 @@ M.Map("n", "<C-v>", "<cmd>vsplit<CR>", { desc = "Vertical Split" })
 
 M.Map("n", "<leader>v", "<C-v>", { desc = "Visual Block" })
 M.Map("v", "<leader>r", ":s/\\%V", { desc = "Find and replace visual mode" })
+
+vim.keymap.set({ "n", "x", "o" }, "<CR>", function()
+    if vim.treesitter.get_parser(nil, nil, { error = false }) then
+        require("vim.treesitter._select").select_parent(vim.v.count1)
+    else
+        vim.lsp.buf.selection_range(vim.v.count1)
+    end
+end, { desc = "Select parent treesitter node or outer incremental lsp selections" })
+
+vim.keymap.set({ "n", "x", "o" }, "<BS>", function()
+    if vim.treesitter.get_parser(nil, nil, { error = false }) then
+        require("vim.treesitter._select").select_child(vim.v.count1)
+    else
+        vim.lsp.buf.selection_range(-vim.v.count1)
+    end
+end, { desc = "Select child treesitter node or inner incremental lsp selections" })
 
 return M
