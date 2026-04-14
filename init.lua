@@ -19,7 +19,6 @@ vim.api.nvim_create_autocmd("PackChanged", {
 require("vim._core.ui2").enable({})
 
 -- Settings
-require("nvdm.autocmd")
 require("nvdm.remap")
 require("nvdm.set")
 require("nvdm.diagnostic")
@@ -58,6 +57,47 @@ require("tiny-inline-diagnostic").setup()
 require("nvim-ts-autotag").setup()
 require("mini.pairs").setup()
 
+---
+-- Treesitter
+local ts_parsers = {
+    "bash",
+    "typescript",
+    "vue",
+    "html",
+    "css",
+    "json",
+    "yaml",
+    "dockerfile",
+    "c_sharp",
+    "lua",
+    "vim",
+    "markdown",
+    "python",
+    "sql",
+}
+
+local nts = require("nvim-treesitter")
+nts.install(ts_parsers)
+vim.api.nvim_create_autocmd("PackChanged", {
+    callback = function()
+        nts.update()
+    end,
+})
+
+-- Enable treesitter highlighting and indents
+vim.api.nvim_create_autocmd("FileType", {
+    callback = function(args)
+        local filetype = args.match
+        local lang = vim.treesitter.language.get_lang(filetype)
+        if lang ~= nil then
+            if vim.treesitter.language.add(lang) then
+                vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+                vim.treesitter.start()
+            end
+        end
+    end,
+})
+
 ------
 -- LSP
 require("mason").setup({
@@ -69,7 +109,8 @@ require("mason").setup({
 require("mason-lspconfig").setup({
     automatic_enable = true,
 })
-vim.lsp.codelens.enable(true)
+-- Disabling until there is positional config.
+-- vim.lsp.codelens.enable(true)
 local lspUtils = require("nvdm.lspUtils")
 vim.api.nvim_create_autocmd("LspAttach", {
     desc = "LSP actions",
@@ -138,9 +179,10 @@ vim.lsp.config("cssls", {
 
 vim.lsp.config("roslyn", {
     settings = {
+        -- Disabling until a better code lens support is added
         ["csharp|code_lens"] = {
-            dotnet_enable_references_code_lens = true,
-            dotnet_enable_tests_code_lens = true, -- Run/debug tests inline
+            dotnet_enable_references_code_lens = false,
+            --     dotnet_enable_tests_code_lens = true, -- Run/debug tests inline
         },
         ["csharp|inlay_hints"] = {
             dotnet_enable_inlay_hints_for_parameters = true,
@@ -268,3 +310,13 @@ require("persistence").setup({
 vim.keymap.set("n", "<leader>rl", function()
     require("persistence").load()
 end, { desc = "Reload last session" })
+
+-- Yank highlight
+local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
+vim.api.nvim_create_autocmd("TextYankPost", {
+    callback = function()
+        vim.highlight.on_yank()
+    end,
+    group = highlight_group,
+    pattern = "*",
+})

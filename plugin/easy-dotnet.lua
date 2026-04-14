@@ -7,7 +7,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
         vim.pack.add({
             "https://github.com/GustavEikaas/easy-dotnet.nvim",
-            "https://github.com/nvim-lua/plenary.nvim"
+            "https://github.com/nvim-lua/plenary.nvim",
         })
 
         require("easy-dotnet").setup({
