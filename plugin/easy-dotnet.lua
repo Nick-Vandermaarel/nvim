@@ -1,7 +1,7 @@
 local group = vim.api.nvim_create_augroup("LazyLoadEasyDotnet", { clear = true })
-vim.api.nvim_create_autocmd("FileType", {
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
     group = group,
-    pattern = { "cs", "vb", "csproj", "sln", "slnx", "props", "csx", "targets" },
+    pattern = { "*.cs", "*.vb", "*.csproj", "*.sln", "*.slnx", "*.props", "*.csx", "*.targets" },
     callback = function()
         vim.api.nvim_del_augroup_by_name("LazyLoadEasyDotnet")
 
