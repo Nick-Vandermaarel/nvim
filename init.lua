@@ -30,7 +30,11 @@ vim.pack.add({
     "https://github.com/neovim/nvim-lspconfig",
     "https://github.com/rebelot/kanagawa.nvim",
     "https://github.com/tpope/vim-fugitive",
-    "https://github.com/seblj/roslyn.nvim",
+    {
+        -- src = "https://github.com/seblj/roslyn.nvim",
+        src = "https://github.com/tris203/roslyn.nvim",
+        version = "0.12",
+    },
     "https://github.com/folke/lazydev.nvim",
 
     -- Note: Some languages require the tree-sitter-cli installed to the OS
