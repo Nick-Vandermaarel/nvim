@@ -29,11 +29,7 @@ vim.pack.add({
     "https://github.com/neovim/nvim-lspconfig",
     "https://github.com/rebelot/kanagawa.nvim",
     "https://github.com/tpope/vim-fugitive",
-    {
-        -- src = "https://github.com/seblj/roslyn.nvim",
-        src = "https://github.com/tris203/roslyn.nvim",
-        version = "0.12",
-    },
+    "https://github.com/seblj/roslyn.nvim",
     "https://github.com/folke/lazydev.nvim",
 
     -- Note: Some languages require the tree-sitter-cli installed to the OS
@@ -110,7 +106,7 @@ require("mason-lspconfig").setup({
     automatic_enable = true,
 })
 -- Disabling until there is positional config.
--- vim.lsp.codelens.enable(true)
+vim.lsp.codelens.enable(true)
 local lspUtils = require("nvdm.lspUtils")
 vim.api.nvim_create_autocmd("LspAttach", {
     desc = "LSP actions",
@@ -179,10 +175,9 @@ vim.lsp.config("cssls", {
 
 vim.lsp.config("roslyn", {
     settings = {
-        -- Disabling until a better code lens support is added
         ["csharp|code_lens"] = {
             dotnet_enable_references_code_lens = false,
-            --     dotnet_enable_tests_code_lens = true, -- Run/debug tests inline
+            dotnet_enable_tests_code_lens = true, -- Run/debug tests inline
         },
         ["csharp|inlay_hints"] = {
             dotnet_enable_inlay_hints_for_parameters = true,
