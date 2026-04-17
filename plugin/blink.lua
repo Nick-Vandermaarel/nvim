@@ -11,7 +11,10 @@ require("blink.cmp").setup({
         nerd_font_variant = "mono",
     },
     sources = {
-        default = { "lsp", "easy-dotnet", "snippets", "buffer", "path" },
+        default = { "lsp", "snippets", "buffer", "path" },
+        per_filetype = {
+            c_sharp = { inherit_defaults = true, "easy-dotnet" },
+        },
         providers = {
             ["easy-dotnet"] = {
                 name = "easy-dotnet",

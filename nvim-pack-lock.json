@@ -10,7 +10,7 @@
       "src": "https://github.com/stevearc/conform.nvim"
     },
     "easy-dotnet.nvim": {
-      "rev": "bb17268d632fc6723e0e7718064b4e8b5222960a",
+      "rev": "e0d33c44eba25b53dc73ee8686811d574a37e7a3",
       "src": "https://github.com/GustavEikaas/easy-dotnet.nvim"
     },
     "gitsigns.nvim": {
@@ -82,9 +82,8 @@
       "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim"
     },
     "roslyn.nvim": {
-      "rev": "226fc98d2bc04c1669439829642dad576622621d",
-      "src": "https://github.com/tris203/roslyn.nvim",
-      "version": "'0.12'"
+      "rev": "6a5e60a7c25d9ce0835aa9c69379f1c92e0a9d56",
+      "src": "https://github.com/seblj/roslyn.nvim"
     },
     "snacks.nvim": {
       "rev": "ad9ede6a9cddf16cedbd31b8932d6dcdee9b716e",

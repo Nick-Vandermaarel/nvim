@@ -103,9 +103,8 @@ require("mason").setup({
     },
 })
 require("mason-lspconfig").setup({
-    automatic_enable = true,
+    automatic_enable = false,
 })
--- Disabling until there is positional config.
 vim.lsp.codelens.enable(true)
 local lspUtils = require("nvdm.lspUtils")
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -116,6 +115,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
         if client ~= nil then
             vim.lsp.document_color.enable(true)
+
+            -- Custom component highlighting for vue
+            local existing_capabilities = client.server_capabilities
+            if existing_capabilities ~= nil then
+                if vim.bo.filetype == "vue" then
+                    existing_capabilities.semanticTokensProvider.full = false
+                else
+                    existing_capabilities.semanticTokensProvider.full = true
+                end
+            end
 
             -- Semantic highlighting when hovering
             if client.server_capabilities.documentHighlightProvider then
