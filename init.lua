@@ -111,7 +111,7 @@ require("mason").setup({
 require("mason-lspconfig").setup({
     automatic_enable = false,
 })
-vim.lsp.codelens.enable(true)
+-- vim.lsp.codelens.enable(true)
 local lspUtils = require("nvdm.lspUtils")
 vim.api.nvim_create_autocmd("LspAttach", {
     desc = "LSP actions",
@@ -152,6 +152,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end,
 })
 
+vim.lsp.inlay_hint.enable()
+
 local vue_language_server_path = vim.fn.expand("$MASON/packages")
     .. "/vue-language-server"
     .. "/node_modules/@vue/language-server"
@@ -190,15 +192,24 @@ vim.lsp.config("cssls", {
 
 vim.lsp.config("roslyn", {
     settings = {
+        ["csharp|background_analysis"] = {
+            dotnet_analyzer_diagnostics_scope = "fullSolution",
+            dotnet_compiler_diagnostics_scope = "fullSolution",
+        },
         ["csharp|code_lens"] = {
-            dotnet_enable_references_code_lens = false,
+            dotnet_enable_references_code_lens = true,
             dotnet_enable_tests_code_lens = true, -- Run/debug tests inline
         },
         ["csharp|inlay_hints"] = {
-            dotnet_enable_inlay_hints_for_parameters = true,
-            csharp_enable_inlay_hints_for_implicit_variable_types = true, -- Shows what 'var' resolves to
-            csharp_enable_inlay_hints_for_implicit_object_creation = true, -- Shows types in 'new()'
+            csharp_enable_inlay_hints_for_implicit_object_creation = true,
+            csharp_enable_inlay_hints_for_implicit_variable_types = false,
+            csharp_enable_inlay_hints_for_lambda_parameter_types = true,
+            csharp_enable_inlay_hints_for_types = true,
+            dotnet_enable_inlay_hints_for_indexer_parameters = true,
+            dotnet_enable_inlay_hints_for_literal_parameters = false,
             dotnet_enable_inlay_hints_for_object_creation_parameters = true,
+            dotnet_enable_inlay_hints_for_other_parameters = false,
+            dotnet_enable_inlay_hints_for_parameters = true,
         },
         ["csharp|completion"] = {
             dotnet_show_completion_items_from_unimported_namespaces = true,
