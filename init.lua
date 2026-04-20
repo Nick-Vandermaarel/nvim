@@ -87,8 +87,14 @@ vim.api.nvim_create_autocmd("FileType", {
         local lang = vim.treesitter.language.get_lang(filetype)
         if lang ~= nil then
             if vim.treesitter.language.add(lang) then
-                vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
                 vim.treesitter.start()
+
+                if filetype ~= "cs" then
+                    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+                else
+                    vim.bo[args.buf].indentexpr = ""
+                    vim.cmd("setlocal cindent")
+                end
             end
         end
     end,
