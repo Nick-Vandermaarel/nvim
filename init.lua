@@ -49,7 +49,6 @@ require("nvdm.todohl").setup()
 
 require("lazydev").setup()
 
-require("tiny-inline-diagnostic").setup()
 require("nvim-ts-autotag").setup()
 require("mini.pairs").setup()
 
@@ -204,10 +203,10 @@ vim.lsp.config("roslyn", {
             csharp_enable_inlay_hints_for_implicit_object_creation = false,
             csharp_enable_inlay_hints_for_implicit_variable_types = false,
             csharp_enable_inlay_hints_for_lambda_parameter_types = true,
-            csharp_enable_inlay_hints_for_types = true,
+            csharp_enable_inlay_hints_for_types = false,
             dotnet_enable_inlay_hints_for_indexer_parameters = true,
             dotnet_enable_inlay_hints_for_literal_parameters = false,
-            dotnet_enable_inlay_hints_for_object_creation_parameters = true,
+            dotnet_enable_inlay_hints_for_object_creation_parameters = false,
             dotnet_enable_inlay_hints_for_other_parameters = false,
             dotnet_enable_inlay_hints_for_parameters = true,
         },
