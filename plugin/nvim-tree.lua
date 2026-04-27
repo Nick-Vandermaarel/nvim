@@ -2,6 +2,33 @@ vim.pack.add({
     "https://github.com/nvim-tree/nvim-tree.lua",
     "https://github.com/nvim-tree/nvim-web-devicons",
 })
+
+require("nvim-tree").setup({
+        sort = {
+        sorter = "case_sensitive",
+        },
+        renderer = {
+        indent_markers = {
+        enable = true,
+        },
+        },
+        view = {
+        width = 35,
+        relativenumber = true,
+        },
+        actions = {
+        open_file = {
+        window_picker = {
+        enable = false,
+        },
+        },
+        },
+        git = {
+            ignore = true,
+        },
+        on_attach = custom_on_attatch,
+})
+
 local function custom_on_attatch(bufnr)
     local api = require("nvim-tree.api")
     local function opts(desc)
@@ -18,32 +45,6 @@ local function custom_on_attatch(bufnr)
         end
     end, opts("Create file from dotnet template"))
 end
-
-require("nvim-tree").setup({
-    sort = {
-        sorter = "case_sensitive",
-    },
-    renderer = {
-        indent_markers = {
-            enable = true,
-        },
-    },
-    view = {
-        width = 35,
-        relativenumber = true,
-    },
-    actions = {
-        open_file = {
-            window_picker = {
-                enable = false,
-            },
-        },
-    },
-    git = {
-        ignore = true,
-    },
-    on_attach = custom_on_attatch,
-}),
 
 vim.keymap.set("n", "<leader>ee", ":NvimTreeToggle<CR>", { desc = "Toggle nvim tree" })
 vim.keymap.set("n", "<leader>ef", ":NvimTreeFindFileToggle<CR>", { desc = "Toggle file explorer or current file" })
