@@ -30,6 +30,8 @@ o.termguicolors = true
 o.scrolloff = 8
 o.updatetime = 50
 
+o.colorcolumn = "120"
+
 o.title = true
 o.titlestring = [[%t - %{fnamemodify(getcwd(), ':t')}]]
 
