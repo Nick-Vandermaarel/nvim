@@ -16,6 +16,7 @@ vim.api.nvim_create_autocmd("PackChanged", {
     end,
 })
 
+-- disabled for now. Causing issues with diagnostic underline.
 require("vim._core.ui2").enable({})
 
 -- Settings
@@ -108,7 +109,7 @@ require("mason").setup({
     },
 })
 require("mason-lspconfig").setup({
-    automatic_enable = false,
+    automatic_enable = true,
 })
 -- vim.lsp.codelens.enable(true)
 local lspUtils = require("nvdm.lspUtils")
@@ -123,7 +124,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
             -- Custom component highlighting for vue
             local existing_capabilities = client.server_capabilities
-            if existing_capabilities ~= nil then
+            if existing_capabilities and existing_capabilities.semanticTokensProvider then
                 if vim.bo.filetype == "vue" then
                     existing_capabilities.semanticTokensProvider.full = false
                 else

@@ -14,6 +14,7 @@ vim.diagnostic.config({
         },
     },
     underline = true,
+    update_in_insert = true,
 })
 
 local r = require("nvdm.remap")
