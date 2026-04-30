@@ -16,7 +16,6 @@ vim.api.nvim_create_autocmd("PackChanged", {
     end,
 })
 
--- disabled for now. Causing issues with diagnostic underline.
 require("vim._core.ui2").enable({})
 
 -- Settings
