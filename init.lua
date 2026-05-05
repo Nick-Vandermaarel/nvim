@@ -263,10 +263,6 @@ require("kanagawa").setup({
             DiagnosticVirtualTextInfo = makeDiagnosticColor(theme.diag.info),
             DiagnosticVirtualTextWarn = makeDiagnosticColor(theme.diag.warning),
             DiagnosticVirtualTextError = makeDiagnosticColor(theme.diag.error),
-
-            -- Private cs fields
-            ["@lsp.type.field.cs"] = { fg = colors.palette.fg },
-            ["@lsp.type.constant.cs"] = { fg = colors.palette.dragonOrange2 },
         }
     end,
 })
