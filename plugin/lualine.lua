@@ -2,6 +2,15 @@ vim.pack.add({ "https://github.com/nvim-lualine/lualine.nvim" })
 local theme = require("lualine.themes.auto")
 local dap_ui = require("nvdm.dap")
 
+local function worktree_name()
+    local worktree = vim.fn.FugitiveWorkTree()
+    if worktree == nil or worktree == "" then
+        return ""
+    end
+
+    return vim.fs.basename(worktree)
+end
+
 require("lualine").setup({
     options = {
         theme = theme,
@@ -28,6 +37,7 @@ require("lualine").setup({
             },
         },
         lualine_b = {
+            worktree_name,
             "branch",
             "diff",
             "diagnostics",
