@@ -188,6 +188,11 @@ vim.lsp.config("cssls", {
     },
 })
 
+require("roslyn").setup({
+    extensions = {
+        razor = { enabled = false },
+    },
+})
 vim.lsp.config("roslyn", {
     settings = {
         ["csharp|background_analysis"] = {
