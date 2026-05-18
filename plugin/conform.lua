@@ -1,14 +1,14 @@
 vim.pack.add({ "https://github.com/stevearc/conform.nvim" })
 require("conform").setup({
     formatters_by_ft = {
-        javascript = { "prettierd" },
-        typescript = { "prettierd" },
-        vue = { "prettierd", "eslint_d" },
-        scss = { "prettierd" },
-        json = { "prettierd" },
-        html = { "prettierd" },
-        css = { "prettierd" },
-        markdown = { "prettierd" },
+        javascript = { "oxfmt" },
+        typescript = { "oxfmt" },
+        vue = { "oxfmt" },
+        scss = { "oxfmt" },
+        json = { "oxfmt" },
+        html = { "oxfmt" },
+        css = { "oxfmt" },
+        markdown = { "oxfmt" },
         lua = { "stylua" },
         -- cs = { "csharpier" },
     },
