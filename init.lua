@@ -36,6 +36,7 @@ vim.pack.add({
     "https://github.com/nvim-treesitter/nvim-treesitter",
 
     -- Less important
+    "https://github.com/sindrets/diffview.nvim",
     "https://github.com/nvim-tree/nvim-web-devicons",
     "https://github.com/romamihalich/neogen",
     "https://github.com/MeanderingProgrammer/render-markdown.nvim",
@@ -50,6 +51,7 @@ require("nvdm.todohl").setup()
 require("lazydev").setup()
 require("nvim-ts-autotag").setup()
 require("mini.pairs").setup()
+require("diffview").setup()
 
 ---
 -- Treesitter
