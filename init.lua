@@ -190,7 +190,7 @@ vim.lsp.config("cssls", {
     },
 })
 
-vim.lsp.enable("roslyn_ls")
+-- setup using roslyn nvim
 vim.lsp.config("roslyn_ls", {
     filetypes = { "razor", "cs", "sln", "slnx", "csproj" },
 
