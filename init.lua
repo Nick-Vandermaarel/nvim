@@ -29,7 +29,7 @@ vim.pack.add({
     "https://github.com/neovim/nvim-lspconfig",
     "https://github.com/rebelot/kanagawa.nvim",
     "https://github.com/tpope/vim-fugitive",
-    "https://github.com/seblj/roslyn.nvim",
+    "https://github.com/seblyng/roslyn.nvim",
     "https://github.com/folke/lazydev.nvim",
 
     -- Note: Some languages require the tree-sitter-cli installed to the OS
@@ -104,7 +104,7 @@ vim.api.nvim_create_autocmd("FileType", {
 -- LSP
 require("mason").setup({
     registries = {
-        "github:Crashdummyy/mason-registry",
+        -- "github:Crashdummyy/mason-registry",
         "github:mason-org/mason-registry",
     },
 })
@@ -190,16 +190,14 @@ vim.lsp.config("cssls", {
     },
 })
 
-require("roslyn").setup({
-    extensions = {
-        razor = { enabled = false },
-    },
-})
-vim.lsp.config("roslyn", {
+vim.lsp.enable("roslyn_ls")
+vim.lsp.config("roslyn_ls", {
+    filetypes = { "razor", "cs", "sln", "slnx", "csproj" },
+
     settings = {
         ["csharp|background_analysis"] = {
-            dotnet_analyzer_diagnostics_scope = "fullSolution",
-            dotnet_compiler_diagnostics_scope = "fullSolution",
+            dotnet_analyzer_diagnostics_scope = "openFiles",
+            dotnet_compiler_diagnostics_scope = "openFiles",
         },
         ["csharp|code_lens"] = {
             dotnet_enable_references_code_lens = true,
