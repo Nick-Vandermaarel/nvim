@@ -125,6 +125,19 @@ require("snacks").setup({
     },
     picker = {
         enabled = true,
+        sources = {
+            explorer = {
+                hidden = false,
+                ignored = false,
+                exclude = {
+                    ".godot/**",
+                    ".import/**",
+                    "*.import",
+                    "*.uid",
+                    "project.godot",
+                },
+            },
+        },
     },
     -- this is nice, but only really works well with lazy.nvim right now.
     dashboard = {
