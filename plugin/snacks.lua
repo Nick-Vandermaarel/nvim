@@ -127,7 +127,7 @@ require("snacks").setup({
         enabled = true,
         sources = {
             explorer = {
-                hidden = false,
+                hidden = true,
                 ignored = false,
                 exclude = {
                     ".godot/**",

@@ -3,19 +3,6 @@ vim.g.loaded_netrwPlugin = 1
 
 vim.g.mapleader = " "
 
--- Treesitter
-vim.api.nvim_create_autocmd("PackChanged", {
-    callback = function(ev)
-        local name, kind = ev.data.spec.name, ev.data.kind
-        if name == "nvim-treesitter" and kind == "update" then
-            if not ev.data.active then
-                vim.cmd.packadd("nvim-treesitter")
-            end
-            vim.cmd("TSUpdate")
-        end
-    end,
-})
-
 require("vim._core.ui2").enable({})
 
 -- Settings
@@ -31,12 +18,12 @@ vim.pack.add({
     "https://github.com/tpope/vim-fugitive",
     "https://github.com/seblyng/roslyn.nvim",
     "https://github.com/folke/lazydev.nvim",
+    "https://github.com/folke/persistence.nvim",
 
     -- Note: Some languages require the tree-sitter-cli installed to the OS
     "https://github.com/nvim-treesitter/nvim-treesitter",
 
     -- Less important
-    "https://github.com/sindrets/diffview.nvim",
     "https://github.com/nvim-tree/nvim-web-devicons",
     "https://github.com/romamihalich/neogen",
     "https://github.com/MeanderingProgrammer/render-markdown.nvim",
@@ -51,7 +38,6 @@ require("nvdm.todohl").setup()
 require("lazydev").setup()
 require("nvim-ts-autotag").setup()
 require("mini.pairs").setup()
-require("diffview").setup()
 
 ---
 -- Treesitter
@@ -322,11 +308,10 @@ vim.keymap.set("n", "<leader>gp", ":Gitsigns preview_hunk<CR>", { desc = "Git Pr
 vim.keymap.set("n", "<leader>gt", ":Gitsigns toggle_current_line_blame<CR>", { desc = "Git Toggle Current Line Blame" })
 
 -- Session persistence
-vim.pack.add({ "https://github.com/folke/persistence.nvim" })
 require("persistence").setup({
     dir = vim.fn.expand(vim.fn.stdpath("config") .. "/session/"),
-    options = { "buffers", "curdir", "tabpages", "winsize" },
 })
+vim.opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize" }
 vim.keymap.set("n", "<leader>rl", function()
     require("persistence").load()
 end, { desc = "Reload last session" })

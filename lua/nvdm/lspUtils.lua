@@ -44,9 +44,7 @@ function M.onAttach(event)
     nmap("<leader>sd", vim.diagnostic.open_float, "Show line [d]iagnostics")
     nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
     nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
-    vim.keymap.set("i", "<C-h>", function()
-        vim.lsp.buf.signature_help()
-    end)
+    vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, { buffer = event.buf })
 end
 
 return M
