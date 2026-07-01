@@ -114,7 +114,6 @@ vim.pack.add({
 require("snacks").setup({
     input = {},
     notifier = {},
-    explorer = {},
     indent = {
         priority = 1,
         enabled = true,
@@ -125,19 +124,6 @@ require("snacks").setup({
     },
     picker = {
         enabled = true,
-        sources = {
-            explorer = {
-                hidden = true,
-                ignored = false,
-                exclude = {
-                    ".godot/**",
-                    ".import/**",
-                    "*.import",
-                    "*.uid",
-                    "project.godot",
-                },
-            },
-        },
     },
     -- this is nice, but only really works well with lazy.nvim right now.
     dashboard = {
@@ -218,6 +204,3 @@ vim.keymap.set({ "n", "x" }, "<leader>sw", function()
     Snacks.picker.grep_word()
 end, { desc = "Visual selection or word" })
 
--- Explorer
-vim.keymap.set("n", "<leader>ee", Snacks.explorer.open, { desc = "Toggle explorer" })
-vim.keymap.set("n", "<leader>ef", Snacks.explorer.reveal, { desc = "Toggle file explorer or current file" })
