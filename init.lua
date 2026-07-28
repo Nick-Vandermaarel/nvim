@@ -283,5 +283,14 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 vim.pack.add({ "https://github.com/webhooked/kanso.nvim" })
 require("kanso").setup({
     minimal = true,
+    colors = {
+        theme = {
+            ink = {
+                ui = {
+                    bg = "#181818",
+                },
+            },
+        },
+    },
 })
 vim.cmd.colorscheme("kanso-ink")
