@@ -55,6 +55,7 @@ local ts_parsers = {
     "markdown",
     "python",
     "sql",
+    "odin",
 }
 
 local nts = require("nvim-treesitter")
