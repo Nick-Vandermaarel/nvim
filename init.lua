@@ -19,9 +19,6 @@ vim.pack.add({
     "https://github.com/folke/lazydev.nvim",
     "https://github.com/folke/persistence.nvim",
 
-    -- Note: Some languages require the tree-sitter-cli installed to the OS
-    "https://github.com/nvim-treesitter/nvim-treesitter",
-
     -- Less important
     "https://github.com/nvim-tree/nvim-web-devicons",
     "https://github.com/romamihalich/neogen",
@@ -38,53 +35,7 @@ require("lazydev").setup()
 require("nvim-ts-autotag").setup()
 require("mini.pairs").setup()
 
----
--- Treesitter
-local ts_parsers = {
-    "bash",
-    "typescript",
-    "vue",
-    "html",
-    "css",
-    "json",
-    "yaml",
-    "dockerfile",
-    "c_sharp",
-    "lua",
-    "vim",
-    "markdown",
-    "python",
-    "sql",
-    "odin",
-}
-
-local nts = require("nvim-treesitter")
-nts.install(ts_parsers)
-vim.api.nvim_create_autocmd("PackChanged", {
-    callback = function()
-        nts.update()
-    end,
-})
-
--- Enable treesitter highlighting and indents
-vim.api.nvim_create_autocmd("FileType", {
-    callback = function(args)
-        local filetype = args.match
-        local lang = vim.treesitter.language.get_lang(filetype)
-        if lang ~= nil then
-            if vim.treesitter.language.add(lang) then
-                vim.treesitter.start()
-
-                if filetype ~= "cs" then
-                    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-                else
-                    vim.bo[args.buf].indentexpr = ""
-                    vim.cmd("setlocal cindent")
-                end
-            end
-        end
-    end,
-})
+require("nvdm.treesitter")
 
 ------
 -- LSP
