@@ -14,7 +14,6 @@ vim.pack.add({
     "https://github.com/mason-org/mason.nvim",
     "https://github.com/mason-org/mason-lspconfig.nvim",
     "https://github.com/neovim/nvim-lspconfig",
-    "https://github.com/tpope/vim-fugitive",
     "https://github.com/seblyng/roslyn.nvim",
     "https://github.com/folke/lazydev.nvim",
     "https://github.com/folke/persistence.nvim",
@@ -246,3 +245,99 @@ require("kanso").setup({
     },
 })
 vim.cmd.colorscheme("kanso-ink")
+
+-- Update packages
+vim.api.nvim_create_user_command("PackUpdate", function()
+    vim.pack.update()
+end, {})
+
+-- Delete packages
+vim.api.nvim_create_user_command("PackDelete", function()
+    -- 1. Grab all packages on disk and filter for inactive ones
+    local inactive = {}
+    for _, pkg in ipairs(vim.pack.get()) do
+        if not pkg.active then
+            table.insert(inactive, pkg.spec.name)
+        end
+    end
+
+    if #inactive == 0 then
+        vim.notify("No unused plugins found!", vim.log.levels.INFO)
+        return
+    end
+
+    -- 2. Create a clean floating window UI
+    local buf = vim.api.nvim_create_buf(false, true)
+    local width = 50
+    local height = math.min(#inactive + 4, 20)
+
+    -- Pad names with unchecked boxes for visual state
+    local lines = { " [ ] Press <Space> to toggle, <Enter> to delete ", string.rep("─", width), "" }
+    for _, name in ipairs(inactive) do
+        table.insert(lines, "  [ ] " .. name)
+    end
+
+    vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+    vim.bo[buf].modifiable = false
+
+    local win = vim.api.nvim_open_win(buf, true, {
+        relative = "editor",
+        width = width,
+        height = height,
+        row = (vim.o.lines - height) / 2,
+        col = (vim.o.columns - width) / 2,
+        style = "minimal",
+        border = "rounded",
+        title = " Delete Unused Packages ",
+    })
+
+    -- 3. Map <Space> to toggle "[ ]" to "[x]"
+    vim.keymap.set("n", "<space>", function()
+        local row = vim.api.nvim_win_get_cursor(win)[1]
+        if row <= 3 then
+            return
+        end -- Don't toggle header rows
+
+        vim.bo[buf].modifiable = true
+        local line = vim.api.nvim_buf_get_lines(buf, row - 1, row, false)[1]
+        if line:match("%[ %]") then
+            line = line:gsub("%[ %]", "[x]")
+        else
+            line = line:gsub("%[x%]", "[ ]")
+        end
+        vim.api.nvim_buf_set_lines(buf, row - 1, row, false, { line })
+        vim.bo[buf].modifiable = false
+    end, { buffer = buf, silent = true })
+
+    -- 4. Map <Enter> to execute batch delete
+    vim.keymap.set("n", "<cr>", function()
+        local all_lines = vim.api.nvim_buf_get_lines(buf, 3, -1, false)
+        local targets = {}
+
+        for _, line in ipairs(all_lines) do
+            if line:match("%[x%]") then
+                local name = line:gsub("^%s*%[x%]%s*", "")
+                table.insert(targets, name)
+            end
+        end
+
+        vim.api.nvim_win_close(win, true)
+
+        if #targets > 0 then
+            -- Batch delete via native vim.pack
+            vim.pack.del(targets)
+            vim.notify("Successfully deleted: " .. table.concat(targets, ", "), vim.log.levels.INFO)
+        else
+            vim.notify("No packages were selected for deletion.", vim.log.levels.WARN)
+        end
+    end, { buffer = buf, silent = true })
+
+    -- Map <Esc> or 'q' to close without deleting
+    local close_opts = { buffer = buf, silent = true }
+    vim.keymap.set("n", "<esc>", function()
+        vim.api.nvim_win_close(win, true)
+    end, close_opts)
+    vim.keymap.set("n", "q", function()
+        vim.api.nvim_win_close(win, true)
+    end, close_opts)
+end, {})
