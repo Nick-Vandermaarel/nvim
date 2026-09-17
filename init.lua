@@ -194,19 +194,24 @@ vim.keymap.set("n", "<leader>ng", require("neogen").generate, { desc = "Neogen c
 
 -- Git signs
 require("gitsigns").setup({
+    signs = {
+        add = { text = "+" },
+        change = { text = "~" },
+        delete = { text = "-" },
+        topdelete = { text = "‾" },
+        changedelete = { text = "~" },
+        untracked = { text = "┆" },
+    },
+    signs_staged = {
+        add = { text = "+" },
+        change = { text = "~" },
+        delete = { text = "-" },
+        topdelete = { text = "‾" },
+        changedelete = { text = "~" },
+    },
     diff_opts = {
         ignore_whitespace = true,
     },
-})
--- Auto-refresh gitsigns after git commit
-vim.api.nvim_create_autocmd("BufWritePost", {
-    pattern = "COMMIT_EDITMSG",
-    callback = function()
-        vim.defer_fn(function()
-            require("gitsigns").refresh()
-        end, 100)
-    end,
-    desc = "Refresh gitsigns after commit",
 })
 vim.keymap.set("n", "<leader>gp", ":Gitsigns preview_hunk<CR>", { desc = "Git Preview" })
 vim.keymap.set("n", "<leader>gt", ":Gitsigns toggle_current_line_blame<CR>", { desc = "Git Toggle Current Line Blame" })
