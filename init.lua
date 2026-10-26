@@ -239,6 +239,11 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 vim.pack.add({ "https://github.com/webhooked/kanso.nvim" })
 require("kanso").setup({
     minimal = true,
+    overrides = function()
+        return {
+            Comment = { fg = "#9A8C7E", italic = true },
+        }
+    end,
     colors = {
         theme = {
             ink = {
