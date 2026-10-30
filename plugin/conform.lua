@@ -9,6 +9,7 @@ require("conform").setup({
         html = { "oxfmt" },
         css = { "oxfmt" },
         markdown = { "oxfmt" },
+        astro = { "oxfmt" },
         lua = { "stylua" },
         odin = { "odinfmt" },
         -- cs = { "csharpier" },

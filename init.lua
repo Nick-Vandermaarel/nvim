@@ -255,6 +255,7 @@ require("kanso").setup({
     },
 })
 vim.cmd.colorscheme("kanso-ink")
+vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#888888" })
 
 -- Update packages
 vim.api.nvim_create_user_command("PackUpdate", function()
