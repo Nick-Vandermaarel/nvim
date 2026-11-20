@@ -137,7 +137,7 @@ vim.lsp.config("roslyn_ls", {
         },
         ["csharp|code_lens"] = {
             dotnet_enable_references_code_lens = true,
-            dotnet_enable_tests_code_lens = true, -- Run/debug tests inline
+            dotnet_enable_tests_code_lens = true, -- Run tests inline
         },
         ["csharp|inlay_hints"] = {
             csharp_enable_inlay_hints_for_implicit_object_creation = false,
@@ -235,7 +235,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     pattern = "*",
 })
 
--- COLORS here for lualine to work nicely. Extra config is stored in the theme.lua if needed.
+-- Load the colorscheme before Lualine is configured.
 vim.pack.add({ "https://github.com/webhooked/kanso.nvim" })
 require("kanso").setup({
     minimal = true,

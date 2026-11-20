@@ -11,6 +11,9 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
         })
 
         require("easy-dotnet").setup({
+            debugger = {
+                auto_register_dap = false,
+            },
             lsp = {
                 enabled = false,
             },

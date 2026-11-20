@@ -1,8 +1,11 @@
 vim.pack.add({ "https://github.com/nvim-lualine/lualine.nvim" })
 local theme = require("lualine.themes.auto")
-local dap_ui = require("nvdm.dap")
 
 local function worktree_name()
+    if vim.fn.exists("*FugitiveWorkTree") == 0 then
+        return ""
+    end
+
     local worktree = vim.fn.FugitiveWorkTree()
     if worktree == nil or worktree == "" then
         return ""
@@ -23,19 +26,7 @@ require("lualine").setup({
         section_separators = { left = "", right = "" },
     },
     sections = {
-        lualine_a = {
-            {
-                dap_ui.statusline,
-                cond = function()
-                    return dap_ui.session() ~= nil
-                end,
-                color = {
-                    fg = "#1f1f28",
-                    bg = "#c34043",
-                    gui = "bold",
-                },
-            },
-        },
+        lualine_a = {},
         lualine_b = {
             worktree_name,
             "branch",
